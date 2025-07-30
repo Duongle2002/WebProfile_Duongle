@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\MyWebProfile.kj926iixre.bundle.scp.css"
     },
     {
+      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

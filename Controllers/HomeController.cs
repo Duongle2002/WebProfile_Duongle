@@ -15,14 +15,34 @@ public class HomeController : Controller
 
         public async Task<IActionResult> Index()
     {
-            // Lấy dữ liệu từ database
-            var projects = await _context.Projects.Where(p => p.IsActive).OrderByDescending(p => p.CreatedAt).Take(6).ToListAsync();
-            var skills = await _context.Skills.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder).ToListAsync();
-            var experiences = await _context.Experiences.Where(e => e.IsActive).OrderByDescending(e => e.StartDate).ToListAsync();
+            // Lấy dữ liệu từ database - chỉ lấy những item không bị xóa và đang active
+            var projects = await _context.Projects
+                .Where(p => p.IsActive && !p.IsDeleted)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(6)
+                .ToListAsync();
+            
+            var skills = await _context.Skills
+                .Where(s => s.IsActive && !s.IsDeleted)
+                .OrderBy(s => s.DisplayOrder)
+                .ToListAsync();
+            
+            var experiences = await _context.Experiences
+                .Where(e => e.IsActive && !e.IsDeleted)
+                .OrderByDescending(e => e.StartDate)
+                .ToListAsync();
+            
+            var contentSettings = await _context.ContentSettings
+                .Where(c => !c.IsDeleted)
+                .ToListAsync();
 
             ViewBag.Projects = projects;
             ViewBag.Skills = skills;
             ViewBag.Experiences = experiences;
+            ViewBag.ContentSettings = contentSettings;
+
+            // Set ContentSettings for layout
+            ViewData["ContentSettings"] = contentSettings;
 
         return View();
     }

@@ -1,380 +1,115 @@
 @{
-    ViewData["Title"] = "Admin Dashboard";
-    Layout = "_Layout";
+    ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout";
 }
 
-<div class="admin-dashboard">
-    <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2">
-                <div class="admin-sidebar">
-                    <div class="admin-header">
-                        <h3><i class="fas fa-cog"></i> Admin Panel</h3>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
                     </div>
-                    <nav class="admin-nav">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="@Url.Action("Index", "Admin")">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Projects", "Admin")">
-                                    <i class="fas fa-project-diagram"></i> Quản lý Dự án
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Skills", "Admin")">
-                                    <i class="fas fa-code"></i> Quản lý Kỹ năng
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Experiences", "Admin")">
-                                    <i class="fas fa-briefcase"></i> Quản lý Kinh nghiệm
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("ThemeSettings", "Admin")">
-                                    <i class="fas fa-palette"></i> Cài đặt Giao diện
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="col-md-5">
-                <div class="admin-content">
-                    <div class="admin-header">
-                        <h2>Dashboard</h2>
-                        <p>Quản lý nội dung website portfolio</p>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-project-diagram"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3>@ViewBag.ProjectCount</h3>
-                                    <p>Dự án</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3>@ViewBag.SkillCount</h3>
-                                    <p>Kỹ năng</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3>@ViewBag.ExperienceCount</h3>
-                                    <p>Kinh nghiệm</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="quick-actions">
-                                <h4>Thao tác nhanh</h4>
-                                <div class="action-buttons">
-                                    <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Thêm dự án mới
-                                    </a>
-                                    <a href="@Url.Action("CreateSkill", "Admin")" class="btn btn-success">
-                                        <i class="fas fa-plus"></i> Thêm kỹ năng mới
-                                    </a>
-                                    <a href="@Url.Action("CreateExperience", "Admin")" class="btn btn-info">
-                                        <i class="fas fa-plus"></i> Thêm kinh nghiệm mới
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="preview-section">
-                                <h4>Xem trước</h4>
-                                <p>Xem trước website với các thay đổi mới nhất</p>
-                                <button class="btn btn-warning" onclick="refreshPreview()">
-                                    <i class="fas fa-sync-alt"></i> Làm mới Preview
-                                </button>
-                            </div>
-                        </div>
+                    <div class="stat-content">
+                        <h3>@ViewBag.ProjectCount</h3>
+                        <p>Dự án</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Website Preview -->
-            <div class="col-md-5 h-100">
-                <div class="preview-panel d-flex flex-column">
-                    <div class="preview-header bg-light border-bottom p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-eye me-2"></i> Website Preview</h5>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshPreview()" title="Làm mới">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                                <a href="@Url.Action("Index", "Home")" target="_blank" class="btn btn-sm btn-outline-secondary" title="Mở trong tab mới">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    <div class="preview-frame-container flex-grow-1 position-relative">
-                        <iframe id="previewFrame" src="@Url.Action("Index", "Home")" frameborder="0" class="w-100 h-100"></iframe>
+                    <div class="stat-content">
+                        <h3>@ViewBag.SkillCount</h3>
+                        <p>Kỹ năng</p>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>@ViewBag.ExperienceCount</h3>
+                        <p>Kinh nghiệm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="quick-actions">
+                    <h4>Thao tác nhanh</h4>
+                    <div class="action-buttons">
+                        <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Thêm dự án mới
+                        </a>
+                        <a href="@Url.Action("CreateSkill", "Admin")" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Thêm kỹ năng mới
+                        </a>
+                        <a href="@Url.Action("CreateExperience", "Admin")" class="btn btn-info">
+                            <i class="fas fa-plus"></i> Thêm kinh nghiệm mới
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="preview-section">
+                    <h4>Xem trước</h4>
+                    <p>Xem trước website với các thay đổi mới nhất</p>
+                    <a href="@Url.Action("Preview", "Admin")" target="_blank" class="btn btn-warning">
+                        <i class="fas fa-eye"></i> Xem trước Website
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="recent-activity">
+            <h4>Hoạt động gần đây</h4>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-plus text-success"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Thêm dự án mới</div>
+                        <div class="activity-time">2 giờ trước</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-edit text-primary"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Cập nhật kỹ năng</div>
+                        <div class="activity-time">5 giờ trước</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-cog text-warning"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Cài đặt giao diện</div>
+                        <div class="activity-time">1 ngày trước</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<style>
-.admin-dashboard {
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.admin-sidebar {
-    background: #343a40;
-    color: white;
-    min-height: 100vh;
-    padding: 0;
-}
-
-.admin-header {
-    padding: 20px;
-    border-bottom: 1px solid #495057;
-}
-
-.admin-nav {
-    padding: 20px 0;
-}
-
-.admin-nav .nav-link {
-    color: #adb5bd;
-    padding: 12px 20px;
-    border: none;
-    transition: all 0.3s;
-}
-
-.admin-nav .nav-link:hover,
-.admin-nav .nav-link.active {
-    color: white;
-    background-color: #495057;
-}
-
-.admin-nav .nav-link i {
-    margin-right: 10px;
-    width: 20px;
-}
-
-.admin-content {
-    padding: 30px;
-    background: white;
-    min-height: 100vh;
-    border-right: 1px solid #dee2e6;
-}
-
-.admin-content .admin-header {
-    background: none;
-    border: none;
-    padding: 0 0 20px 0;
-}
-
-.stat-card {
-    background: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.stat-icon {
-    background: #007bff;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-right: 20px;
-}
-
-.stat-content h3 {
-    margin: 0;
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
-}
-
-.stat-content p {
-    margin: 5px 0 0 0;
-    color: #666;
-}
-
-.quick-actions,
-.preview-section {
-    background: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    height: 100%;
-}
-
-.action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.action-buttons .btn {
-    text-align: left;
-    padding: 12px 20px;
-}
-
-.btn i {
-    margin-right: 8px;
-}
-
-/* Preview Panel - Using Bootstrap classes */
-.preview-panel {
-    background: white;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.preview-frame-container {
-    background: white;
-    overflow: hidden;
-}
-
-#previewFrame {
-    border: none;
-    background: white;
-}
-
-/* Loading indicator */
-.preview-frame-container.loading::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.9);
-    z-index: 1;
-}
-
-.preview-frame-container.loading::after {
-    content: '\f021';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    color: #007bff;
-    animation: spin 1s linear infinite;
-    z-index: 2;
-}
-
-@@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive */
-@@media (max-width: 1200px) {
-    .col-md-2 {
-        flex: 0 0 200px;
-        max-width: 200px;
-    }
-    
-    .col-md-5 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-    
-    .col-md-2,
-    .col-md-5 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    .preview-panel {
-        min-height: 400px;
-    }
-}
-</style>
-
 <script>
+// Add any additional JavaScript for dashboard functionality here
 document.addEventListener('DOMContentLoaded', function() {
-    const previewFrame = document.getElementById('previewFrame');
-    const frameContainer = document.querySelector('.preview-frame-container');
-    
-    // Show loading indicator when iframe is loading
-    previewFrame.addEventListener('load', function() {
-        frameContainer.classList.remove('loading');
-    });
-    
-    // Show loading indicator initially
-    frameContainer.classList.add('loading');
-    
-    // Auto-refresh preview every 60 seconds
-    setInterval(function() {
-        refreshPreview();
-    }, 60000);
-});
-
-function refreshPreview() {
-    const previewFrame = document.getElementById('previewFrame');
-    const frameContainer = document.querySelector('.preview-frame-container');
-    
-    // Show loading indicator
-    frameContainer.classList.add('loading');
-    
-    // Reload the iframe
-    previewFrame.src = previewFrame.src;
-}
-
-// Handle iframe load events
-document.getElementById('previewFrame').addEventListener('load', function() {
-    document.querySelector('.preview-frame-container').classList.remove('loading');
-});
-
-document.getElementById('previewFrame').addEventListener('error', function() {
-    document.querySelector('.preview-frame-container').classList.remove('loading');
+    // Initialize any dashboard-specific functionality
+    console.log('Admin Dashboard loaded successfully');
 });
 </script> 

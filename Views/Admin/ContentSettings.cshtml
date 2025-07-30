@@ -1,0 +1,250 @@
+@model IEnumerable<MyWebProfile.Models.ContentSettings>
+
+@{
+    ViewData["Title"] = "Quản lý Nội dung";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Quản lý Nội dung</h2>
+        <p>Tổng cộng: @Model.Count() cài đặt</p>
+    </div>
+    <div>
+        <a href="@Url.Action("CreateContentSetting", "Admin")" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm cài đặt mới
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th width="5%">ID</th>
+                        <th width="15%">Khóa</th>
+                        <th width="25%">Giá trị</th>
+                        <th width="12%">Danh mục</th>
+                        <th width="20%">Mô tả</th>
+                        <th width="10%">Trạng thái</th>
+                        <th width="13%">Cập nhật lúc</th>
+                        <th width="10%">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var setting in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="badge bg-secondary">@setting.Id</span>
+                            </td>
+                            <td>
+                                <strong class="text-primary">@setting.Key</strong>
+                            </td>
+                            <td>
+                                <div class="content-value">
+                                    @if (setting.Value.Length > 100)
+                                    {
+                                        <div class="content-preview">
+                                            @setting.Value.Substring(0, 100)<text>...</text>
+                                        </div>
+                                        <div class="content-full" style="display: none;">
+                                            @setting.Value
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-link toggle-content" 
+                                                data-target="@setting.Id">
+                                            <i class="fas fa-eye"></i> Xem thêm
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <div class="content-full">
+                                            @setting.Value
+                                        </div>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                @{
+                                    var categoryClass = setting.Category switch
+                                    {
+                                        "Hero" => "bg-primary",
+                                        "About" => "bg-success", 
+                                        "Contact" => "bg-info",
+                                        "Navigation" => "bg-warning",
+                                        "Footer" => "bg-secondary",
+                                        "General" => "bg-dark",
+                                        _ => "bg-info"
+                                    };
+                                }
+                                <span class="badge @categoryClass">@setting.Category</span>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(setting.Description))
+                                {
+                                    <span title="@setting.Description">
+                                        @(setting.Description.Length > 50 ? setting.Description.Substring(0, 50) + "..." : setting.Description)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có mô tả</span>
+                                }
+                            </td>
+                            <td>
+                                @if (setting.IsDeleted)
+                                {
+                                    <span class="badge bg-danger">Đã xóa</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Hoạt động</span>
+                                }
+                            </td>
+                            <td>
+                                <small class="text-muted">
+                                    @setting.UpdatedAt.ToString("dd/MM/yyyy")<br>
+                                    @setting.UpdatedAt.ToString("HH:mm")
+                                </small>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="@Url.Action("EditContentSetting", "Admin", new { id = setting.Id })" 
+                                       class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @if (!setting.IsDeleted)
+                                    {
+                                        <form asp-action="DeleteContentSetting" method="post" style="display: inline;">
+                                            <input type="hidden" name="id" value="@setting.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa cài đặt này?')"
+                                                    title="Xóa">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-action="RestoreContentSetting" method="post" style="display: inline;">
+                                            <input type="hidden" name="id" value="@setting.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-success" 
+                                                    onclick="return confirm('Bạn có chắc chắn muốn khôi phục cài đặt này?')"
+                                                    title="Khôi phục">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-cogs fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Chưa có cài đặt nào</h4>
+                <p class="text-muted">Bắt đầu bằng cách thêm cài đặt đầu tiên</p>
+                <a href="@Url.Action("CreateContentSetting", "Admin")" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Thêm cài đặt mới
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+.content-value {
+    position: relative;
+}
+
+.content-preview {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.content-full {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.toggle-content {
+    padding: 0;
+    font-size: 12px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.toggle-content:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.table th {
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 5px 8px;
+}
+
+.btn-group .btn {
+    margin-right: 2px;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Toggle content preview/full view
+            $('.toggle-content').click(function(e) {
+                e.preventDefault();
+                var targetId = $(this).data('target');
+                var row = $(this).closest('tr');
+                var preview = row.find('.content-preview');
+                var full = row.find('.content-full');
+                var button = $(this);
+                
+                if (preview.is(':visible')) {
+                    preview.hide();
+                    full.show();
+                    button.html('<i class="fas fa-eye-slash"></i> Thu gọn');
+                } else {
+                    full.hide();
+                    preview.show();
+                    button.html('<i class="fas fa-eye"></i> Xem thêm');
+                }
+            });
+            
+            // Add hover effect for better UX
+            $('.table tbody tr').hover(
+                function() {
+                    $(this).addClass('table-active');
+                },
+                function() {
+                    $(this).removeClass('table-active');
+                }
+            );
+        });
+    </script>
+} 

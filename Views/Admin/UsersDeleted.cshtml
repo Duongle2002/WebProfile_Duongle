@@ -1,0 +1,75 @@
+@model IEnumerable<MyWebProfile.Models.User>
+
+@{
+    ViewData["Title"] = "Người dùng đã xóa";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Người dùng đã xóa</h2>
+        <p>Tổng cộng: @Model.Count() người dùng đã xóa</p>
+    </div>
+    <a href="@Url.Action("Users", "Admin")" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Vai trò</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Username</td>
+                            <td>
+                                <span class="badge bg-@(user.Role == "Admin" ? "danger" : "primary")">
+                                    @user.Role
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <form asp-action="RestoreUser" method="post" style="display: inline;">
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-success">
+                                            <i class="fas fa-undo"></i> Khôi phục
+                                        </button>
+                                    </form>
+                                    <form asp-action="DeleteUserPermanently" method="post" style="display: inline;">
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                onclick="return confirm('Bạn có chắc chắn muốn xóa vĩnh viễn người dùng này?')">
+                                            <i class="fas fa-trash"></i> Xóa vĩnh viễn
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <i class="fas fa-users"></i>
+                <h3>Không có người dùng nào đã xóa</h3>
+                <a href="@Url.Action("Users", "Admin")" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                </a>
+            </div>
+        }
+    </div>
+</div> 

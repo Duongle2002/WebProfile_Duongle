@@ -1,29 +1,41 @@
+@{
+    var contentSettings = ViewBag.ContentSettings as List<MyWebProfile.Models.ContentSettings> ?? new List<MyWebProfile.Models.ContentSettings>();
+    var heroName = contentSettings.FirstOrDefault(x => x.Key == "HeroName")?.Value ?? "Lê Hữu Dương";
+    var heroLocation = contentSettings.FirstOrDefault(x => x.Key == "HeroLocation")?.Value ?? "San Francisco, CA";
+    var heroTitle = contentSettings.FirstOrDefault(x => x.Key == "HeroTitle")?.Value ?? "Full Stack Developer & UI/UX Designer";
+    var heroImage = contentSettings.FirstOrDefault(x => x.Key == "HeroImage")?.Value ?? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200";
+    var heroProjects = contentSettings.FirstOrDefault(x => x.Key == "HeroProjects")?.Value ?? ViewBag.Projects?.Count.ToString() ?? "23";
+    var heroExperience = contentSettings.FirstOrDefault(x => x.Key == "HeroExperience")?.Value ?? "5+";
+    var heroClients = contentSettings.FirstOrDefault(x => x.Key == "HeroClients")?.Value ?? "50+";
+    var heroPortfolioButton = contentSettings.FirstOrDefault(x => x.Key == "HeroPortfolioButton")?.Value ?? "Xem Portfolio";
+    var heroContactButton = contentSettings.FirstOrDefault(x => x.Key == "HeroContactButton")?.Value ?? "Liên hệ ngay";
+}
+
 <section class="hero">
     <div class="hero-background"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200" 
-             alt="Lê Hữu Dương" class="hero-image">
-        <h1 class="hero-title">Lê Hữu Dương</h1>
-        <p class="hero-location">San Francisco, CA</p>
-        <p class="hero-subtitle">Full Stack Developer & UI/UX Designer</p>
+        <img src="@heroImage" alt="@heroName" class="hero-image">
+        <h1 class="hero-title">@heroName</h1>
+        <p class="hero-location">@heroLocation</p>
+        <p class="hero-subtitle">@heroTitle</p>
         <div class="hero-stats">
             <div class="stat">
-                <div class="stat-number">23</div>
+                <div class="stat-number">@heroProjects</div>
                 <div class="stat-label">Dự án</div>
             </div>
             <div class="stat">
-                <div class="stat-number">5+</div>
+                <div class="stat-number">@heroExperience</div>
                 <div class="stat-label">Năm KN</div>
             </div>
             <div class="stat">
-                <div class="stat-number">50+</div>
+                <div class="stat-number">@heroClients</div>
                 <div class="stat-label">Khách hàng</div>
             </div>
         </div>
         <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="scrollToSection('projects')">Xem Portfolio</button>
-            <button class="btn btn-outline" onclick="scrollToSection('contact')">Liên hệ ngay</button>
+            <button class="btn btn-primary" onclick="scrollToSection('projects')">@heroPortfolioButton</button>
+            <button class="btn btn-outline" onclick="scrollToSection('contact')">@heroContactButton</button>
         </div>
     </div>
 </section> 

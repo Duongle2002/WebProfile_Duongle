@@ -20,6 +20,14 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/ContentSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29udGVudFNldHRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/CreateContentSetting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQ29udGVudFNldHRpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/CreateProject.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUHJvamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -28,8 +36,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlU2tpbGwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditContentSetting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENvbnRlbnRTZXR0aW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditProject.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFByb2plY3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Experiences.cshtml]
@@ -38,6 +58,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/ExperiencesDeleted.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRXhwZXJpZW5jZXNEZWxldGVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/HeroSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSGVyb1NldHRpbmdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Index.cshtml]
@@ -72,6 +96,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGhlbWVTZXR0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/UsersDeleted.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnNEZWxldGVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,6 +134,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Shared/_ValidationScriptsPartial.cshtml]

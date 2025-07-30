@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "s06geWIF65yrcamBnAE2w1lZOj/Hx8DHckUQ5YqvAhc=",
+  "Hash": "OIffv2wb7QugVCwAczONepJFOUvv1eIv6Lw6VU6OnSU=",
   "Source": "MyWebProfile",
   "BasePath": "_content/MyWebProfile",
   "Mode": "Default",
@@ -57,6 +57,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MyWebProfile.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\admin.css",
+      "SourceId": "MyWebProfile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\",
+      "BasePath": "_content/MyWebProfile",
+      "RelativePath": "css/admin#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "d7ht5cq84w",
+      "Integrity": "p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin.css"
     },
     {
       "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
@@ -1362,6 +1383,88 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/admin.css",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\admin.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8830"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Jul 2025 11:04:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU="
+        }
+      ]
+    },
+    {
+      "Route": "css/admin.d7ht5cq84w.css",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\admin.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8830"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Jul 2025 11:04:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d7ht5cq84w"
+        },
+        {
+          "Name": "label",
+          "Value": "css/admin.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU="
+        }
+      ]
+    },
     {
       "Route": "css/site.css",
       "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",

@@ -1,139 +1,70 @@
 @model List<MyWebProfile.Models.Project>
 @{
     ViewData["Title"] = "Quản lý Dự án";
-    Layout = "_Layout";
+    Layout = "_AdminLayout";
 }
 
-<div class="admin-dashboard">
-    <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2">
-                <div class="admin-sidebar">
-                    <div class="admin-header">
-                        <h3><i class="fas fa-cog"></i> Admin Panel</h3>
-                    </div>
-                    <nav class="admin-nav">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Admin")">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="@Url.Action("Projects", "Admin")">
-                                    <i class="fas fa-project-diagram"></i> Quản lý Dự án
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Skills", "Admin")">
-                                    <i class="fas fa-code"></i> Quản lý Kỹ năng
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Experiences", "Admin")">
-                                    <i class="fas fa-briefcase"></i> Quản lý Kinh nghiệm
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("ThemeSettings", "Admin")">
-                                    <i class="fas fa-palette"></i> Cài đặt Giao diện
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="col-md-5">
-                <div class="admin-content">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <h2>Quản lý Dự án</h2>
-                            <p>Tổng cộng: @Model.Count dự án</p>
-                        </div>
-                        <div>
-                            <a href="@Url.Action("ProjectsDeleted", "Admin")" class="btn btn-outline-secondary me-2">
-                                <i class="fas fa-trash-restore"></i> Đã xóa
-                            </a>
-                            <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Thêm dự án mới
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="projects-grid">
-                        @foreach (var project in Model)
-                        {
-                            <div class="project-card">
-                                <div class="project-image">
-                                    <img src="@project.ImageUrl" alt="@project.Title" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
-                                </div>
-                                <div class="project-content">
-                                    <h4>@project.Title</h4>
-                                    <p class="project-description">@project.Description</p>
-                                    <div class="project-tags">
-                                        @foreach (var tag in project.Tags.Split(','))
-                                        {
-                                            <span class="tag">@tag.Trim()</span>
-                                        }
-                                    </div>
-                                    <div class="project-meta">
-                                        <span class="price">$@project.Price.ToString("N0")</span>
-                                        <span class="rating">
-                                            <i class="fas fa-star"></i> @project.Rating
-                                        </span>
-                                    </div>
-                                    <div class="project-actions">
-                                        <a href="@Url.Action("EditProject", "Admin", new { id = project.Id })" class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-project-id="@project.Id" data-project-title="@project.Title">
-                                            <i class="fas fa-trash"></i> Xóa
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-
-                    @if (!Model.Any())
-                    {
-                        <div class="empty-state">
-                            <i class="fas fa-project-diagram"></i>
-                            <h3>Chưa có dự án nào</h3>
-                            <p>Bắt đầu bằng cách thêm dự án đầu tiên</p>
-                            <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Thêm dự án mới
-                            </a>
-                        </div>
-                    }
-                </div>
-            </div>
-            
-            <!-- Website Preview -->
-            <div class="col-md-5 h-100">
-                <div class="preview-panel  d-flex flex-column">
-                    <div class="preview-header bg-light border-bottom p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-eye me-2"></i> Website Preview</h5>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshPreview()" title="Làm mới">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                                <a href="@Url.Action("Index", "Home")" target="_blank" class="btn btn-sm btn-outline-secondary" title="Mở trong tab mới">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="preview-frame-container flex-grow-1 position-relative">
-                        <iframe id="previewFrame" src="@Url.Action("Index", "Home")" frameborder="0" class="w-100 h-100"></iframe>
-                    </div>
-                </div>
-            </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Quản lý Dự án</h2>
+        <p>Tổng cộng: @Model.Count dự án</p>
+    </div>
+    <div>
+        <a href="@Url.Action("ProjectsDeleted", "Admin")" class="btn btn-outline-secondary me-2">
+            <i class="fas fa-trash-restore"></i> Đã xóa
+        </a>
+        <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm dự án mới
+        </a>
     </div>
 </div>
+
+<div class="projects-grid">
+    @foreach (var project in Model)
+    {
+        <div class="project-card">
+            <div class="project-image">
+                <img src="@project.ImageUrl" alt="@project.Title" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+            </div>
+            <div class="project-content">
+                <h4>@project.Title</h4>
+                <p class="project-description">@project.Description</p>
+                <div class="project-tags">
+                    @foreach (var tag in project.Tags.Split(','))
+                    {
+                        <span class="tag">@tag.Trim()</span>
+                    }
+                </div>
+                <div class="project-meta">
+                    <span class="price">$@project.Price.ToString("N0")</span>
+                    <span class="rating">
+                        <i class="fas fa-star"></i> @project.Rating
+                    </span>
+                </div>
+                <div class="project-actions">
+                    <a href="@Url.Action("EditProject", "Admin", new { id = project.Id })" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-edit"></i> Sửa
+                    </a>
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-project-id="@project.Id" data-project-title="@project.Title">
+                        <i class="fas fa-trash"></i> Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <i class="fas fa-project-diagram"></i>
+        <h3>Chưa có dự án nào</h3>
+        <p>Bắt đầu bằng cách thêm dự án đầu tiên</p>
+        <a href="@Url.Action("CreateProject", "Admin")" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm dự án mới
+        </a>
+    </div>
+}
 
 <!-- Modal xác nhận xóa -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -156,292 +87,17 @@
   </div>
 </div>
 
-<style>
-.admin-dashboard {
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.admin-sidebar {
-    background: #343a40;
-    color: white;
-    min-height: 100vh;
-    padding: 0;
-}
-
-.admin-header {
-    padding: 20px;
-    border-bottom: 1px solid #495057;
-}
-
-.admin-nav {
-    padding: 20px 0;
-}
-
-.admin-nav .nav-link {
-    color: #adb5bd;
-    padding: 12px 20px;
-    border: none;
-    transition: all 0.3s;
-}
-
-.admin-nav .nav-link:hover,
-.admin-nav .nav-link.active {
-    color: white;
-    background-color: #495057;
-}
-
-.admin-nav .nav-link i {
-    margin-right: 10px;
-    width: 20px;
-}
-
-.admin-content {
-    padding: 30px;
-    background: white;
-    min-height: 100vh;
-    border-right: 1px solid #dee2e6;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.project-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-image {
-    height: 200px;
-    overflow: hidden;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.project-content {
-    padding: 20px;
-}
-
-.project-content h4 {
-    margin: 0 0 10px 0;
-    color: #333;
-    font-size: 18px;
-}
-
-.project-description {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 15px;
-    line-height: 1.4;
-}
-
-.project-tags {
-    margin-bottom: 15px;
-}
-
-.tag {
-    background: #e9ecef;
-    color: #495057;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-right: 5px;
-    display: inline-block;
-    margin-bottom: 5px;
-}
-
-.project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.price {
-    font-weight: bold;
-    color: #28a745;
-    font-size: 16px;
-}
-
-.rating {
-    color: #ffc107;
-    font-weight: bold;
-}
-
-.project-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #666;
-}
-
-.empty-state i {
-    font-size: 48px;
-    color: #ddd;
-    margin-bottom: 20px;
-}
-
-.empty-state h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.empty-state p {
-    margin-bottom: 20px;
-}
-
-/* Preview Panel - Using Bootstrap classes */
-.preview-panel {
-    background: white;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.preview-frame-container {
-    background: white;
-    overflow: hidden;
-}
-
-#previewFrame {
-    border: none;
-    background: white;
-}
-
-/* Loading indicator */
-.preview-frame-container.loading::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.9);
-    z-index: 1;
-}
-
-.preview-frame-container.loading::after {
-    content: '\f021';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    color: #007bff;
-    animation: spin 1s linear infinite;
-    z-index: 2;
-}
-
-@@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive */
-@@media (max-width: 1200px) {
-    .col-md-2 {
-        flex: 0 0 200px;
-        max-width: 200px;
-    }
-    
-    .col-md-5 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-    
-    .col-md-2,
-    .col-md-5 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    .preview-panel {
-        min-height: 400px;
-    }
-}
-</style>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const previewFrame = document.getElementById('previewFrame');
-    const frameContainer = document.querySelector('.preview-frame-container');
-    
-    // Show loading indicator when iframe is loading
-    previewFrame.addEventListener('load', function() {
-        frameContainer.classList.remove('loading');
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var projectId = button.getAttribute('data-project-id');
+        var projectTitle = button.getAttribute('data-project-title');
+        var modalTitle = deleteModal.querySelector('#modalProjectTitle');
+        var deleteForm = deleteModal.querySelector('#deleteForm');
+        modalTitle.textContent = projectTitle;
+        deleteForm.action = '/Admin/DeleteProject/' + projectId;
     });
-    
-    // Show loading indicator initially
-    frameContainer.classList.add('loading');
-    
-    // Auto-refresh preview every 60 seconds
-    setInterval(function() {
-        refreshPreview();
-    }, 60000);
-});
-
-function refreshPreview() {
-    const previewFrame = document.getElementById('previewFrame');
-    const frameContainer = document.querySelector('.preview-frame-container');
-    
-    // Show loading indicator
-    frameContainer.classList.add('loading');
-    
-    // Reload the iframe
-    previewFrame.src = previewFrame.src;
-}
-
-// Handle iframe load events
-document.getElementById('previewFrame').addEventListener('load', function() {
-    document.querySelector('.preview-frame-container').classList.remove('loading');
-});
-
-document.getElementById('previewFrame').addEventListener('error', function() {
-    document.querySelector('.preview-frame-container').classList.remove('loading');
-});
-
-var deleteModal = document.getElementById('deleteModal');
-deleteModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget;
-  var projectId = button.getAttribute('data-project-id');
-  var projectTitle = button.getAttribute('data-project-title');
-  var modalTitle = deleteModal.querySelector('#modalProjectTitle');
-  var deleteForm = deleteModal.querySelector('#deleteForm');
-  modalTitle.textContent = projectTitle;
-  deleteForm.action = '/Admin/DeleteProject/' + projectId;
 });
 </script> 

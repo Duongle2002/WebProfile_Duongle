@@ -11,5 +11,6 @@ namespace MyWebProfile.Models
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ThemeSettings> ThemeSettings { get; set; }
+        public DbSet<ContentSettings> ContentSettings { get; set; }
     }
 } 

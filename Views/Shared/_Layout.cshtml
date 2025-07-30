@@ -17,8 +17,12 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #2d2933;">
+@{
+    var contentSettings = ViewData["ContentSettings"] as List<MyWebProfile.Models.ContentSettings> ?? new List<MyWebProfile.Models.ContentSettings>();
+    var navBrand = contentSettings.FirstOrDefault(x => x.Key == "NavBrand")?.Value ?? "Duong";
+}
             <div class="container">
-                <a class="navbar-brand" href="#">Duong</a>
+                <a class="navbar-brand" href="#">@navBrand</a>
                 <a class="btn btn-light ms-auto" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     <i class="bi bi-list"></i> 
                 </a>

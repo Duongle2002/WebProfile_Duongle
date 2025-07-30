@@ -20,9 +20,9 @@ namespace MyWebProfile.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var projectCount = await _context.Projects.CountAsync(p => p.IsActive);
-            var skillCount = await _context.Skills.CountAsync(s => s.IsActive);
-            var experienceCount = await _context.Experiences.CountAsync(e => e.IsActive);
+            var projectCount = await _context.Projects.CountAsync(p => p.IsActive && !p.IsDeleted);
+            var skillCount = await _context.Skills.CountAsync(s => s.IsActive && !s.IsDeleted);
+            var experienceCount = await _context.Experiences.CountAsync(e => e.IsActive && !e.IsDeleted);
 
             ViewBag.ProjectCount = projectCount;
             ViewBag.SkillCount = skillCount;
@@ -72,7 +72,7 @@ namespace MyWebProfile.Controllers
         }
 
         [Authorize]
-        public override ViewResult View(string viewName, object model)
+        public override ViewResult View(string? viewName, object? model)
         {
             // Bảo vệ các view admin
             return base.View(viewName, model);
@@ -99,120 +99,186 @@ namespace MyWebProfile.Controllers
 
         public async Task<IActionResult> SeedSampleData()
         {
-            // Tạo Projects mẫu
-            if (!await _context.Projects.AnyAsync())
+            // Seed Projects
+            if (!_context.Projects.Any())
             {
-                var sampleProjects = new List<Project>
+                var projects = new List<Project>
                 {
                     new Project
                     {
-                Title = "E-commerce Platform",
-                Description = "Nền tảng thương mại điện tử với React và .NET Core",
-                ImageUrl = "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
-                Tags = "React,.NET,SQL Server",
-                Price = 2500,
-                        Rating = 5.0m,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        IsActive = true
-            },
-            new Project
-            {
-                Title = "Mobile Banking App",
-                Description = "Ứng dụng ngân hàng di động với React Native",
-                ImageUrl = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
-                Tags = "React Native,Node.js,MongoDB",
-                Price = 3200,
+                        Title = "E-Commerce Website",
+                        Description = "A full-featured e-commerce platform built with ASP.NET Core and React",
+                        ImageUrl = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+                        GitHubUrl = "https://github.com/example/ecommerce",
+                        Tags = "ASP.NET Core, React, SQL Server, Bootstrap",
+                        Price = 2500,
+                        Rating = 4.8m,
+                        IsActive = true,
+                        CreatedAt = DateTime.Now.AddDays(-30)
+                    },
+                    new Project
+                    {
+                        Title = "Portfolio Website",
+                        Description = "A modern portfolio website showcasing my work and skills",
+                        ImageUrl = "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+                        GitHubUrl = "https://github.com/example/portfolio",
+                        Tags = "HTML, CSS, JavaScript, Bootstrap",
+                        Price = 1500,
                         Rating = 4.9m,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        IsActive = true
-            }
-        };
-                _context.Projects.AddRange(sampleProjects);
+                        IsActive = true,
+                        CreatedAt = DateTime.Now.AddDays(-20)
+                    },
+                    new Project
+                    {
+                        Title = "Task Management App",
+                        Description = "A collaborative task management application with real-time updates",
+                        ImageUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+                        GitHubUrl = "https://github.com/example/taskmanager",
+                        Tags = "Node.js, React, MongoDB, Socket.io",
+                        Price = 3000,
+                        Rating = 4.7m,
+                        IsActive = true,
+                        CreatedAt = DateTime.Now.AddDays(-10)
+                    }
+                };
+                _context.Projects.AddRange(projects);
             }
 
-            // Tạo Skills mẫu
-            if (!await _context.Skills.AnyAsync())
+            // Seed Skills
+            if (!_context.Skills.Any())
             {
-                var sampleSkills = new List<Skill>
-        {
-                    new Skill
+                var skills = new List<Skill>
+                {
+                    new Skill { Name = "C#", Description = "Backend Development", Proficiency = 90, Category = "Backend", DisplayOrder = 1, IsActive = true },
+                    new Skill { Name = "ASP.NET Core", Description = "Web Framework", Proficiency = 85, Category = "Backend", DisplayOrder = 2, IsActive = true },
+                    new Skill { Name = "JavaScript", Description = "Frontend Development", Proficiency = 80, Category = "Frontend", DisplayOrder = 3, IsActive = true },
+                    new Skill { Name = "React", Description = "Frontend Framework", Proficiency = 75, Category = "Frontend", DisplayOrder = 4, IsActive = true },
+                    new Skill { Name = "SQL Server", Description = "Database Management", Proficiency = 85, Category = "Database", DisplayOrder = 5, IsActive = true },
+                    new Skill { Name = "HTML/CSS", Description = "Web Development", Proficiency = 90, Category = "Frontend", DisplayOrder = 6, IsActive = true }
+                };
+                _context.Skills.AddRange(skills);
+            }
+
+            // Seed Experiences
+            if (!_context.Experiences.Any())
+            {
+                var experiences = new List<Experience>
+                {
+                    new Experience
                     {
-                        Name = "React",
-                        Description = "Frontend Framework",
-                        Proficiency = 90,
-                        Category = "Frontend",
-                        Icon = "fab fa-react",
-                        DisplayOrder = 1,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
+                        Company = "Tech Solutions Inc.",
+                        Title = "Senior Full Stack Developer",
+                        Description = "Led development of enterprise applications using ASP.NET Core and React",
+                        Period = "2022 - Hiện tại",
+                        StartDate = DateTime.Now.AddYears(-2),
+                        EndDate = DateTime.Now,
                         IsActive = true
                     },
-                    new Skill
+                    new Experience
                     {
-                        Name = ".NET Core",
-                        Description = "Backend Framework",
-                        Proficiency = 85,
-                        Category = "Backend",
-                        Icon = "fas fa-code",
-                        DisplayOrder = 2,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        IsActive = true
-                    },
-                    new Skill
-                    {
-                        Name = "SQL Server",
-                        Description = "Database Management",
-                        Proficiency = 80,
-                        Category = "Database",
-                        Icon = "fas fa-database",
-                        DisplayOrder = 3,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
+                        Company = "Digital Innovations",
+                        Title = "Full Stack Developer",
+                        Description = "Developed web applications and maintained existing systems",
+                        Period = "2020 - 2022",
+                        StartDate = DateTime.Now.AddYears(-4),
+                        EndDate = DateTime.Now.AddYears(-2),
                         IsActive = true
                     }
                 };
-                _context.Skills.AddRange(sampleSkills);
+                _context.Experiences.AddRange(experiences);
             }
 
-            // Tạo Experiences mẫu
-            if (!await _context.Experiences.AnyAsync())
+            // Seed ContentSettings
+            if (!_context.ContentSettings.Any())
             {
-                var sampleExperiences = new List<Experience>
-        {
-            new Experience
-            {
-                Title = "Senior Full Stack Developer",
-                Company = "Tech Innovate Co.",
-                Period = "2022 - Hiện tại",
-                Description = "Phát triển và duy trì các ứng dụng web quy mô lớn sử dụng React, .NET Core, và Azure.",
-                        StartDate = new DateTime(2022, 1, 1),
-                        DisplayOrder = 1,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        IsActive = true
-            },
-            new Experience
-            {
-                Title = "Full Stack Developer",
-                Company = "Digital Solutions Ltd.",
-                Period = "2020 - 2022",
-                Description = "Thiết kế và phát triển các ứng dụng web responsive cho clients trong nhiều lĩnh vực khác nhau.",
-                StartDate = new DateTime(2020, 1, 1),
-                        EndDate = new DateTime(2022, 1, 1),
-                        DisplayOrder = 2,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        IsActive = true
+                var contentSettings = new List<ContentSettings>
+                {
+                    new ContentSettings
+                    {
+                        Key = "HeroName",
+                        Value = "Lê Hữu Dương",
+                        Description = "Tên hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroLocation",
+                        Value = "San Francisco, CA",
+                        Description = "Vị trí hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroTitle",
+                        Value = "Full Stack Developer & UI/UX Designer",
+                        Description = "Chức danh hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroImage",
+                        Value = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200",
+                        Description = "URL ảnh đại diện trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroProjects",
+                        Value = "23",
+                        Description = "Số dự án hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroExperience",
+                        Value = "5+",
+                        Description = "Số năm kinh nghiệm hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroClients",
+                        Value = "50+",
+                        Description = "Số khách hàng hiển thị trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroPortfolioButton",
+                        Value = "Xem Portfolio",
+                        Description = "Text nút Portfolio trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "HeroContactButton",
+                        Value = "Liên hệ ngay",
+                        Description = "Text nút Liên hệ trong Hero section",
+                        Category = "Hero",
+                        UpdatedAt = DateTime.Now
+                    },
+                    new ContentSettings
+                    {
+                        Key = "NavBrand",
+                        Value = "Duong",
+                        Description = "Tên hiển thị trong navigation bar",
+                        Category = "Navigation",
+                        UpdatedAt = DateTime.Now
                     }
                 };
-                _context.Experiences.AddRange(sampleExperiences);
+                _context.ContentSettings.AddRange(contentSettings);
             }
 
             await _context.SaveChangesAsync();
-            return Content("Sample data created successfully!");
+            return Content("Sample data seeded successfully!");
         }
 
         #region Projects Management
@@ -645,9 +711,9 @@ namespace MyWebProfile.Controllers
         #region Preview
         public IActionResult Preview()
         {
-            ViewBag.Projects = _context.Projects.Where(p => p.IsActive).OrderByDescending(p => p.CreatedAt).ToList();
-            ViewBag.Skills = _context.Skills.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder).ToList();
-            ViewBag.Experiences = _context.Experiences.Where(e => e.IsActive).OrderByDescending(e => e.StartDate).ToList();
+            ViewBag.Projects = _context.Projects.Where(p => p.IsActive && !p.IsDeleted).OrderByDescending(p => p.CreatedAt).ToList();
+            ViewBag.Skills = _context.Skills.Where(s => s.IsActive && !s.IsDeleted).OrderBy(s => s.DisplayOrder).ToList();
+            ViewBag.Experiences = _context.Experiences.Where(e => e.IsActive && !e.IsDeleted).OrderByDescending(e => e.StartDate).ToList();
             ViewBag.ThemeSettings = _context.ThemeSettings.FirstOrDefault() ?? new ThemeSettings();
             return View();
         }
@@ -657,12 +723,389 @@ namespace MyWebProfile.Controllers
         {
             var data = new
             {
-                projects = await _context.Projects.Where(p => p.IsActive).OrderByDescending(p => p.CreatedAt).ToListAsync(),
-                skills = await _context.Skills.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder).ToListAsync(),
-                experiences = await _context.Experiences.Where(e => e.IsActive).OrderByDescending(e => e.StartDate).ToListAsync(),
+                projects = await _context.Projects.Where(p => p.IsActive && !p.IsDeleted).OrderByDescending(p => p.CreatedAt).ToListAsync(),
+                skills = await _context.Skills.Where(s => s.IsActive && !s.IsDeleted).OrderBy(s => s.DisplayOrder).ToListAsync(),
+                experiences = await _context.Experiences.Where(e => e.IsActive && !e.IsDeleted).OrderByDescending(e => e.StartDate).ToListAsync(),
                 themeSettings = await _context.ThemeSettings.FirstOrDefaultAsync() ?? new ThemeSettings()
             };
             return Json(data);
+        }
+        #endregion
+
+        #region Users Management
+        [Authorize]
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.Where(u => !u.IsDeleted).OrderBy(u => u.Username).ToListAsync();
+            return View(users);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> UsersDeleted()
+        {
+            var users = await _context.Users.Where(u => u.IsDeleted).OrderBy(u => u.Username).ToListAsync();
+            return View(users);
+        }
+
+        [Authorize]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                // Check if username already exists
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại.");
+                    return View(user);
+                }
+
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+                user.Role = user.Role ?? "Admin";
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Users));
+            }
+            return View(user);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditUser(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingUser = await _context.Users.FindAsync(id);
+                    if (existingUser == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Check if username already exists for other users
+                    var duplicateUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username && u.Id != id);
+                    if (duplicateUser != null)
+                    {
+                        ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại.");
+                        return View(user);
+                    }
+
+                    existingUser.Username = user.Username;
+                    existingUser.Role = user.Role;
+
+                    // Only update password if provided
+                    if (!string.IsNullOrEmpty(user.PasswordHash))
+                    {
+                        existingUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Users));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.IsDeleted = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Users));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RestoreUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.IsDeleted = false;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(UsersDeleted));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteUserPermanently(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(UsersDeleted));
+        }
+
+        private bool UserExists(int id)
+        {
+            return _context.Users.Any(e => e.Id == id);
+        }
+        #endregion
+
+        #region Content Settings
+        [Authorize]
+        public async Task<IActionResult> ContentSettings()
+        {
+            var contentSettings = await _context.ContentSettings.Where(c => !c.IsDeleted).OrderBy(c => c.Category).ThenBy(c => c.Key).ToListAsync();
+            return View(contentSettings);
+        }
+
+        [Authorize]
+        public IActionResult CreateContentSetting()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateContentSetting(ContentSettings contentSetting)
+        {
+            if (ModelState.IsValid)
+            {
+                contentSetting.UpdatedAt = DateTime.Now;
+                _context.ContentSettings.Add(contentSetting);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(ContentSettings));
+            }
+            return View(contentSetting);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditContentSetting(int id)
+        {
+            var contentSetting = await _context.ContentSettings.FindAsync(id);
+            if (contentSetting == null)
+            {
+                return NotFound();
+            }
+            return View(contentSetting);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditContentSetting(int id, ContentSettings contentSetting)
+        {
+            if (id != contentSetting.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingSetting = await _context.ContentSettings.FindAsync(id);
+                    if (existingSetting == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingSetting.Key = contentSetting.Key;
+                    existingSetting.Value = contentSetting.Value;
+                    existingSetting.Description = contentSetting.Description;
+                    existingSetting.Category = contentSetting.Category;
+                    existingSetting.UpdatedAt = DateTime.Now;
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(ContentSettings));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContentSettingExists(contentSetting.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(contentSetting);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteContentSetting(int id)
+        {
+            var contentSetting = await _context.ContentSettings.FindAsync(id);
+            if (contentSetting == null)
+            {
+                return NotFound();
+            }
+            contentSetting.IsDeleted = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ContentSettings));
+        }
+
+        private bool ContentSettingExists(int id)
+        {
+            return _context.ContentSettings.Any(e => e.Id == id);
+        }
+        #endregion
+
+        #region Hero Settings
+        [Authorize]
+        public async Task<IActionResult> HeroSettings()
+        {
+            var heroSettings = await _context.ContentSettings
+                .Where(c => c.Category == "Hero" && !c.IsDeleted)
+                .OrderBy(c => c.Key)
+                .ToListAsync();
+
+            // Get project count for stats
+            var projectCount = await _context.Projects.CountAsync(p => p.IsActive && !p.IsDeleted);
+            ViewBag.ProjectCount = projectCount;
+
+            return View(heroSettings);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateHeroSetting(string key, string value)
+        {
+            var setting = await _context.ContentSettings.FirstOrDefaultAsync(c => c.Key == key && c.Category == "Hero");
+            if (setting == null)
+            {
+                setting = new ContentSettings
+                {
+                    Key = key,
+                    Category = "Hero",
+                    UpdatedAt = DateTime.Now
+                };
+                _context.ContentSettings.Add(setting);
+            }
+
+            setting.Value = value;
+            setting.UpdatedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true });
+        }
+        #endregion
+
+        #region Debug Actions
+        [Authorize]
+        public async Task<IActionResult> DebugData()
+        {
+            var debugInfo = new
+            {
+                Projects = new
+                {
+                    Total = await _context.Projects.CountAsync(),
+                    Active = await _context.Projects.CountAsync(p => p.IsActive),
+                    NotDeleted = await _context.Projects.CountAsync(p => !p.IsDeleted),
+                    ActiveAndNotDeleted = await _context.Projects.CountAsync(p => p.IsActive && !p.IsDeleted),
+                    Deleted = await _context.Projects.CountAsync(p => p.IsDeleted),
+                    Inactive = await _context.Projects.CountAsync(p => !p.IsActive)
+                },
+                Skills = new
+                {
+                    Total = await _context.Skills.CountAsync(),
+                    Active = await _context.Skills.CountAsync(s => s.IsActive),
+                    NotDeleted = await _context.Skills.CountAsync(s => !s.IsDeleted),
+                    ActiveAndNotDeleted = await _context.Skills.CountAsync(s => s.IsActive && !s.IsDeleted),
+                    Deleted = await _context.Skills.CountAsync(s => s.IsDeleted),
+                    Inactive = await _context.Skills.CountAsync(s => !s.IsActive)
+                },
+                Experiences = new
+                {
+                    Total = await _context.Experiences.CountAsync(),
+                    Active = await _context.Experiences.CountAsync(e => e.IsActive),
+                    NotDeleted = await _context.Experiences.CountAsync(e => !e.IsDeleted),
+                    ActiveAndNotDeleted = await _context.Experiences.CountAsync(e => e.IsActive && !e.IsDeleted),
+                    Deleted = await _context.Experiences.CountAsync(e => e.IsDeleted),
+                    Inactive = await _context.Experiences.CountAsync(e => !e.IsActive)
+                },
+                ContentSettings = new
+                {
+                    Total = await _context.ContentSettings.CountAsync(),
+                    NotDeleted = await _context.ContentSettings.CountAsync(c => !c.IsDeleted),
+                    Deleted = await _context.ContentSettings.CountAsync(c => c.IsDeleted)
+                }
+            };
+
+            return Json(debugInfo);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ResetData()
+        {
+            // Reset all IsDeleted flags to false
+            var deletedProjects = await _context.Projects.Where(p => p.IsDeleted).ToListAsync();
+            foreach (var project in deletedProjects)
+            {
+                project.IsDeleted = false;
+            }
+
+            var deletedSkills = await _context.Skills.Where(s => s.IsDeleted).ToListAsync();
+            foreach (var skill in deletedSkills)
+            {
+                skill.IsDeleted = false;
+            }
+
+            var deletedExperiences = await _context.Experiences.Where(e => e.IsDeleted).ToListAsync();
+            foreach (var experience in deletedExperiences)
+            {
+                experience.IsDeleted = false;
+            }
+
+            var deletedContentSettings = await _context.ContentSettings.Where(c => c.IsDeleted).ToListAsync();
+            foreach (var setting in deletedContentSettings)
+            {
+                setting.IsDeleted = false;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
         #endregion
     }
