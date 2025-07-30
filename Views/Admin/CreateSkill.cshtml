@@ -1,0 +1,407 @@
+@model MyWebProfile.Models.Skill
+@{
+    ViewData["Title"] = "Thêm kỹ năng mới";
+    Layout = "_Layout";
+}
+
+<div class="admin-dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="admin-sidebar">
+                    <div class="admin-header">
+                        <h3><i class="fas fa-cog"></i> Admin Panel</h3>
+                    </div>
+                    <nav class="admin-nav">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Projects", "Admin")">
+                                    <i class="fas fa-project-diagram"></i> Quản lý Dự án
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Skills", "Admin")">
+                                    <i class="fas fa-code"></i> Quản lý Kỹ năng
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Experiences", "Admin")">
+                                    <i class="fas fa-briefcase"></i> Quản lý Kinh nghiệm
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ThemeSettings", "Admin")">
+                                    <i class="fas fa-palette"></i> Cài đặt Giao diện
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Preview", "Admin")" target="_blank">
+                                    <i class="fas fa-eye"></i> Xem trước
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="admin-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2>Thêm kỹ năng mới</h2>
+                            <p>Điền thông tin kỹ năng</p>
+                        </div>
+                        <a href="@Url.Action("Skills", "Admin")" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-card">
+                                <form asp-action="CreateSkill" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Name" class="form-label">Tên kỹ năng *</label>
+                                                <input asp-for="Name" class="form-control" placeholder="Nhập tên kỹ năng">
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Category" class="form-label">Loại kỹ năng *</label>
+                                                <select asp-for="Category" class="form-control">
+                                                    <option value="">Chọn loại kỹ năng</option>
+                                                    <option value="Frontend">Frontend</option>
+                                                    <option value="Backend">Backend</option>
+                                                    <option value="Database">Database</option>
+                                                    <option value="DevOps">DevOps</option>
+                                                    <option value="Mobile">Mobile</option>
+                                                    <option value="Other">Khác</option>
+                                                </select>
+                                                <span asp-validation-for="Category" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="form-label">Mô tả kỹ năng *</label>
+                                        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Mô tả chi tiết về kỹ năng"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Proficiency" class="form-label">Mức độ thành thạo (%) *</label>
+                                                <input asp-for="Proficiency" type="range" min="0" max="100" class="form-control-range" id="proficiencyRange">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>0%</span>
+                                                    <span id="proficiencyValue">50%</span>
+                                                    <span>100%</span>
+                                                </div>
+                                                <span asp-validation-for="Proficiency" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Icon" class="form-label">Icon</label>
+                                                <input asp-for="Icon" class="form-control" placeholder="fas fa-code">
+                                                <small class="form-text text-muted">Ví dụ: fas fa-code, fab fa-react, fas fa-database</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="DisplayOrder" class="form-label">Thứ tự hiển thị</label>
+                                        <input asp-for="DisplayOrder" type="number" class="form-control" placeholder="0">
+                                        <small class="form-text text-muted">Số càng nhỏ hiển thị càng trước</small>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Lưu kỹ năng
+                                        </button>
+                                        <a href="@Url.Action("Skills", "Admin")" class="btn btn-outline-secondary">
+                                            <i class="fas fa-times"></i> Hủy
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview-card">
+                                <h4>Xem trước</h4>
+                                <div class="skill-preview">
+                                    <div class="skill-header">
+                                        <div class="skill-icon">
+                                            <i id="previewIcon" class="fas fa-code"></i>
+                                        </div>
+                                        <div class="skill-info">
+                                            <h5 id="previewName">Tên kỹ năng</h5>
+                                            <span id="previewCategory" class="skill-category">Loại kỹ năng</span>
+                                        </div>
+                                    </div>
+                                    <div class="skill-content">
+                                        <p id="previewDescription" class="skill-description">Mô tả kỹ năng sẽ hiển thị ở đây</p>
+                                        <div class="skill-progress">
+                                            <div class="progress">
+                                                <div id="previewProgress" class="progress-bar" style="width: 50%"></div>
+                                            </div>
+                                            <span id="previewProficiency" class="proficiency-text">50%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background: #343a40;
+    color: white;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.admin-header {
+    padding: 20px;
+    border-bottom: 1px solid #495057;
+}
+
+.admin-nav {
+    padding: 20px 0;
+}
+
+.admin-nav .nav-link {
+    color: #adb5bd;
+    padding: 12px 20px;
+    border: none;
+    transition: all 0.3s;
+}
+
+.admin-nav .nav-link:hover,
+.admin-nav .nav-link.active {
+    color: white;
+    background-color: #495057;
+}
+
+.admin-nav .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.admin-content {
+    padding: 30px;
+}
+
+.form-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.form-control-range {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.preview-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 20px;
+}
+
+.preview-card h4 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.skill-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.skill-icon {
+    background: #007bff;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.skill-info h5 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.skill-category {
+    color: #666;
+    font-size: 12px;
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.skill-content {
+    margin-bottom: 15px;
+}
+
+.skill-description {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.skill-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress {
+    flex: 1;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+.proficiency-text {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 14px;
+    min-width: 40px;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('Name');
+    const categoryInput = document.getElementById('Category');
+    const descriptionInput = document.getElementById('Description');
+    const proficiencyRange = document.getElementById('proficiencyRange');
+    const iconInput = document.getElementById('Icon');
+
+    const previewName = document.getElementById('previewName');
+    const previewCategory = document.getElementById('previewCategory');
+    const previewDescription = document.getElementById('previewDescription');
+    const previewProgress = document.getElementById('previewProgress');
+    const previewProficiency = document.getElementById('previewProficiency');
+    const previewIcon = document.getElementById('previewIcon');
+
+    function updatePreview() {
+        // Update name
+        previewName.textContent = nameInput.value || 'Tên kỹ năng';
+        
+        // Update category
+        previewCategory.textContent = categoryInput.value || 'Loại kỹ năng';
+        
+        // Update description
+        previewDescription.textContent = descriptionInput.value || 'Mô tả kỹ năng sẽ hiển thị ở đây';
+        
+        // Update proficiency
+        const proficiency = parseInt(proficiencyRange.value) || 50;
+        previewProgress.style.width = proficiency + '%';
+        previewProficiency.textContent = proficiency + '%';
+        
+        // Update icon
+        if (iconInput.value) {
+            previewIcon.className = iconInput.value;
+        } else {
+            previewIcon.className = 'fas fa-code';
+        }
+    }
+
+    // Add event listeners
+    nameInput.addEventListener('input', updatePreview);
+    categoryInput.addEventListener('change', updatePreview);
+    descriptionInput.addEventListener('input', updatePreview);
+    proficiencyRange.addEventListener('input', updatePreview);
+    iconInput.addEventListener('input', updatePreview);
+
+    // Update proficiency value display
+    proficiencyRange.addEventListener('input', function() {
+        document.getElementById('proficiencyValue').textContent = this.value + '%';
+    });
+
+    // Initial preview
+    updatePreview();
+});
+</script> 

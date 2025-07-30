@@ -1,0 +1,170 @@
+/* _content/MyWebProfile/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-zei7xesayi] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-zei7xesayi] {
+  color: #0077cc;
+}
+
+.btn-primary[b-zei7xesayi] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-zei7xesayi], .nav-pills .show > .nav-link[b-zei7xesayi] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-zei7xesayi] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-zei7xesayi] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-zei7xesayi] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-zei7xesayi] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-zei7xesayi] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+ body[b-zei7xesayi] { background-color: #636363; color: #fff; }
+        .card-custom[b-zei7xesayi] { background-color: #ffe8ce; border: none; border-radius: 10px; }
+        .btn-custom[b-zei7xesayi] { background-color: #ff6200; color: #fff; border: none; }
+        .btn-custom:hover[b-zei7xesayi] { background-color: #e65c00; }
+        .navbar[b-zei7xesayi] {
+            background-color: #2d2d2d;
+        }
+        .background-image[b-zei7xesayi] {
+            background:#fff;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+        }
+        .card-custom[b-zei7xesayi] {
+            height: 10rem;
+            background-color: #ff6200;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-custom i[b-zei7xesayi] {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .card-custom p[b-zei7xesayi] {
+            margin: 0;
+        }
+        .about-section[b-zei7xesayi] {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section img[b-zei7xesayi] {
+            border: 5px solid #ff6200;
+            margin-bottom: 20px;
+        }
+        .about-section h1[b-zei7xesayi] {
+            color: #000;
+            font-size: 3rem;
+        }
+        .about-section h5[b-zei7xesayi] {
+            color: #ff6200;
+        }
+        .card-container[b-zei7xesayi] {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 0;
+            scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+            animation: scroll-b-zei7xesayi 20s linear infinite; /* Hiệu ứng cuộn tự động */
+        }
+
+        .card[b-zei7xesayi] {
+            flex: 0 0 auto;
+            width: 18rem; /* Sử dụng kích thước Bootstrap */
+            background-color: #ff6200;
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .card img[b-zei7xesayi] {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card-container[b-zei7xesayi]::-webkit-scrollbar {
+            display: none; /* Ẩn thanh cuộn trên Chrome, Safari */
+        }
+
+        /* Định nghĩa animation cho cuộn */
+        @keyframes scroll-b-zei7xesayi {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Đảm bảo cuộn liên tục bằng cách lặp lại nội dung */
+        .card-container[b-zei7xesayi] {
+            display: flex;
+            min-width: 100%; /* Đảm bảo container đủ rộng */
+        }
+
+        /* Lặp lại nội dung để hiệu ứng mượt mà */
+        .card-container:hover[b-zei7xesayi] {
+            animation-play-state: paused; /* Dừng khi hover */
+        }
+        .portfolio-section[b-zei7xesayi] {
+            background-color: #5a5a5a;
+            padding: 40px 20px;
+            text-align: center;
+            color: #ccc;
+            border-radius: 15px;
+        }
+        .portfolio-section h2[b-zei7xesayi] {
+            margin-bottom: 10px;
+        }
+        .portfolio-section p[b-zei7xesayi] {
+            margin-bottom: 30px;
+        }
+        /* Thêm hiệu ứng AOS */
+        [data-aos][b-zei7xesayi] {
+            opacity: 0;
+            transition-property: opacity, transform;
+        }
+        [data-aos].aos-animate[b-zei7xesayi] {
+            opacity: 1;
+        }

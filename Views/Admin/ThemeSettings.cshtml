@@ -1,0 +1,394 @@
+@model MyWebProfile.Models.ThemeSettings
+@{
+    ViewData["Title"] = "Cài đặt Giao diện";
+    Layout = "_Layout";
+}
+
+<div class="admin-dashboard">
+    <div class="row">
+            <div class="col-md-3">
+                <div class="admin-sidebar">
+                    <div class="admin-header">
+                        <h3><i class="fas fa-cog"></i> Admin Panel</h3>
+                    </div>
+                    <nav class="admin-nav">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Projects", "Admin")">
+                                    <i class="fas fa-project-diagram"></i> Quản lý Dự án
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Skills", "Admin")">
+                                    <i class="fas fa-code"></i> Quản lý Kỹ năng
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Experiences", "Admin")">
+                                    <i class="fas fa-briefcase"></i> Quản lý Kinh nghiệm
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("ThemeSettings", "Admin")">
+                                    <i class="fas fa-palette"></i> Cài đặt Giao diện
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Preview", "Admin")" target="_blank">
+                                    <i class="fas fa-eye"></i> Xem trước
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="admin-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2>Cài đặt Giao diện</h2>
+                            <p>Tùy chỉnh màu sắc và font chữ</p>
+                        </div>
+                        <a href="@Url.Action("Index", "Admin")" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-card">
+                                <form asp-action="ThemeSettings" method="post">
+                                    <h4 class="mb-4">Màu sắc</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="PrimaryColor" class="form-label">Màu chính</label>
+                                                <div class="color-input-group">
+                                                    <input asp-for="PrimaryColor" type="color" class="form-control color-picker">
+                                                    <input asp-for="PrimaryColor" type="text" class="form-control color-text" placeholder="#007bff">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="SecondaryColor" class="form-label">Màu phụ</label>
+                                                <div class="color-input-group">
+                                                    <input asp-for="SecondaryColor" type="color" class="form-control color-picker">
+                                                    <input asp-for="SecondaryColor" type="text" class="form-control color-text" placeholder="#6c757d">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="BackgroundColor" class="form-label">Màu nền</label>
+                                                <div class="color-input-group">
+                                                    <input asp-for="BackgroundColor" type="color" class="form-control color-picker">
+                                                    <input asp-for="BackgroundColor" type="text" class="form-control color-text" placeholder="#ffffff">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="TextColor" class="form-label">Màu chữ</label>
+                                                <div class="color-input-group">
+                                                    <input asp-for="TextColor" type="color" class="form-control color-picker">
+                                                    <input asp-for="TextColor" type="text" class="form-control color-text" placeholder="#333333">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="mb-4 mt-5">Font chữ</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="FontFamily" class="form-label">Font chữ</label>
+                                                <select asp-for="FontFamily" class="form-control">
+                                                    <option value="Arial, sans-serif">Arial</option>
+                                                    <option value="Helvetica, sans-serif">Helvetica</option>
+                                                    <option value="Georgia, serif">Georgia</option>
+                                                    <option value="Times New Roman, serif">Times New Roman</option>
+                                                    <option value="Verdana, sans-serif">Verdana</option>
+                                                    <option value="Roboto, sans-serif">Roboto</option>
+                                                    <option value="Open Sans, sans-serif">Open Sans</option>
+                                                    <option value="Lato, sans-serif">Lato</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="FontSize" class="form-label">Cỡ chữ (px)</label>
+                                                <input asp-for="FontSize" type="number" min="12" max="24" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Lưu cài đặt
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="resetToDefault()">
+                                            <i class="fas fa-undo"></i> Khôi phục mặc định
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview-card">
+                                <h4>Xem trước</h4>
+                                <div class="theme-preview" id="themePreview">
+                                    <div class="preview-header">
+                                        <h3>Tiêu đề mẫu</h3>
+                                        <p>Đây là đoạn văn bản mẫu để xem trước font chữ và màu sắc.</p>
+                                    </div>
+                                    <div class="preview-buttons">
+                                        <button class="btn btn-primary">Nút chính</button>
+                                        <button class="btn btn-secondary">Nút phụ</button>
+                                    </div>
+                                    <div class="preview-card-sample">
+                                        <h5>Thẻ mẫu</h5>
+                                        <p>Nội dung thẻ mẫu với màu nền và chữ.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<style>
+.admin-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.admin-sidebar {
+    background: #343a40;
+    color: white;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.admin-header {
+    padding: 20px;
+    border-bottom: 1px solid #495057;
+}
+
+.admin-nav {
+    padding: 20px 0;
+}
+
+.admin-nav .nav-link {
+    color: #adb5bd;
+    padding: 12px 20px;
+    border: none;
+    transition: all 0.3s;
+}
+
+.admin-nav .nav-link:hover,
+.admin-nav .nav-link.active {
+    color: white;
+    background-color: #495057;
+}
+
+.admin-nav .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.admin-content {
+    padding: 30px;
+}
+
+.form-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.color-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.color-picker {
+    width: 60px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.color-text {
+    flex: 1;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.preview-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 20px;
+}
+
+.preview-card h4 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.theme-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.preview-header h3 {
+    margin-bottom: 10px;
+}
+
+.preview-header p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.preview-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.preview-card-sample {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.preview-card-sample h5 {
+    margin-bottom: 10px;
+}
+
+.preview-card-sample p {
+    margin: 0;
+    line-height: 1.4;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const primaryColor = document.getElementById('PrimaryColor');
+    const secondaryColor = document.getElementById('SecondaryColor');
+    const backgroundColor = document.getElementById('BackgroundColor');
+    const textColor = document.getElementById('TextColor');
+    const fontFamily = document.getElementById('FontFamily');
+    const fontSize = document.getElementById('FontSize');
+
+    const themePreview = document.getElementById('themePreview');
+
+    function updatePreview() {
+        const primary = primaryColor.value;
+        const secondary = secondaryColor.value;
+        const background = backgroundColor.value;
+        const text = textColor.value;
+        const font = fontFamily.value;
+        const size = fontSize.value;
+
+        // Update preview styles
+        themePreview.style.backgroundColor = background;
+        themePreview.style.color = text;
+        themePreview.style.fontFamily = font;
+        themePreview.style.fontSize = size + 'px';
+
+        // Update button colors
+        const buttons = themePreview.querySelectorAll('.btn-primary');
+        buttons.forEach(btn => {
+            btn.style.backgroundColor = primary;
+            btn.style.borderColor = primary;
+        });
+
+        const secondaryButtons = themePreview.querySelectorAll('.btn-secondary');
+        secondaryButtons.forEach(btn => {
+            btn.style.backgroundColor = secondary;
+            btn.style.borderColor = secondary;
+        });
+
+        // Update text colors
+        const headings = themePreview.querySelectorAll('h3, h5');
+        headings.forEach(heading => {
+            heading.style.color = text;
+        });
+    }
+
+    // Add event listeners
+    primaryColor.addEventListener('input', updatePreview);
+    secondaryColor.addEventListener('input', updatePreview);
+    backgroundColor.addEventListener('input', updatePreview);
+    textColor.addEventListener('input', updatePreview);
+    fontFamily.addEventListener('change', updatePreview);
+    fontSize.addEventListener('input', updatePreview);
+
+    // Initial preview
+    updatePreview();
+});
+
+function resetToDefault() {
+    document.getElementById('PrimaryColor').value = '#007bff';
+    document.getElementById('SecondaryColor').value = '#6c757d';
+    document.getElementById('BackgroundColor').value = '#ffffff';
+    document.getElementById('TextColor').value = '#333333';
+    document.getElementById('FontFamily').value = 'Arial, sans-serif';
+    document.getElementById('FontSize').value = '16';
+    
+    // Trigger preview update
+    document.getElementById('PrimaryColor').dispatchEvent(new Event('input'));
+}
+</script> 

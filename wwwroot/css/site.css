@@ -1,0 +1,197 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Admin Panel Override - Đảm bảo admin có màu chữ rõ ràng */
+.admin-dashboard,
+.admin-dashboard *,
+.admin-content,
+.admin-content *,
+.form-card,
+.form-card * {
+  color: #000 !important;
+}
+
+.admin-dashboard body,
+.admin-content body {
+  background-color: #f8f9fa !important;
+  color: #000 !important;
+}
+
+.admin-dashboard .form-label,
+.admin-content .form-label {
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+.admin-dashboard .form-control,
+.admin-content .form-control {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+.admin-dashboard .form-control::placeholder,
+.admin-content .form-control::placeholder {
+  color: #6c757d !important;
+}
+
+.admin-dashboard h1,
+.admin-dashboard h2,
+.admin-dashboard h3,
+.admin-dashboard h4,
+.admin-dashboard h5,
+.admin-dashboard h6,
+.admin-content h1,
+.admin-content h2,
+.admin-content h3,
+.admin-content h4,
+.admin-content h5,
+.admin-content h6 {
+  color: #000 !important;
+}
+
+.admin-dashboard p,
+.admin-content p {
+  color: #333 !important;
+}
+
+/* Home page styles - chỉ áp dụng cho trang chính */
+body:not(.admin-dashboard) { 
+  background-color: #636363; 
+  color: #fff; 
+}
+
+        .card-custom { background-color: #ffe8ce; border: none; border-radius: 10px; }
+        .btn-custom { background-color: #ff6200; color: #fff; border: none; }
+        .btn-custom:hover { background-color: #e65c00; }
+        .navbar {
+            background-color: #2d2d2d;
+        }
+        .background-image {
+            background-image: url('https://file.hstatic.net/200000819107/file/83b809857acd41a7bad4935b4734f9fc_74d061868b174be98997ed238bf304c5.gif');
+            height: 40rem;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+        }
+        .card-custom {
+            height: 10rem;
+            background-color: #ff6200;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-custom i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .card-custom p {
+            margin: 0;
+        }
+        .about-section {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section img {
+            border: 5px solid #ff6200;
+            margin-bottom: 20px;
+        }
+        .about-section h1 {
+            color: #000;
+            font-size: 3rem;
+        }
+        .about-section h5 {
+            color: #ff6200;
+        }
+        .card-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 0;
+            scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+            animation: scroll 20s linear infinite; /* Hiệu ứng cuộn tự động */
+        }
+
+        .card {
+            flex: 0 0 auto;
+            width: 18rem; /* Sử dụng kích thước Bootstrap */
+            background-color: #ff6200;
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card-container::-webkit-scrollbar {
+            display: none; /* Ẩn thanh cuộn trên Chrome, Safari */
+        }
+
+        /* Định nghĩa animation cho cuộn */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Đảm bảo cuộn liên tục bằng cách lặp lại nội dung */
+        .card-container {
+            display: flex;
+            min-width: 100%; /* Đảm bảo container đủ rộng */
+        }
+
+        /* Lặp lại nội dung để hiệu ứng mượt mà */
+        .card-container:hover {
+            animation-play-state: paused; /* Dừng khi hover */
+        }
+        .portfolio-section {
+            background-color: #5a5a5a;
+            padding: 40px 20px;
+            text-align: center;
+            color: #ccc;
+            border-radius: 15px;
+        }
+        .portfolio-section h2 {
+            margin-bottom: 10px;
+        }
+        .portfolio-section p {
+            margin-bottom: 30px;
+        }
+        /* Thêm hiệu ứng AOS */
+        [data-aos] {
+            opacity: 0;
+            transition-property: opacity, transform;
+        }
+        [data-aos].aos-animate {
+            opacity: 1;
+        }

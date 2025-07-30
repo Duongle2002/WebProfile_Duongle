@@ -1,0 +1,130 @@
+@model List<MyWebProfile.Models.Skill>
+@{
+    ViewData["Title"] = "Kỹ năng đã xóa";
+    Layout = "_Layout";
+}
+
+<div class="admin-dashboard">
+    <div class="row">
+        <!-- Sidebar giữ nguyên như Skills.cshtml -->
+        <div class="col-md-2">
+            <div class="admin-sidebar">
+                <div class="admin-header">
+                    <h3><i class="fas fa-cog"></i> Admin Panel</h3>
+                </div>
+                <nav class="admin-nav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Projects", "Admin")">
+                                <i class="fas fa-project-diagram"></i> Quản lý Dự án
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Skills", "Admin")">
+                                <i class="fas fa-code"></i> Quản lý Kỹ năng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Experiences", "Admin")">
+                                <i class="fas fa-briefcase"></i> Quản lý Kinh nghiệm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ThemeSettings", "Admin")">
+                                <i class="fas fa-palette"></i> Cài đặt Giao diện
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <div class="admin-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2>Kỹ năng đã xóa</h2>
+                        <p>Tổng cộng: @Model.Count kỹ năng đã xóa</p>
+                    </div>
+                    <a href="@Url.Action("Skills", "Admin")" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                    </a>
+                </div>
+                <div class="skills-grid">
+                    @foreach (var skill in Model)
+                    {
+                        <div class="skill-card">
+                            <div class="skill-content">
+                                <h4>@skill.Name</h4>
+                                <p class="skill-description">@skill.Description</p>
+                                <div class="skill-meta">
+                                    <span class="category">@skill.Category</span>
+                                    <span class="proficiency">@skill.Proficiency%</span>
+                                </div>
+                                <div class="skill-actions">
+                                    <form method="post" action="@Url.Action("RestoreSkill", "Admin", new { id = skill.Id })" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <i class="fas fa-undo"></i> Khôi phục
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSkillForeverModal" data-skill-id="@skill.Id" data-skill-name="@skill.Name">
+                                        <i class="fas fa-trash"></i> Xóa vĩnh viễn
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (!Model.Any())
+                {
+                    <div class="empty-state">
+                        <i class="fas fa-code"></i>
+                        <h3>Không có kỹ năng nào đã xóa</h3>
+                        <a href="@Url.Action("Skills", "Admin")" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận xóa vĩnh viễn -->
+<div class="modal fade" id="deleteSkillForeverModal" tabindex="-1" aria-labelledby="deleteSkillForeverModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteSkillForeverModalLabel">Xác nhận xóa vĩnh viễn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn <strong>xóa vĩnh viễn</strong> kỹ năng <strong id="modalSkillNameForever"></strong> không? Hành động này không thể hoàn tác!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <form id="deleteSkillForeverForm" method="post">
+            <button type="submit" class="btn btn-danger">Xóa vĩnh viễn</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var deleteSkillForeverModal = document.getElementById('deleteSkillForeverModal');
+deleteSkillForeverModal.addEventListener('show.bs.modal', function (event) {
+  var button = event.relatedTarget;
+  var skillId = button.getAttribute('data-skill-id');
+  var skillName = button.getAttribute('data-skill-name');
+  var modalTitle = deleteSkillForeverModal.querySelector('#modalSkillNameForever');
+  var deleteForm = deleteSkillForeverModal.querySelector('#deleteSkillForeverForm');
+  modalTitle.textContent = skillName;
+  deleteForm.action = '/Admin/DeleteSkillPermanently/' + skillId;
+});
+</script> 

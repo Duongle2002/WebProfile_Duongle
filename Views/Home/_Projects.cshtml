@@ -1,0 +1,45 @@
+<section id="projects" class="projects">
+    <div class="container">
+        <h2 class="section-title">Dự án nổi bật</h2>
+        <div class="projects-grid">
+            @if (ViewBag.Projects != null && ((List<MyWebProfile.Models.Project>)ViewBag.Projects).Any())
+            {
+                @foreach (var project in (List<MyWebProfile.Models.Project>)ViewBag.Projects)
+                {
+                    <div class="project-card">
+                        <img src="@project.ImageUrl" alt="@project.Title">
+                        <div class="project-content">
+                            <h3>@project.Title</h3>
+                            <p>@project.Description</p>
+                            <div class="project-tags">
+                                @if (!string.IsNullOrEmpty(project.Tags))
+                                {
+                                    @foreach (var tag in project.Tags.Split(','))
+                                    {
+                                        <span class="tag">@tag.Trim()</span>
+                                    }
+                                }
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-price">$@project.Price.ToString("N0")</span>
+                                <div class="project-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>@project.Rating.ToString("F1")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center">
+                    <p>Chưa có dự án nào được thêm.</p>
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary">Xem thêm dự án</button>
+        </div>
+    </div>
+</section> 

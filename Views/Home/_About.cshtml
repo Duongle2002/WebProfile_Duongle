@@ -1,0 +1,52 @@
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title">Giới thiệu</h2>
+        <div class="about-content">
+            <div class="about-skills">
+                <h3>Kỹ năng chuyên môn</h3>
+                @if (ViewBag.Skills != null && ((List<MyWebProfile.Models.Skill>)ViewBag.Skills).Any())
+                {
+                    @foreach (var skill in (List<MyWebProfile.Models.Skill>)ViewBag.Skills)
+                    {
+                        <div class="skill">
+                            <div class="skill-header">
+                                <span>@skill.Name</span>
+                                <span>@skill.Proficiency%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: @skill.Proficiency%"></div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center">
+                        <p>Chưa có kỹ năng nào được thêm.</p>
+                    </div>
+                }
+            </div>
+            <div class="about-text">
+                <p>Tôi là một developer đam mê với hơn 5 năm kinh nghiệm trong việc phát triển các ứng dụng web hiện đại. Chuyên môn của tôi bao gồm React, .NET, và các công nghệ frontend/backend tiên tiến.</p>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <span>Clean Code</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Responsive</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <span>Performance</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <span>Team Work</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
