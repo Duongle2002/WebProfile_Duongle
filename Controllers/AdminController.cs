@@ -112,13 +112,13 @@ namespace MyWebProfile.Controllers
                         GitHubUrl = "https://github.com/example/ecommerce",
                         DeployUrl = "https://ecommerce-demo.vercel.app",
                         Tags = "ASP.NET Core, React, SQL Server, Bootstrap",
-                        Price = 2500,
+                Price = 2500,
                         Rating = 4.8m,
                         IsActive = true,
                         CreatedAt = DateTime.Now.AddDays(-30)
-                    },
-                    new Project
-                    {
+            },
+            new Project
+            {
                         Title = "Portfolio Website",
                         Description = "A modern portfolio website showcasing my work and skills",
                         ImageUrl = "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
@@ -166,23 +166,23 @@ namespace MyWebProfile.Controllers
             if (!_context.Experiences.Any())
             {
                 var experiences = new List<Experience>
-                {
-                    new Experience
-                    {
+        {
+            new Experience
+            {
                         Company = "Tech Solutions Inc.",
-                        Title = "Senior Full Stack Developer",
+                Title = "Senior Full Stack Developer",
                         Description = "Led development of enterprise applications using ASP.NET Core and React",
-                        Period = "2022 - Hiện tại",
+                Period = "2022 - Hiện tại",
                         StartDate = DateTime.Now.AddYears(-2),
                         EndDate = DateTime.Now,
                         IsActive = true
-                    },
-                    new Experience
-                    {
+            },
+            new Experience
+            {
                         Company = "Digital Innovations",
-                        Title = "Full Stack Developer",
+                Title = "Full Stack Developer",
                         Description = "Developed web applications and maintained existing systems",
-                        Period = "2020 - 2022",
+                Period = "2020 - 2022",
                         StartDate = DateTime.Now.AddYears(-4),
                         EndDate = DateTime.Now.AddYears(-2),
                         IsActive = true
@@ -354,14 +354,14 @@ namespace MyWebProfile.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                    project.CreatedAt = DateTime.Now;
-                    project.UpdatedAt = DateTime.Now;
-                    project.IsActive = true;
-                    _context.Projects.Add(project);
-                    await _context.SaveChangesAsync();
+            {
+                project.CreatedAt = DateTime.Now;
+                project.UpdatedAt = DateTime.Now;
+                project.IsActive = true;
+                _context.Projects.Add(project);
+                await _context.SaveChangesAsync();
                     System.Diagnostics.Debug.WriteLine($"Project saved successfully with ID: {project.Id}");
-                    return RedirectToAction(nameof(Projects));
+                return RedirectToAction(nameof(Projects));
                 }
                 catch (Exception ex)
                 {

@@ -4,37 +4,37 @@
     Layout = "_AdminLayout";
 }
 
-<div class="row">
+    <div class="row">
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
                 <h3 class="mb-4">Thêm Dự án mới</h3>
                 
-                <form asp-action="CreateProject" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
+                        <form asp-action="CreateProject" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                 <label asp-for="Title" class="form-label">Tên dự án</label>
-                                <input asp-for="Title" class="form-control" placeholder="Nhập tên dự án">
-                                <span asp-validation-for="Title" class="text-danger"></span>
-                            </div>
-                        </div>
+                                        <input asp-for="Title" class="form-control" placeholder="Nhập tên dự án">
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                </div>
                         
-                        <div class="col-md-6">
-                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                 <label asp-for="Price" class="form-label">Giá (USD)</label>
-                                <input asp-for="Price" type="number" class="form-control" placeholder="0">
-                                <span asp-validation-for="Price" class="text-danger"></span>
+                                        <input asp-for="Price" type="number" class="form-control" placeholder="0">
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
+
+                            <div class="form-group">
                         <label asp-for="Description" class="form-label">Mô tả</label>
                         <textarea asp-for="Description" class="form-control" rows="3" placeholder="Mô tả chi tiết về dự án"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -57,39 +57,39 @@
                                 <small class="form-text text-muted">Link deploy (Vercel, Netlify, Heroku, etc.) - Không bắt buộc</small>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Tags" class="form-label">Tags (phân cách bằng dấu phẩy)</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Tags" class="form-label">Tags (phân cách bằng dấu phẩy)</label>
                                 <input asp-for="Tags" class="form-control" placeholder="HTML, CSS, JavaScript">
                                 <span asp-validation-for="Tags" class="text-danger"></span>
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
                         
-                        <div class="col-md-6">
-                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                 <label asp-for="Rating" class="form-label">Đánh giá (1-5)</label>
                                 <input asp-for="Rating" type="number" min="1" max="5" step="0.1" class="form-control" placeholder="4.5">
-                                <span asp-validation-for="Rating" class="text-danger"></span>
+                                        <span asp-validation-for="Rating" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Lưu dự án
-                        </button>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Lưu dự án
+                                </button>
                         <a href="@Url.Action("Projects", "Admin")" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Quay lại
-                        </a>
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-    
+            
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
@@ -119,12 +119,12 @@
                                 <a href="#" class="btn btn-sm btn-success" id="previewDeploy" style="display: none;">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                
-                <style>
+            </div>
+    </div>
+</div>
+
+<style>
                 .project-preview-container {
                     max-height: 500px;
                     overflow-y: auto;
