@@ -9,16 +9,16 @@
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
-      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\style.css",
-      "PackagePath": "staticwebassets\\css\\style.css"
+      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\theme.css",
+      "PackagePath": "staticwebassets\\css\\theme.css"
     },
     {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\images\\default-project.svg",
+      "PackagePath": "staticwebassets\\images\\default-project.svg"
     },
     {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\script.js",
@@ -27,6 +27,10 @@
     {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\theme-loader.js",
+      "PackagePath": "staticwebassets\\js\\theme-loader.js"
     },
     {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\lib\\bootstrap\\LICENSE",

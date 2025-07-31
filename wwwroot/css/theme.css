@@ -1,0 +1,365 @@
+/* Theme Settings CSS - Applied dynamically based on database settings */
+
+:root {
+    /* Default values - will be overridden by JavaScript */
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --font-family: 'Inter', sans-serif;
+    --font-size: 16px;
+    --line-height: 1.6;
+    --letter-spacing: 0.5px;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --transition-duration: 0.3s;
+    --transition-timing: ease;
+}
+
+/* Apply theme to all elements */
+* {
+    transition: all var(--transition-duration) var(--transition-timing);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+p, span, div {
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: white !important;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    opacity: 0.9;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Cards and containers */
+.card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.container, .container-fluid {
+    background-color: var(--background-color);
+}
+
+/* Form elements */
+.form-control {
+    border-radius: var(--border-radius);
+    border-color: #dee2e6;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Badges */
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+/* Sections */
+section {
+    background-color: var(--background-color);
+}
+
+/* Hero section */
+.hero-section {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* About section */
+.about-section {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Experience section */
+.experience-section {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Projects section */
+.projects-section {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Contact section */
+.contact-section {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Floating navigation */
+.floating-nav {
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+}
+
+/* Back to top button */
+.back-to-top {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+/* Loading animation */
+.loading-spinner {
+    border-color: var(--primary-color);
+}
+
+/* Progress bars */
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* Alerts */
+.alert-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.alert-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+/* Tables */
+.table {
+    color: var(--text-color);
+}
+
+.table thead th {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: #dee2e6;
+}
+
+/* Modal */
+.modal-content {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+}
+
+.modal-header {
+    border-bottom-color: #dee2e6;
+}
+
+.modal-footer {
+    border-top-color: #dee2e6;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    background-color: var(--background-color);
+    border-color: #dee2e6;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Tooltips */
+.tooltip-inner {
+    background-color: var(--primary-color);
+}
+
+/* Popovers */
+.popover {
+    background-color: var(--background-color);
+    border-color: #dee2e6;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.popover-header {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-bottom-color: #dee2e6;
+}
+
+.popover-body {
+    color: var(--text-color);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+    opacity: 0.8;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Focus outline */
+:focus {
+    outline-color: var(--primary-color);
+}
+
+/* Disabled elements */
+.disabled, [disabled] {
+    opacity: 0.6;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn var(--transition-duration) var(--transition-timing);
+}
+
+.slide-up {
+    animation: slideUp var(--transition-duration) var(--transition-timing);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    :root {
+        --font-size: 14px;
+        --border-radius: 6px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #333333;
+        --background-color: #ffffff;
+        --text-color: #000000;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --text-color: #ffffff;
+    }
+} 

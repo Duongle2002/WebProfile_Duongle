@@ -1,0 +1,163 @@
+@{
+    ViewData["Title"] = "Quản lý Thống kê";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Quản lý Thống kê</h2>
+        <p>Cập nhật thống kê hiển thị trên trang chủ</p>
+    </div>
+    <div>
+        <a href="@Url.Action("Preview", "Admin")" class="btn btn-primary" target="_blank">
+            <i class="fas fa-eye"></i> Xem trước Website
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Thống kê động từ Database</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card bg-primary text-white">
+                            <div class="stat-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">@ViewBag.ProjectsCount</div>
+                                <div class="stat-label">Dự án</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card bg-success text-white">
+                            <div class="stat-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">@ViewBag.ExperiencesCount</div>
+                                <div class="stat-label">Kinh nghiệm</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card bg-info text-white">
+                            <div class="stat-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">@ViewBag.SkillsCount</div>
+                                <div class="stat-label">Kỹ năng</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        Các số liệu này được tính tự động từ database. 
+                        Thêm/xóa Projects, Experiences, Skills sẽ tự động cập nhật.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Cài đặt thống kê tùy chỉnh</h5>
+            </div>
+            <div class="card-body">
+                <form id="statisticsForm">
+                    <div class="mb-3">
+                        <label class="form-label">Số khách hàng hài lòng</label>
+                        <input type="text" class="form-control" id="satisfiedClients" value="@ViewBag.SatisfiedClients" placeholder="50+">
+                        <small class="text-muted">Hiển thị trong cả Hero section và About section</small>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveStatistics()">
+                        <i class="fas fa-save"></i> Lưu cài đặt
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">Thông tin</h6>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    <strong>Thống kê động:</strong> Tự động tính từ database<br>
+                    <strong>Thống kê tùy chỉnh:</strong> Có thể chỉnh sửa thủ công<br>
+                    <strong>Hero Section:</strong> Hiển thị số dự án, kinh nghiệm, khách hàng<br>
+                    <strong>About Section:</strong> Hiển thị thống kê chi tiết<br>
+                    <strong>Khách hàng hài lòng:</strong> Dùng chung cho cả 2 section
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+</style>
+
+@section Scripts {
+    <script>
+        function saveStatistics() {
+            const satisfiedClients = $('#satisfiedClients').val();
+
+            $.ajax({
+                url: '@Url.Action("UpdateStatistics", "Admin")',
+                type: 'POST',
+                data: {
+                    satisfiedClients: satisfiedClients
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Thống kê đã được cập nhật thành công!');
+                        location.reload();
+                    } else {
+                        alert('Có lỗi xảy ra: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi lưu thống kê!');
+                }
+            });
+        }
+    </script>
+} 

@@ -110,6 +110,7 @@ namespace MyWebProfile.Controllers
                         Description = "A full-featured e-commerce platform built with ASP.NET Core and React",
                         ImageUrl = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
                         GitHubUrl = "https://github.com/example/ecommerce",
+                        DeployUrl = "https://ecommerce-demo.vercel.app",
                         Tags = "ASP.NET Core, React, SQL Server, Bootstrap",
                         Price = 2500,
                         Rating = 4.8m,
@@ -122,6 +123,7 @@ namespace MyWebProfile.Controllers
                         Description = "A modern portfolio website showcasing my work and skills",
                         ImageUrl = "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
                         GitHubUrl = "https://github.com/example/portfolio",
+                        DeployUrl = "", // Không có deploy URL
                         Tags = "HTML, CSS, JavaScript, Bootstrap",
                         Price = 1500,
                         Rating = 4.9m,
@@ -134,6 +136,7 @@ namespace MyWebProfile.Controllers
                         Description = "A collaborative task management application with real-time updates",
                         ImageUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
                         GitHubUrl = "https://github.com/example/taskmanager",
+                        DeployUrl = "", // Không có deploy URL
                         Tags = "Node.js, React, MongoDB, Socket.io",
                         Price = 3000,
                         Rating = 4.7m,
@@ -306,14 +309,66 @@ namespace MyWebProfile.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProject(Project project)
         {
+            // Log incoming data
+            System.Diagnostics.Debug.WriteLine($"=== CreateProject Debug ===");
+            System.Diagnostics.Debug.WriteLine($"Title: {project.Title}");
+            System.Diagnostics.Debug.WriteLine($"Description: {project.Description}");
+            System.Diagnostics.Debug.WriteLine($"Price: {project.Price}");
+            System.Diagnostics.Debug.WriteLine($"Rating: {project.Rating}");
+            System.Diagnostics.Debug.WriteLine($"ImageUrl: {project.ImageUrl}");
+            System.Diagnostics.Debug.WriteLine($"GitHubUrl: {project.GitHubUrl}");
+            System.Diagnostics.Debug.WriteLine($"DeployUrl: {project.DeployUrl}");
+            System.Diagnostics.Debug.WriteLine($"Tags: {project.Tags}");
+            
+            // Debug: Log ModelState errors
+            if (!ModelState.IsValid)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== ModelState Errors ===");
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                    }
+                }
+                
+                // Log specific field errors
+                foreach (var key in ModelState.Keys)
+                {
+                    var state = ModelState[key];
+                    if (state?.Errors.Count > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Field '{key}' has {state.Errors.Count} errors:");
+                        foreach (var error in state.Errors)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"  - {error.ErrorMessage}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"ModelState is VALID");
+            }
+            
             if (ModelState.IsValid)
             {
-                project.CreatedAt = DateTime.Now;
-                project.UpdatedAt = DateTime.Now;
-                project.IsActive = true;
-                _context.Projects.Add(project);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Projects));
+                try
+                {
+                    project.CreatedAt = DateTime.Now;
+                    project.UpdatedAt = DateTime.Now;
+                    project.IsActive = true;
+                    _context.Projects.Add(project);
+                    await _context.SaveChangesAsync();
+                    System.Diagnostics.Debug.WriteLine($"Project saved successfully with ID: {project.Id}");
+                    return RedirectToAction(nameof(Projects));
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Database Error: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    ModelState.AddModelError("", $"Database error: {ex.Message}");
+                }
             }
             return View(project);
         }
@@ -333,9 +388,54 @@ namespace MyWebProfile.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProject(int id, Project project)
         {
+            System.Diagnostics.Debug.WriteLine($"=== EditProject Debug ===");
+            System.Diagnostics.Debug.WriteLine($"ID: {id}, Project ID: {project.Id}");
+            
             if (id != project.Id)
             {
+                System.Diagnostics.Debug.WriteLine($"ID mismatch: {id} != {project.Id}");
                 return NotFound();
+            }
+
+            // Log incoming data
+            System.Diagnostics.Debug.WriteLine($"Title: {project.Title}");
+            System.Diagnostics.Debug.WriteLine($"Description: {project.Description}");
+            System.Diagnostics.Debug.WriteLine($"Price: {project.Price}");
+            System.Diagnostics.Debug.WriteLine($"Rating: {project.Rating}");
+            System.Diagnostics.Debug.WriteLine($"ImageUrl: {project.ImageUrl ?? "NULL"}");
+            System.Diagnostics.Debug.WriteLine($"GitHubUrl: {project.GitHubUrl ?? "NULL"}");
+            System.Diagnostics.Debug.WriteLine($"DeployUrl: {project.DeployUrl ?? "NULL"}");
+            System.Diagnostics.Debug.WriteLine($"Tags: {project.Tags ?? "NULL"}");
+
+            // Debug: Log ModelState errors
+            if (!ModelState.IsValid)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== ModelState Errors ===");
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                    }
+                }
+                
+                // Log specific field errors
+                foreach (var key in ModelState.Keys)
+                {
+                    var state = ModelState[key];
+                    if (state?.Errors.Count > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Field '{key}' has {state.Errors.Count} errors:");
+                        foreach (var error in state.Errors)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"  - {error.ErrorMessage}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"ModelState is VALID");
             }
 
             if (ModelState.IsValid)
@@ -345,9 +445,12 @@ namespace MyWebProfile.Controllers
                     project.UpdatedAt = DateTime.Now;
                     _context.Update(project);
                     await _context.SaveChangesAsync();
+                    System.Diagnostics.Debug.WriteLine($"Project updated successfully");
+                    return RedirectToAction(nameof(Projects));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Concurrency Error: {ex.Message}");
                     if (!ProjectExists(project.Id))
                     {
                         return NotFound();
@@ -357,7 +460,12 @@ namespace MyWebProfile.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Projects));
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Database Error: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    ModelState.AddModelError("", $"Database error: {ex.Message}");
+                }
             }
             return View(project);
         }
@@ -669,42 +777,311 @@ namespace MyWebProfile.Controllers
         #endregion
 
         #region Theme Settings
+        [Authorize]
         public IActionResult ThemeSettings()
         {
             return View(_context.ThemeSettings.FirstOrDefault() ?? new ThemeSettings());
         }
 
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> ThemeSettings(ThemeSettings settings)
+        public async Task<IActionResult> UpdateThemeSettings(
+            // Basic Colors
+            string? PrimaryColor, string? SecondaryColor, string? BackgroundColor, string? TextColor,
+            // Button Colors
+            string? ButtonPrimaryColor, string? ButtonPrimaryHoverColor, string? ButtonPrimaryTextColor,
+            string? ButtonSecondaryColor, string? ButtonSecondaryHoverColor, string? ButtonSecondaryTextColor,
+            string? ButtonOutlineColor, string? ButtonOutlineHoverColor, string? ButtonOutlineTextColor, string? ButtonOutlineHoverTextColor,
+            // Gradient Background
+            bool UseGradientBackground, string? GradientType, string? GradientDirection, string? GradientStartColor, 
+            string? GradientEndColor, string? GradientMiddleColor, string? GradientPosition,
+            // Typography
+            string? FontFamily, int FontSize, string? LineHeight, string? LetterSpacing, 
+            string? HeadingFontFamily, string? HeadingFontWeight,
+            // Visual Effects
+            string? BorderRadius, string? BoxShadow, string? BorderWidth, string? BorderStyle, string? BorderColor,
+            // Animations
+            string? TransitionDuration, string? TransitionTimingFunction, bool EnableHoverEffects, bool EnableScrollAnimations,
+            // Layout
+            string? ContainerMaxWidth, string? SectionPadding, string? CardPadding, string? SpacingUnit,
+            // Advanced
+            string? CustomCSS)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var existingSettings = await _context.ThemeSettings.FirstOrDefaultAsync();
                 if (existingSettings == null)
                 {
-                    _context.ThemeSettings.Add(settings);
+                    existingSettings = new ThemeSettings
+                    {
+                        // Basic Colors
+                        PrimaryColor = PrimaryColor ?? "#007bff",
+                        SecondaryColor = SecondaryColor ?? "#6c757d",
+                        BackgroundColor = BackgroundColor ?? "#ffffff",
+                        TextColor = TextColor ?? "#333333",
+                        
+                        // Button Colors
+                        ButtonPrimaryColor = ButtonPrimaryColor ?? "#007bff",
+                        ButtonPrimaryHoverColor = ButtonPrimaryHoverColor ?? "#0056b3",
+                        ButtonPrimaryTextColor = ButtonPrimaryTextColor ?? "#ffffff",
+                        ButtonSecondaryColor = ButtonSecondaryColor ?? "#6c757d",
+                        ButtonSecondaryHoverColor = ButtonSecondaryHoverColor ?? "#545b62",
+                        ButtonSecondaryTextColor = ButtonSecondaryTextColor ?? "#ffffff",
+                        ButtonOutlineColor = ButtonOutlineColor ?? "#007bff",
+                        ButtonOutlineHoverColor = ButtonOutlineHoverColor ?? "#007bff",
+                        ButtonOutlineTextColor = ButtonOutlineTextColor ?? "#007bff",
+                        ButtonOutlineHoverTextColor = ButtonOutlineHoverTextColor ?? "#ffffff",
+                        
+                        // Gradient Background
+                        UseGradientBackground = UseGradientBackground,
+                        GradientType = GradientType ?? "linear",
+                        GradientDirection = GradientDirection ?? "to right",
+                        GradientStartColor = GradientStartColor ?? "#667eea",
+                        GradientEndColor = GradientEndColor ?? "#764ba2",
+                        GradientMiddleColor = GradientMiddleColor ?? "",
+                        GradientPosition = GradientPosition ?? "center",
+                        
+                        // Typography
+                        FontFamily = FontFamily ?? "Arial, sans-serif",
+                        FontSize = FontSize,
+                        LineHeight = LineHeight ?? "1.6",
+                        LetterSpacing = LetterSpacing ?? "0.5px",
+                        HeadingFontFamily = HeadingFontFamily ?? "Arial, sans-serif",
+                        HeadingFontWeight = HeadingFontWeight ?? "600",
+                        
+                        // Visual Effects
+                        BorderRadius = BorderRadius ?? "8px",
+                        BoxShadow = BoxShadow ?? "0 2px 4px rgba(0,0,0,0.1)",
+                        BorderWidth = BorderWidth ?? "1px",
+                        BorderStyle = BorderStyle ?? "solid",
+                        BorderColor = BorderColor ?? "#dee2e6",
+                        
+                        // Animations
+                        TransitionDuration = TransitionDuration ?? "0.3s",
+                        TransitionTimingFunction = TransitionTimingFunction ?? "ease",
+                        EnableHoverEffects = EnableHoverEffects,
+                        EnableScrollAnimations = EnableScrollAnimations,
+                        
+                        // Layout
+                        ContainerMaxWidth = ContainerMaxWidth ?? "1200px",
+                        SectionPadding = SectionPadding ?? "80px 0",
+                        CardPadding = CardPadding ?? "20px",
+                        SpacingUnit = SpacingUnit ?? "1rem",
+                        
+                        // Advanced
+                        CustomCSS = CustomCSS ?? "",
+                        
+                        IsActive = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    };
+                    _context.ThemeSettings.Add(existingSettings);
                 }
                 else
                 {
-                    existingSettings.PrimaryColor = settings.PrimaryColor;
-                    existingSettings.SecondaryColor = settings.SecondaryColor;
-                    existingSettings.TextColor = settings.TextColor;
-                    existingSettings.BackgroundColor = settings.BackgroundColor;
-                    existingSettings.FontFamily = settings.FontFamily;
-                    existingSettings.FontSize = settings.FontSize;
-                    existingSettings.LineHeight = settings.LineHeight;
-                    existingSettings.LetterSpacing = settings.LetterSpacing;
-                    existingSettings.BorderRadius = settings.BorderRadius;
-                    existingSettings.BoxShadow = settings.BoxShadow;
-                    existingSettings.TransitionDuration = settings.TransitionDuration;
-                    existingSettings.TransitionTimingFunction = settings.TransitionTimingFunction;
-                    existingSettings.TransitionDelay = settings.TransitionDelay;
-                    existingSettings.IsActive = settings.IsActive;
+                    // Basic Colors
+                    existingSettings.PrimaryColor = PrimaryColor ?? existingSettings.PrimaryColor;
+                    existingSettings.SecondaryColor = SecondaryColor ?? existingSettings.SecondaryColor;
+                    existingSettings.BackgroundColor = BackgroundColor ?? existingSettings.BackgroundColor;
+                    existingSettings.TextColor = TextColor ?? existingSettings.TextColor;
+                    
+                    // Button Colors
+                    existingSettings.ButtonPrimaryColor = ButtonPrimaryColor ?? existingSettings.ButtonPrimaryColor;
+                    existingSettings.ButtonPrimaryHoverColor = ButtonPrimaryHoverColor ?? existingSettings.ButtonPrimaryHoverColor;
+                    existingSettings.ButtonPrimaryTextColor = ButtonPrimaryTextColor ?? existingSettings.ButtonPrimaryTextColor;
+                    existingSettings.ButtonSecondaryColor = ButtonSecondaryColor ?? existingSettings.ButtonSecondaryColor;
+                    existingSettings.ButtonSecondaryHoverColor = ButtonSecondaryHoverColor ?? existingSettings.ButtonSecondaryHoverColor;
+                    existingSettings.ButtonSecondaryTextColor = ButtonSecondaryTextColor ?? existingSettings.ButtonSecondaryTextColor;
+                    existingSettings.ButtonOutlineColor = ButtonOutlineColor ?? existingSettings.ButtonOutlineColor;
+                    existingSettings.ButtonOutlineHoverColor = ButtonOutlineHoverColor ?? existingSettings.ButtonOutlineHoverColor;
+                    existingSettings.ButtonOutlineTextColor = ButtonOutlineTextColor ?? existingSettings.ButtonOutlineTextColor;
+                    existingSettings.ButtonOutlineHoverTextColor = ButtonOutlineHoverTextColor ?? existingSettings.ButtonOutlineHoverTextColor;
+                    
+                    // Gradient Background
+                    existingSettings.UseGradientBackground = UseGradientBackground;
+                    existingSettings.GradientType = GradientType ?? existingSettings.GradientType;
+                    existingSettings.GradientDirection = GradientDirection ?? existingSettings.GradientDirection;
+                    existingSettings.GradientStartColor = GradientStartColor ?? existingSettings.GradientStartColor;
+                    existingSettings.GradientEndColor = GradientEndColor ?? existingSettings.GradientEndColor;
+                    existingSettings.GradientMiddleColor = GradientMiddleColor ?? existingSettings.GradientMiddleColor;
+                    existingSettings.GradientPosition = GradientPosition ?? existingSettings.GradientPosition;
+                    
+                    // Typography
+                    existingSettings.FontFamily = FontFamily ?? existingSettings.FontFamily;
+                    existingSettings.FontSize = FontSize;
+                    existingSettings.LineHeight = LineHeight ?? existingSettings.LineHeight;
+                    existingSettings.LetterSpacing = LetterSpacing ?? existingSettings.LetterSpacing;
+                    existingSettings.HeadingFontFamily = HeadingFontFamily ?? existingSettings.HeadingFontFamily;
+                    existingSettings.HeadingFontWeight = HeadingFontWeight ?? existingSettings.HeadingFontWeight;
+                    
+                    // Visual Effects
+                    existingSettings.BorderRadius = BorderRadius ?? existingSettings.BorderRadius;
+                    existingSettings.BoxShadow = BoxShadow ?? existingSettings.BoxShadow;
+                    existingSettings.BorderWidth = BorderWidth ?? existingSettings.BorderWidth;
+                    existingSettings.BorderStyle = BorderStyle ?? existingSettings.BorderStyle;
+                    existingSettings.BorderColor = BorderColor ?? existingSettings.BorderColor;
+                    
+                    // Animations
+                    existingSettings.TransitionDuration = TransitionDuration ?? existingSettings.TransitionDuration;
+                    existingSettings.TransitionTimingFunction = TransitionTimingFunction ?? existingSettings.TransitionTimingFunction;
+                    existingSettings.EnableHoverEffects = EnableHoverEffects;
+                    existingSettings.EnableScrollAnimations = EnableScrollAnimations;
+                    
+                    // Layout
+                    existingSettings.ContainerMaxWidth = ContainerMaxWidth ?? existingSettings.ContainerMaxWidth;
+                    existingSettings.SectionPadding = SectionPadding ?? existingSettings.SectionPadding;
+                    existingSettings.CardPadding = CardPadding ?? existingSettings.CardPadding;
+                    existingSettings.SpacingUnit = SpacingUnit ?? existingSettings.SpacingUnit;
+                    
+                    // Advanced
+                    existingSettings.CustomCSS = CustomCSS ?? existingSettings.CustomCSS;
+                    
+                    existingSettings.UpdatedAt = DateTime.Now;
                 }
+                
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ThemeSettings));
+                return Json(new { success = true, message = "Cài đặt giao diện đã được lưu thành công!" });
             }
-            return View(settings);
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetThemeSettings()
+        {
+            try
+            {
+                var themeSettings = await _context.ThemeSettings.FirstOrDefaultAsync();
+                if (themeSettings == null)
+                {
+                    // Return default settings
+                    return Json(new
+                    {
+                        // Basic Colors
+                        primaryColor = "#3b82f6",
+                        secondaryColor = "#64748b",
+                        backgroundColor = "#ffffff",
+                        textColor = "#1e293b",
+                        
+                        // Button Colors
+                        buttonPrimaryColor = "#007bff",
+                        buttonPrimaryHoverColor = "#0056b3",
+                        buttonPrimaryTextColor = "#ffffff",
+                        buttonSecondaryColor = "#6c757d",
+                        buttonSecondaryHoverColor = "#545b62",
+                        buttonSecondaryTextColor = "#ffffff",
+                        buttonOutlineColor = "#007bff",
+                        buttonOutlineHoverColor = "#007bff",
+                        buttonOutlineTextColor = "#007bff",
+                        buttonOutlineHoverTextColor = "#ffffff",
+                        
+                        // Gradient Background
+                        useGradientBackground = false,
+                        gradientType = "linear",
+                        gradientDirection = "to right",
+                        gradientStartColor = "#667eea",
+                        gradientEndColor = "#764ba2",
+                        gradientMiddleColor = "",
+                        gradientPosition = "center",
+                        
+                        // Typography
+                        fontFamily = "'Inter', sans-serif",
+                        fontSize = 16,
+                        lineHeight = "1.6",
+                        letterSpacing = "0.5px",
+                        headingFontFamily = "'Inter', sans-serif",
+                        headingFontWeight = "600",
+                        
+                        // Visual Effects
+                        borderRadius = "12px",
+                        boxShadow = "0 4px 8px rgba(0,0,0,0.15)",
+                        borderWidth = "1px",
+                        borderStyle = "solid",
+                        borderColor = "#dee2e6",
+                        
+                        // Animations
+                        transitionDuration = "0.3s",
+                        transitionTimingFunction = "ease",
+                        enableHoverEffects = true,
+                        enableScrollAnimations = true,
+                        
+                        // Layout
+                        containerMaxWidth = "1200px",
+                        sectionPadding = "80px 0",
+                        cardPadding = "20px",
+                        spacingUnit = "1rem",
+                        
+                        // Advanced
+                        customCSS = ""
+                    });
+                }
+
+                return Json(new
+                {
+                    // Basic Colors
+                    primaryColor = themeSettings.PrimaryColor,
+                    secondaryColor = themeSettings.SecondaryColor,
+                    backgroundColor = themeSettings.BackgroundColor,
+                    textColor = themeSettings.TextColor,
+                    
+                    // Button Colors
+                    buttonPrimaryColor = themeSettings.ButtonPrimaryColor,
+                    buttonPrimaryHoverColor = themeSettings.ButtonPrimaryHoverColor,
+                    buttonPrimaryTextColor = themeSettings.ButtonPrimaryTextColor,
+                    buttonSecondaryColor = themeSettings.ButtonSecondaryColor,
+                    buttonSecondaryHoverColor = themeSettings.ButtonSecondaryHoverColor,
+                    buttonSecondaryTextColor = themeSettings.ButtonSecondaryTextColor,
+                    buttonOutlineColor = themeSettings.ButtonOutlineColor,
+                    buttonOutlineHoverColor = themeSettings.ButtonOutlineHoverColor,
+                    buttonOutlineTextColor = themeSettings.ButtonOutlineTextColor,
+                    buttonOutlineHoverTextColor = themeSettings.ButtonOutlineHoverTextColor,
+                    
+                    // Gradient Background
+                    useGradientBackground = themeSettings.UseGradientBackground,
+                    gradientType = themeSettings.GradientType,
+                    gradientDirection = themeSettings.GradientDirection,
+                    gradientStartColor = themeSettings.GradientStartColor,
+                    gradientEndColor = themeSettings.GradientEndColor,
+                    gradientMiddleColor = themeSettings.GradientMiddleColor,
+                    gradientPosition = themeSettings.GradientPosition,
+                    
+                    // Typography
+                    fontFamily = themeSettings.FontFamily,
+                    fontSize = themeSettings.FontSize,
+                    lineHeight = themeSettings.LineHeight,
+                    letterSpacing = themeSettings.LetterSpacing,
+                    headingFontFamily = themeSettings.HeadingFontFamily,
+                    headingFontWeight = themeSettings.HeadingFontWeight,
+                    
+                    // Visual Effects
+                    borderRadius = themeSettings.BorderRadius,
+                    boxShadow = themeSettings.BoxShadow,
+                    borderWidth = themeSettings.BorderWidth,
+                    borderStyle = themeSettings.BorderStyle,
+                    borderColor = themeSettings.BorderColor,
+                    
+                    // Animations
+                    transitionDuration = themeSettings.TransitionDuration,
+                    transitionTimingFunction = themeSettings.TransitionTimingFunction,
+                    enableHoverEffects = themeSettings.EnableHoverEffects,
+                    enableScrollAnimations = themeSettings.EnableScrollAnimations,
+                    
+                    // Layout
+                    containerMaxWidth = themeSettings.ContainerMaxWidth,
+                    sectionPadding = themeSettings.SectionPadding,
+                    cardPadding = themeSettings.CardPadding,
+                    spacingUnit = themeSettings.SpacingUnit,
+                    
+                    // Advanced
+                    customCSS = themeSettings.CustomCSS
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
         #endregion
 
@@ -894,6 +1271,20 @@ namespace MyWebProfile.Controllers
         public async Task<IActionResult> ContentSettings()
         {
             var contentSettings = await _context.ContentSettings.Where(c => !c.IsDeleted).OrderBy(c => c.Category).ThenBy(c => c.Key).ToListAsync();
+            
+            // Load display settings
+            var displaySettings = contentSettings.Where(c => c.Category == "Display").ToList();
+            ViewBag.DisplaySettings = displaySettings;
+            
+            // Debug: Log display settings
+            Console.WriteLine($"=== ContentSettings Action ===");
+            Console.WriteLine($"Found {displaySettings.Count} display settings:");
+            foreach (var setting in displaySettings)
+            {
+                Console.WriteLine($"- {setting.Key}: {setting.Value}");
+            }
+            Console.WriteLine($"=== End ContentSettings Action ===");
+            
             return View(contentSettings);
         }
 
@@ -991,46 +1382,6 @@ namespace MyWebProfile.Controllers
         }
         #endregion
 
-        #region Hero Settings
-        [Authorize]
-        public async Task<IActionResult> HeroSettings()
-        {
-            var heroSettings = await _context.ContentSettings
-                .Where(c => c.Category == "Hero" && !c.IsDeleted)
-                .OrderBy(c => c.Key)
-                .ToListAsync();
-
-            // Get project count for stats
-            var projectCount = await _context.Projects.CountAsync(p => p.IsActive && !p.IsDeleted);
-            ViewBag.ProjectCount = projectCount;
-
-            return View(heroSettings);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> UpdateHeroSetting(string key, string value)
-        {
-            var setting = await _context.ContentSettings.FirstOrDefaultAsync(c => c.Key == key && c.Category == "Hero");
-            if (setting == null)
-            {
-                setting = new ContentSettings
-                {
-                    Key = key,
-                    Category = "Hero",
-                    UpdatedAt = DateTime.Now
-                };
-                _context.ContentSettings.Add(setting);
-            }
-
-            setting.Value = value;
-            setting.UpdatedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
-
-            return Json(new { success = true });
-        }
-        #endregion
-
         #region Debug Actions
         [Authorize]
         public async Task<IActionResult> DebugData()
@@ -1107,6 +1458,225 @@ namespace MyWebProfile.Controllers
 
             return RedirectToAction("Index");
         }
+
+        #region Main Page Content Management
+        [Authorize]
+        public async Task<IActionResult> MainPageContent()
+        {
+            var contentSettings = await _context.ContentSettings
+                .Where(c => !c.IsDeleted)
+                .OrderBy(c => c.Category)
+                .ThenBy(c => c.Key)
+                .ToListAsync();
+
+            ViewBag.Categories = new List<string> { "Hero", "About", "Contact", "Navigation", "Footer", "General" };
+            return View(contentSettings);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateMainPageContent(string key, string value, string category = "General")
+        {
+            try
+            {
+                var existingSetting = await _context.ContentSettings
+                    .FirstOrDefaultAsync(c => c.Key == key && !c.IsDeleted);
+
+                if (existingSetting != null)
+                {
+                    existingSetting.Value = value;
+                    existingSetting.Category = category;
+                    existingSetting.UpdatedAt = DateTime.Now;
+                }
+                else
+                {
+                    var newSetting = new ContentSettings
+                    {
+                        Key = key,
+                        Value = value,
+                        Category = category,
+                        Description = $"Nội dung cho {key}",
+                        IsDeleted = false,
+                        UpdatedAt = DateTime.Now
+                    };
+                    _context.ContentSettings.Add(newSetting);
+                }
+
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Cập nhật thành công!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+
+        [Authorize]
+        public async Task<IActionResult> PreviewMainPage()
+        {
+            // Lấy dữ liệu như trang chính
+            var projects = await _context.Projects
+                .Where(p => p.IsActive && !p.IsDeleted)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(6)
+                .ToListAsync();
+            
+            var skills = await _context.Skills
+                .Where(s => s.IsActive && !s.IsDeleted)
+                .OrderBy(s => s.DisplayOrder)
+                .ToListAsync();
+            
+            var experiences = await _context.Experiences
+                .Where(e => e.IsActive && !e.IsDeleted)
+                .OrderByDescending(e => e.StartDate)
+                .ToListAsync();
+            
+            var contentSettings = await _context.ContentSettings
+                .Where(c => !c.IsDeleted)
+                .ToListAsync();
+
+            ViewBag.Projects = projects;
+            ViewBag.Skills = skills;
+            ViewBag.Experiences = experiences;
+            ViewBag.ContentSettings = contentSettings;
+            ViewData["ContentSettings"] = contentSettings;
+
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateDisplaySettings(bool aboutActive, int aboutOrder, 
+            bool experienceActive, int experienceOrder, bool projectsActive, int projectsOrder, 
+            bool contactActive, int contactOrder, bool floatingNavActive, bool backToTopActive, 
+            bool pageLoaderActive, bool scrollAnimationActive)
+        {
+            try
+            {
+                // Debug: Log incoming data
+                Console.WriteLine("=== UpdateDisplaySettings Called ===");
+                Console.WriteLine($"aboutActive: {aboutActive}, aboutOrder: {aboutOrder}");
+                Console.WriteLine($"experienceActive: {experienceActive}, experienceOrder: {experienceOrder}");
+                Console.WriteLine($"projectsActive: {projectsActive}, projectsOrder: {projectsOrder}");
+                Console.WriteLine($"contactActive: {contactActive}, contactOrder: {contactOrder}");
+                Console.WriteLine($"floatingNavActive: {floatingNavActive}, backToTopActive: {backToTopActive}");
+                Console.WriteLine($"pageLoaderActive: {pageLoaderActive}, scrollAnimationActive: {scrollAnimationActive}");
+
+                // Lưu cài đặt vào ContentSettings
+                var settingsToUpdate = new Dictionary<string, string>
+                {
+                    { "AboutActive", aboutActive.ToString() },
+                    { "AboutOrder", aboutOrder.ToString() },
+                    { "ExperienceActive", experienceActive.ToString() },
+                    { "ExperienceOrder", experienceOrder.ToString() },
+                    { "ProjectsActive", projectsActive.ToString() },
+                    { "ProjectsOrder", projectsOrder.ToString() },
+                    { "ContactActive", contactActive.ToString() },
+                    { "ContactOrder", contactOrder.ToString() },
+                    { "FloatingNavActive", floatingNavActive.ToString() },
+                    { "BackToTopActive", backToTopActive.ToString() },
+                    { "PageLoaderActive", pageLoaderActive.ToString() },
+                    { "ScrollAnimationActive", scrollAnimationActive.ToString() }
+                };
+
+                foreach (var setting in settingsToUpdate)
+                {
+                    var existingSetting = await _context.ContentSettings
+                        .FirstOrDefaultAsync(c => c.Key == setting.Key && !c.IsDeleted);
+
+                    if (existingSetting != null)
+                    {
+                        existingSetting.Value = setting.Value;
+                        existingSetting.UpdatedAt = DateTime.Now;
+                        Console.WriteLine($"Updated: {setting.Key} = {setting.Value}");
+                    }
+                    else
+                    {
+                        var newSetting = new ContentSettings
+                        {
+                            Key = setting.Key,
+                            Value = setting.Value,
+                            Category = "Display",
+                            Description = $"Cài đặt hiển thị cho {setting.Key}",
+                            IsDeleted = false,
+                            UpdatedAt = DateTime.Now
+                        };
+                        _context.ContentSettings.Add(newSetting);
+                        Console.WriteLine($"Created: {setting.Key} = {setting.Value}");
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                Console.WriteLine("=== Settings Saved Successfully ===");
+                return Json(new { success = true, message = "Cài đặt đã được lưu thành công!" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"=== Error: {ex.Message} ===");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+        #endregion
+
+        #region Statistics Management
+        [Authorize]
+        public async Task<IActionResult> Statistics()
+        {
+            // Lấy dữ liệu thống kê từ database
+            var projectsCount = await _context.Projects.Where(p => p.IsActive && !p.IsDeleted).CountAsync();
+            var experiencesCount = await _context.Experiences.Where(e => e.IsActive && !e.IsDeleted).CountAsync();
+            var skillsCount = await _context.Skills.Where(s => s.IsActive && !s.IsDeleted).CountAsync();
+            
+            // Lấy settings từ ContentSettings - chỉ một trường khách hàng
+            var contentSettings = await _context.ContentSettings.Where(c => !c.IsDeleted).ToListAsync();
+            var satisfiedClients = contentSettings.FirstOrDefault(x => x.Key == "SatisfiedClients")?.Value ?? "50+";
+            
+            ViewBag.ProjectsCount = projectsCount;
+            ViewBag.ExperiencesCount = experiencesCount;
+            ViewBag.SkillsCount = skillsCount;
+            ViewBag.SatisfiedClients = satisfiedClients;
+            
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateStatistics(string satisfiedClients)
+        {
+            try
+            {
+                // Cập nhật SatisfiedClients
+                var satisfiedClientsSetting = await _context.ContentSettings
+                    .FirstOrDefaultAsync(c => c.Key == "SatisfiedClients" && !c.IsDeleted);
+                
+                if (satisfiedClientsSetting != null)
+                {
+                    satisfiedClientsSetting.Value = satisfiedClients;
+                    satisfiedClientsSetting.UpdatedAt = DateTime.Now;
+                }
+                else
+                {
+                    var newSatisfiedClients = new ContentSettings
+                    {
+                        Key = "SatisfiedClients",
+                        Value = satisfiedClients,
+                        Category = "Statistics",
+                        Description = "Số khách hàng hài lòng (dùng chung cho Hero và About section)",
+                        IsDeleted = false,
+                        UpdatedAt = DateTime.Now
+                    };
+                    _context.ContentSettings.Add(newSatisfiedClients);
+                }
+
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Thống kê đã được cập nhật thành công!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+        #endregion
         #endregion
     }
 } 

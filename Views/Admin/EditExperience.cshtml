@@ -1,0 +1,154 @@
+@model MyWebProfile.Models.Experience
+@{
+    ViewData["Title"] = "Chỉnh sửa Kinh nghiệm";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Chỉnh sửa Kinh nghiệm</h2>
+        <p>Cập nhật thông tin kinh nghiệm làm việc</p>
+    </div>
+    <div>
+        <a href="@Url.Action("Experiences", "Admin")" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Thông tin Kinh nghiệm</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditExperience" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Title" class="form-label">Chức danh *</label>
+                                <input asp-for="Title" class="form-control" placeholder="Ví dụ: Senior Full Stack Developer">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Company" class="form-label">Công ty *</label>
+                                <input asp-for="Company" class="form-control" placeholder="Ví dụ: Tech Company">
+                                <span asp-validation-for="Company" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="StartDate" class="form-label">Ngày bắt đầu *</label>
+                                <input asp-for="StartDate" type="date" class="form-control">
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="EndDate" class="form-label">Ngày kết thúc</label>
+                                <input asp-for="EndDate" type="date" class="form-control">
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                                <div class="form-text">Để trống nếu vẫn đang làm việc</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Mô tả công việc *</label>
+                        <textarea asp-for="Description" class="form-control" rows="5" 
+                                  placeholder="Mô tả chi tiết về công việc, trách nhiệm và thành tựu..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="DisplayOrder" class="form-label">Thứ tự hiển thị</label>
+                                <input asp-for="DisplayOrder" type="number" class="form-control">
+                                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                                <div class="form-text">Số càng nhỏ hiển thị càng trước</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Period" class="form-label">Thời gian</label>
+                                <input asp-for="Period" class="form-control" placeholder="Ví dụ: 2020 - 2022">
+                                <span asp-validation-for="Period" class="text-danger"></span>
+                                <div class="form-text">Hiển thị thời gian tùy chỉnh</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Cập nhật
+                        </button>
+                        <a href="@Url.Action("Experiences", "Admin")" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Hủy
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">Thông tin hiện tại</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Chức danh:</strong><br>
+                    <span>@Model.Title</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Công ty:</strong><br>
+                    <span>@Model.Company</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Thời gian:</strong><br>
+                    <span>@Model.StartDate.ToString("MM/yyyy") - @(Model.EndDate?.ToString("MM/yyyy") ?? "Hiện tại")</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Trạng thái:</strong><br>
+                    @if (Model.IsActive)
+                    {
+                        <span class="badge bg-success">Hoạt động</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">Không hoạt động</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Auto-calculate period when dates change
+            $('#StartDate, #EndDate').change(function() {
+                var startDate = $('#StartDate').val();
+                var endDate = $('#EndDate').val();
+                
+                if (startDate) {
+                    var startYear = new Date(startDate).getFullYear();
+                    var endYear = endDate ? new Date(endDate).getFullYear() : 'Hiện tại';
+                    $('#Period').val(startYear + ' - ' + endYear);
+                }
+            });
+        });
+    </script>
+} 

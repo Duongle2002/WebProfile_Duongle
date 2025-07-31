@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQ29udGVudFNldHRpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/CreateExperience.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlRXhwZXJpZW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/CreateProject.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUHJvamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,6 +46,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditContentSetting.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENvbnRlbnRTZXR0aW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditExperience.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEV4cGVyaWVuY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditProject.cshtml]
@@ -60,16 +68,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRXhwZXJpZW5jZXNEZWxldGVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/HeroSettings.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSGVyb1NldHRpbmdzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/MainPageContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFpblBhZ2VDb250ZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Preview.cshtml]
@@ -92,6 +100,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2tpbGxzRGVsZXRlZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Statistics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3RhdGlzdGljcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/ThemeSettings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGhlbWVTZXR0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -112,24 +124,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/_About.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQWJvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/_Contact.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQ29udGFjdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/_Experience.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfRXhwZXJpZW5jZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/_Hero.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfSGVyby5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Home/_Projects.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfUHJvamVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Shared/Error.cshtml]

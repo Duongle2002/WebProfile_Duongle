@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OIffv2wb7QugVCwAczONepJFOUvv1eIv6Lw6VU6OnSU=",
+  "Hash": "HKoXnGoYyzO1o+05BZDMpshKLBdvbYR1TPfGWqvqfMI=",
   "Source": "MyWebProfile",
   "BasePath": "_content/MyWebProfile",
   "Mode": "Default",
@@ -80,12 +80,12 @@
       "OriginalItemSpec": "wwwroot\\css\\admin.css"
     },
     {
-      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
+      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\theme.css",
       "SourceId": "MyWebProfile",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\",
       "BasePath": "_content/MyWebProfile",
-      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "RelativePath": "css/theme#[.{fingerprint}]?.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -94,32 +94,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mvzfr8q3vg",
-      "Integrity": "Yt5Vx6Jll49/RgIKDppjdMbD4A8ySebWhB6wZMlVeH4=",
+      "Fingerprint": "ykgdbxqa48",
+      "Integrity": "MsSs1Oe6WNxWmm6vv1l5H3XUPeyuEZ+FKDeTSId6GFE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\style.css",
-      "SourceId": "MyWebProfile",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\",
-      "BasePath": "_content/MyWebProfile",
-      "RelativePath": "css/style#[.{fingerprint}]?.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mvijtrninf",
-      "Integrity": "rqCdM4zVMzrl8F3XX3SRSCb6ists1dvURsGxvsCwcsw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\style.css"
+      "OriginalItemSpec": "wwwroot\\css\\theme.css"
     },
     {
       "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\favicon.ico",
@@ -141,6 +120,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\images\\default-project.svg",
+      "SourceId": "MyWebProfile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\",
+      "BasePath": "_content/MyWebProfile",
+      "RelativePath": "images/default-project#[.{fingerprint}]?.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n47q8g3jgw",
+      "Integrity": "aSGaC2/j1JjFCB+JMrdf+WjzdjxCAUjVUbuWe3MRnyY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\default-project.svg"
     },
     {
       "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\script.js",
@@ -183,6 +183,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\theme-loader.js",
+      "SourceId": "MyWebProfile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\",
+      "BasePath": "_content/MyWebProfile",
+      "RelativePath": "js/theme-loader#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xlcuoozwye",
+      "Integrity": "q7xStta6sjfUTN9ZFWMkhZDsXh8F2tfy1oAAINAGV+M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\theme-loader.js"
     },
     {
       "Identity": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
@@ -1466,8 +1487,8 @@
       ]
     },
     {
-      "Route": "css/site.css",
-      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
+      "Route": "css/theme.css",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\theme.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1476,7 +1497,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5088"
+          "Value": "7591"
         },
         {
           "Name": "Content-Type",
@@ -1484,11 +1505,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Yt5Vx6Jll49/RgIKDppjdMbD4A8ySebWhB6wZMlVeH4=\""
+          "Value": "\"MsSs1Oe6WNxWmm6vv1l5H3XUPeyuEZ+FKDeTSId6GFE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 09:00:36 GMT"
+          "Value": "Wed, 30 Jul 2025 18:10:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1498,13 +1519,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Yt5Vx6Jll49/RgIKDppjdMbD4A8ySebWhB6wZMlVeH4="
+          "Value": "sha256-MsSs1Oe6WNxWmm6vv1l5H3XUPeyuEZ+FKDeTSId6GFE="
         }
       ]
     },
     {
-      "Route": "css/site.mvzfr8q3vg.css",
-      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\site.css",
+      "Route": "css/theme.ykgdbxqa48.css",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\theme.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1513,7 +1534,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5088"
+          "Value": "7591"
         },
         {
           "Name": "Content-Type",
@@ -1521,11 +1542,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Yt5Vx6Jll49/RgIKDppjdMbD4A8ySebWhB6wZMlVeH4=\""
+          "Value": "\"MsSs1Oe6WNxWmm6vv1l5H3XUPeyuEZ+FKDeTSId6GFE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 09:00:36 GMT"
+          "Value": "Wed, 30 Jul 2025 18:10:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1535,97 +1556,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mvzfr8q3vg"
+          "Value": "ykgdbxqa48"
         },
         {
           "Name": "label",
-          "Value": "css/site.css"
+          "Value": "css/theme.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Yt5Vx6Jll49/RgIKDppjdMbD4A8ySebWhB6wZMlVeH4="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.css",
-      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12364"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"rqCdM4zVMzrl8F3XX3SRSCb6ists1dvURsGxvsCwcsw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 05 Jul 2025 11:20:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-rqCdM4zVMzrl8F3XX3SRSCb6ists1dvURsGxvsCwcsw="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.mvijtrninf.css",
-      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\css\\style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12364"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"rqCdM4zVMzrl8F3XX3SRSCb6ists1dvURsGxvsCwcsw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 05 Jul 2025 11:20:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "mvijtrninf"
-        },
-        {
-          "Name": "label",
-          "Value": "css/style.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-rqCdM4zVMzrl8F3XX3SRSCb6ists1dvURsGxvsCwcsw="
+          "Value": "sha256-MsSs1Oe6WNxWmm6vv1l5H3XUPeyuEZ+FKDeTSId6GFE="
         }
       ]
     },
@@ -1708,6 +1647,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "images/default-project.n47q8g3jgw.svg",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\images\\default-project.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "386"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aSGaC2/j1JjFCB+JMrdf+WjzdjxCAUjVUbuWe3MRnyY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 31 Jul 2025 08:04:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n47q8g3jgw"
+        },
+        {
+          "Name": "label",
+          "Value": "images/default-project.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aSGaC2/j1JjFCB+JMrdf+WjzdjxCAUjVUbuWe3MRnyY="
+        }
+      ]
+    },
+    {
+      "Route": "images/default-project.svg",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\images\\default-project.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "386"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aSGaC2/j1JjFCB+JMrdf+WjzdjxCAUjVUbuWe3MRnyY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 31 Jul 2025 08:04:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aSGaC2/j1JjFCB+JMrdf+WjzdjxCAUjVUbuWe3MRnyY="
         }
       ]
     },
@@ -1872,6 +1893,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-y/Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM="
+        }
+      ]
+    },
+    {
+      "Route": "js/theme-loader.js",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\theme-loader.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4563"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"q7xStta6sjfUTN9ZFWMkhZDsXh8F2tfy1oAAINAGV+M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Jul 2025 18:10:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-q7xStta6sjfUTN9ZFWMkhZDsXh8F2tfy1oAAINAGV+M="
+        }
+      ]
+    },
+    {
+      "Route": "js/theme-loader.xlcuoozwye.js",
+      "AssetFile": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\theme-loader.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4563"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"q7xStta6sjfUTN9ZFWMkhZDsXh8F2tfy1oAAINAGV+M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Jul 2025 18:10:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xlcuoozwye"
+        },
+        {
+          "Name": "label",
+          "Value": "js/theme-loader.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-q7xStta6sjfUTN9ZFWMkhZDsXh8F2tfy1oAAINAGV+M="
         }
       ]
     },

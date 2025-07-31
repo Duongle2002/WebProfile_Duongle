@@ -13,11 +13,9 @@ namespace MyWebProfile.Models
         [Required(ErrorMessage = "Mô tả dự án là bắt buộc")]
         public string Description { get; set; } = string.Empty;
         
-        [Required(ErrorMessage = "URL hình ảnh là bắt buộc")]
-        [Url(ErrorMessage = "URL hình ảnh không hợp lệ")]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; }
         
-        public string Tags { get; set; } = string.Empty; // Lưu dưới dạng "React,.NET,SQL Server"
+        public string? Tags { get; set; } // Lưu dưới dạng "React,.NET,SQL Server"
         
         [Required(ErrorMessage = "Giá dự án là bắt buộc")]
         [Range(0, double.MaxValue, ErrorMessage = "Giá phải là số dương")]
@@ -30,10 +28,11 @@ namespace MyWebProfile.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = true;
-        public string GitHubUrl { get; set; } = string.Empty;
-        public string LiveDemoUrl { get; set; } = string.Empty;
-        public string DownloadUrl { get; set; } = string.Empty;
-        public string VideoUrl { get; set; } = string.Empty;
+        public string? GitHubUrl { get; set; }
+        public string? LiveDemoUrl { get; set; }
+        public string? DeployUrl { get; set; } // Link deploy (Vercel, Netlify, Heroku, etc.)
+        public string? DownloadUrl { get; set; }
+        public string? VideoUrl { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 } 

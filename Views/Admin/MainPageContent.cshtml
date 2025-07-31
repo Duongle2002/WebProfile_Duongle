@@ -1,0 +1,416 @@
+@model List<MyWebProfile.Models.ContentSettings>
+@using System.Collections.Generic;
+@{
+    ViewData["Title"] = "Quản lý nội dung trang chính";
+    Layout = "_AdminLayout";
+
+    // Danh sách key mặc định cho từng nhóm
+    var defaultKeys = new List<(string Key, string Category, string Description)>
+    {
+        // About/Giới thiệu
+        ("AboutName", "About", "Tên hiển thị trong About section"),
+        ("AboutTitle", "About", "Tiêu đề About section"),
+        ("AboutDescription", "About", "Mô tả chi tiết trong About section"),
+        // Kinh nghiệm
+        ("ExperienceTitle", "Experience", "Tiêu đề phần Kinh nghiệm"),
+        ("ExperienceDescription", "Experience", "Mô tả phần Kinh nghiệm"),
+        // Dự án
+        ("ProjectTitle", "Project", "Tiêu đề phần Dự án"),
+        ("ProjectDescription", "Project", "Mô tả phần Dự án"),
+        // Liên hệ
+        ("ContactEmail", "Contact", "Email liên hệ"),
+        ("ContactPhone", "Contact", "Số điện thoại liên hệ"),
+        ("ContactAddress", "Contact", "Địa chỉ liên hệ"),
+        ("ContactGithub", "Contact", "Link GitHub"),
+        ("ContactLinkedin", "Contact", "Link LinkedIn"),
+        ("ContactTwitter", "Contact", "Link Twitter"),
+        ("ContactFacebook", "Contact", "Link Facebook"),
+        // Hero
+        ("HeroName", "Hero", "Tên hiển thị trong Hero section"),
+        ("HeroTitle", "Hero", "Chức danh/công việc trong Hero section"),
+        ("HeroLocation", "Hero", "Địa điểm làm việc trong Hero section"),
+        ("HeroImage", "Hero", "URL ảnh đại diện trong Hero section"),
+        ("HeroPortfolioButton", "Hero", "Text nút Portfolio trong Hero section"),
+        ("HeroContactButton", "Hero", "Text nút Liên hệ trong Hero section"),
+        // Navigation
+        ("NavigationLogo", "Navigation", "Logo trong navigation"),
+        // Footer
+        ("FooterCopyright", "Footer", "Text copyright trong footer"),
+        ("FooterDescription", "Footer", "Mô tả trong footer")
+    };
+
+    // Kết hợp key mặc định và key trong database (Model)
+    var allKeys = new List<(string Key, string Category, string Description, string Value, DateTime UpdatedAt)>();
+    var usedKeys = new HashSet<string>();
+    foreach (var def in defaultKeys)
+    {
+        var exist = Model.FirstOrDefault(x => x.Key == def.Key);
+        if (exist != null)
+        {
+            allKeys.Add((def.Key, def.Category, def.Description, exist.Value, exist.UpdatedAt));
+            usedKeys.Add(def.Key);
+        }
+        else
+        {
+            allKeys.Add((def.Key, def.Category, def.Description, "", DateTime.Now));
+        }
+    }
+    // Thêm các key khác có trong database nhưng không nằm trong danh sách mặc định
+    foreach (var setting in Model)
+    {
+        if (!usedKeys.Contains(setting.Key))
+        {
+            allKeys.Add((setting.Key, setting.Category, setting.Description, setting.Value, setting.UpdatedAt));
+        }
+    }
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Quản lý nội dung trang chính</h2>
+        <p>Chỉnh sửa nội dung tĩnh hiển thị trên trang chính</p>
+    </div>
+    <div>
+        <a href="@Url.Action("PreviewMainPage", "Admin")" class="btn btn-primary" target="_blank">
+            <i class="fas fa-eye"></i> Xem trước trang chính
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Nội dung hiện tại</h5>
+                <small class="text-muted">Tất cả nội dung có thể chỉnh sửa</small>
+            </div>
+            <div class="card-body">
+                <!-- Bộ lọc -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="searchInput" class="form-label">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Tìm theo key hoặc giá trị...">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="categoryFilter" class="form-label">Danh mục</label>
+                        <select class="form-control" id="categoryFilter">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="Hero">Hero</option>
+                            <option value="About">About</option>
+                            <option value="Contact">Contact</option>
+                            <option value="Navigation">Navigation</option>
+                            <option value="Footer">Footer</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="sortOrder" class="form-label">Sắp xếp</label>
+                        <select class="form-control" id="sortOrder">
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
+                            <option value="category">Theo danh mục</option>
+                            <option value="updated">Cập nhật gần nhất</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="button" class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                            <i class="fas fa-times"></i> Xóa lọc
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover" id="contentTable">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Ý nghĩa</th>
+                                <th>Giá trị</th>
+                                <th>Danh mục</th>
+                                <th>Cập nhật</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in allKeys)
+                            {
+                                <tr data-key="@item.Key" data-category="@item.Category" data-value="@item.Value">
+                                    <td><strong>@item.Key</strong></td>
+                                    <td><small class="text-muted">@item.Description</small></td>
+                                    <td>
+                                        <div class="content-value">
+                                            @if (!string.IsNullOrEmpty(item.Value) && item.Value.Length > 50)
+                                            {
+                                                <div class="content-preview">@item.Value.Substring(0, 50)<text>...</text></div>
+                                                <div class="content-full" style="display: none;">@item.Value</div>
+                                                <button type="button" class="btn btn-sm btn-link toggle-content" data-target="@item.Key"><i class="fas fa-eye"></i> Xem thêm</button>
+                                            }
+                                            else
+                                            {
+                                                <div class="content-full">@item.Value</div>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">@item.Category</span>
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">
+                                            @item.UpdatedAt.ToString("dd/MM/yyyy HH:mm")
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-outline-primary edit-content" 
+                                                data-key="@item.Key" 
+                                                data-value="@item.Value" 
+                                                data-category="@item.Category">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        Hiển thị <span id="visibleCount">@allKeys.Count</span> / <span id="totalCount">@allKeys.Count</span> nội dung
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card sticky-form">
+            <div class="card-header">
+                <h5 class="mb-0">Thêm/Chỉnh sửa nội dung</h5>
+            </div>
+            <div class="card-body">
+                <form id="contentForm">
+                    <div class="mb-3">
+                        <label for="contentKey" class="form-label">Key</label>
+                        <input type="text" class="form-control" id="contentKey" name="key" required>
+                        <div class="form-text">Ví dụ: HeroName, AboutTitle, ContactEmail</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contentValue" class="form-label">Giá trị</label>
+                        <textarea class="form-control" id="contentValue" name="value" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contentCategory" class="form-label">Danh mục</label>
+                        <select class="form-control" id="contentCategory" name="category">
+                            <option value="Hero">Hero</option>
+                            <option value="About">About</option>
+                            <option value="Contact">Contact</option>
+                            <option value="Navigation">Navigation</option>
+                            <option value="Footer">Footer</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-save"></i> Lưu thay đổi
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">Lưu ý</h6>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    <strong>Nội dung động:</strong> Thống kê dự án, kinh nghiệm được tính tự động từ database<br>
+                    <strong>Nội dung tĩnh:</strong> Tên, mô tả, thông tin liên hệ có thể chỉnh sửa ở đây<br>
+                    <strong>Thứ tự hiển thị:</strong> Quản lý trong "Quản lý thứ tự hiển thị"
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.content-value {
+    max-width: 300px;
+}
+
+.content-preview, .content-full {
+    word-wrap: break-word;
+}
+
+.toggle-content {
+    padding: 0;
+    font-size: 0.8rem;
+    color: #007bff;
+}
+
+.edit-content {
+    padding: 0.25rem 0.5rem;
+}
+
+.sticky-form {
+    position: sticky;
+    top: 2rem;
+    z-index: 100;
+}
+
+@@media (max-width: 768px) {
+    .sticky-form {
+        position: static;
+    }
+}
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Toggle content preview/full
+            $('.toggle-content').click(function() {
+                var target = $(this).data('target');
+                var preview = $(this).siblings('.content-preview');
+                var full = $(this).siblings('.content-full');
+                
+                if (preview.is(':visible')) {
+                    preview.hide();
+                    full.show();
+                    $(this).html('<i class="fas fa-eye-slash"></i> Thu gọn');
+                } else {
+                    full.hide();
+                    preview.show();
+                    $(this).html('<i class="fas fa-eye"></i> Xem thêm');
+                }
+            });
+            
+            // Edit content (nút chỉnh sửa)
+            $('.edit-content').click(function(e) {
+                e.stopPropagation();
+                var key = $(this).data('key');
+                var value = $(this).data('value');
+                var category = $(this).data('category');
+                
+                $('#contentKey').val(key);
+                $('#contentValue').val(value);
+                $('#contentCategory').val(category);
+                
+                // Scroll to form
+                $('html, body').animate({
+                    scrollTop: $('#contentForm').offset().top - 100
+                }, 500);
+            });
+            
+            // Khi nhấn vào bất kỳ ô nào (trừ nút thao tác) của hàng => chuyển sang cập nhật
+            $('#contentTable tbody tr td').not(':last-child').on('click', function() {
+                var row = $(this).closest('tr');
+                var key = row.data('key');
+                var value = row.data('value');
+                var category = row.data('category');
+                $('#contentKey').val(key);
+                $('#contentValue').val(value);
+                $('#contentCategory').val(category);
+                $('html, body').animate({
+                    scrollTop: $('#contentForm').offset().top - 100
+                }, 500);
+            });
+            
+            // Submit form
+            $('#contentForm').submit(function(e) {
+                e.preventDefault();
+                
+                var formData = {
+                    key: $('#contentKey').val(),
+                    value: $('#contentValue').val(),
+                    category: $('#contentCategory').val()
+                };
+                
+                $.ajax({
+                    url: '@Url.Action("UpdateMainPageContent", "Admin")',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Cập nhật thành công!');
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi cập nhật!');
+                    }
+                });
+            });
+            
+            // Filter functionality
+            function applyFilters() {
+                var searchTerm = $('#searchInput').val().toLowerCase();
+                var categoryFilter = $('#categoryFilter').val();
+                var sortOrder = $('#sortOrder').val();
+                
+                var rows = $('#contentTable tbody tr');
+                var visibleCount = 0;
+                
+                rows.each(function() {
+                    var row = $(this);
+                    var key = row.data('key').toLowerCase();
+                    var value = row.data('value').toLowerCase();
+                    var category = row.data('category');
+                    
+                    var matchesSearch = key.includes(searchTerm) || value.includes(searchTerm);
+                    var matchesCategory = !categoryFilter || category === categoryFilter;
+                    
+                    if (matchesSearch && matchesCategory) {
+                        row.show();
+                        visibleCount++;
+                    } else {
+                        row.hide();
+                    }
+                });
+                
+                $('#visibleCount').text(visibleCount);
+                
+                // Sort rows
+                var tbody = $('#contentTable tbody');
+                var sortedRows = rows.toArray().sort(function(a, b) {
+                    var aKey = $(a).data('key');
+                    var bKey = $(b).data('key');
+                    var aCategory = $(a).data('category');
+                    var bCategory = $(b).data('category');
+                    
+                    switch(sortOrder) {
+                        case 'az':
+                            return aKey.localeCompare(bKey);
+                        case 'za':
+                            return bKey.localeCompare(aKey);
+                        case 'category':
+                            return aCategory.localeCompare(bCategory) || aKey.localeCompare(bKey);
+                        default:
+                            return 0;
+                    }
+                });
+                
+                tbody.empty().append(sortedRows);
+            }
+            
+            // Bind filter events
+            $('#searchInput, #categoryFilter, #sortOrder').on('input change', applyFilters);
+            
+            // Clear filters function
+            window.clearFilters = function() {
+                $('#searchInput').val('');
+                $('#categoryFilter').val('');
+                $('#sortOrder').val('az');
+                applyFilters();
+            };
+            
+            // Initial filter
+            applyFilters();
+        });
+    </script>
+} 

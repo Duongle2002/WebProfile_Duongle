@@ -1,250 +1,402 @@
-@model IEnumerable<MyWebProfile.Models.ContentSettings>
-
+@model List<MyWebProfile.Models.ContentSettings>
 @{
-    ViewData["Title"] = "Quản lý Nội dung";
+    ViewData["Title"] = "Quản lý thứ tự hiển thị";
     Layout = "_AdminLayout";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2>Quản lý Nội dung</h2>
-        <p>Tổng cộng: @Model.Count() cài đặt</p>
+        <h2>Quản lý thứ tự hiển thị</h2>
+        <p>Sắp xếp thứ tự hiển thị các phần trên trang chủ</p>
     </div>
     <div>
-        <a href="@Url.Action("CreateContentSetting", "Admin")" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Thêm cài đặt mới
+        <a href="@Url.Action("Preview", "Admin")" class="btn btn-primary" target="_blank">
+            <i class="fas fa-eye"></i> Xem trước Website
         </a>
     </div>
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th width="5%">ID</th>
-                        <th width="15%">Khóa</th>
-                        <th width="25%">Giá trị</th>
-                        <th width="12%">Danh mục</th>
-                        <th width="20%">Mô tả</th>
-                        <th width="10%">Trạng thái</th>
-                        <th width="13%">Cập nhật lúc</th>
-                        <th width="10%">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var setting in Model)
-                    {
-                        <tr>
-                            <td>
-                                <span class="badge bg-secondary">@setting.Id</span>
-                            </td>
-                            <td>
-                                <strong class="text-primary">@setting.Key</strong>
-                            </td>
-                            <td>
-                                <div class="content-value">
-                                    @if (setting.Value.Length > 100)
-                                    {
-                                        <div class="content-preview">
-                                            @setting.Value.Substring(0, 100)<text>...</text>
-                                        </div>
-                                        <div class="content-full" style="display: none;">
-                                            @setting.Value
-                                        </div>
-                                        <button type="button" class="btn btn-sm btn-link toggle-content" 
-                                                data-target="@setting.Id">
-                                            <i class="fas fa-eye"></i> Xem thêm
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <div class="content-full">
-                                            @setting.Value
-                                        </div>
-                                    }
-                                </div>
-                            </td>
-                            <td>
-                                @{
-                                    var categoryClass = setting.Category switch
-                                    {
-                                        "Hero" => "bg-primary",
-                                        "About" => "bg-success", 
-                                        "Contact" => "bg-info",
-                                        "Navigation" => "bg-warning",
-                                        "Footer" => "bg-secondary",
-                                        "General" => "bg-dark",
-                                        _ => "bg-info"
-                                    };
-                                }
-                                <span class="badge @categoryClass">@setting.Category</span>
-                            </td>
-                            <td>
-                                @if (!string.IsNullOrEmpty(setting.Description))
-                                {
-                                    <span title="@setting.Description">
-                                        @(setting.Description.Length > 50 ? setting.Description.Substring(0, 50) + "..." : setting.Description)
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">Không có mô tả</span>
-                                }
-                            </td>
-                            <td>
-                                @if (setting.IsDeleted)
-                                {
-                                    <span class="badge bg-danger">Đã xóa</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-success">Hoạt động</span>
-                                }
-                            </td>
-                            <td>
-                                <small class="text-muted">
-                                    @setting.UpdatedAt.ToString("dd/MM/yyyy")<br>
-                                    @setting.UpdatedAt.ToString("HH:mm")
-                                </small>
-                            </td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a href="@Url.Action("EditContentSetting", "Admin", new { id = setting.Id })" 
-                                       class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    @if (!setting.IsDeleted)
-                                    {
-                                        <form asp-action="DeleteContentSetting" method="post" style="display: inline;">
-                                            <input type="hidden" name="id" value="@setting.Id" />
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" 
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa cài đặt này?')"
-                                                    title="Xóa">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <form asp-action="RestoreContentSetting" method="post" style="display: inline;">
-                                            <input type="hidden" name="id" value="@setting.Id" />
-                                            <button type="submit" class="btn btn-sm btn-outline-success" 
-                                                    onclick="return confirm('Bạn có chắc chắn muốn khôi phục cài đặt này?')"
-                                                    title="Khôi phục">
-                                                <i class="fas fa-undo"></i>
-                                            </button>
-                                        </form>
-                                    }
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        
-        @if (!Model.Any())
-        {
-            <div class="text-center py-5">
-                <i class="fas fa-cogs fa-3x text-muted mb-3"></i>
-                <h4 class="text-muted">Chưa có cài đặt nào</h4>
-                <p class="text-muted">Bắt đầu bằng cách thêm cài đặt đầu tiên</p>
-                <a href="@Url.Action("CreateContentSetting", "Admin")" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Thêm cài đặt mới
-                </a>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Thứ tự hiển thị các section</h5>
             </div>
-        }
+            <div class="card-body">
+                <div class="section-order-container">
+                    <div class="section-item" data-section="hero">
+                        <div class="section-handle">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="section-info">
+                            <div class="section-title">
+                                <i class="fas fa-home text-primary"></i>
+                                <span>Hero Section</span>
+                            </div>
+                            <div class="section-description">Phần giới thiệu chính với hình ảnh và thông tin cá nhân</div>
+                        </div>
+                        <div class="section-status">
+                            <span class="badge bg-success">Luôn hiển thị đầu tiên</span>
+                        </div>
+                    </div>
+
+                    <div class="section-item" data-section="about">
+                        <div class="section-handle">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="section-info">
+                            <div class="section-title">
+                                <i class="fas fa-user text-info"></i>
+                                <span>Giới thiệu</span>
+                            </div>
+                            <div class="section-description">Thông tin về bản thân, kỹ năng và thống kê</div>
+                        </div>
+                        <div class="section-controls">
+                                                         <div class="form-check form-switch">
+                                 <input class="form-check-input" type="checkbox" id="aboutActive">
+                                 <label class="form-check-label" for="aboutActive">Hiển thị</label>
+                             </div>
+                            <select class="form-select form-select-sm" id="aboutOrder">
+                                <option value="1">Thứ 1</option>
+                                <option value="2">Thứ 2</option>
+                                <option value="3">Thứ 3</option>
+                                <option value="4">Thứ 4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-item" data-section="experience">
+                        <div class="section-handle">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="section-info">
+                            <div class="section-title">
+                                <i class="fas fa-briefcase text-warning"></i>
+                                <span>Kinh nghiệm</span>
+                            </div>
+                            <div class="section-description">Timeline kinh nghiệm làm việc</div>
+                        </div>
+                        <div class="section-controls">
+                                                         <div class="form-check form-switch">
+                                 <input class="form-check-input" type="checkbox" id="experienceActive">
+                                 <label class="form-check-label" for="experienceActive">Hiển thị</label>
+                             </div>
+                            <select class="form-select form-select-sm" id="experienceOrder">
+                                <option value="1">Thứ 1</option>
+                                                                 <option value="2">Thứ 2</option>
+                                <option value="3">Thứ 3</option>
+                                <option value="4">Thứ 4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-item" data-section="projects">
+                        <div class="section-handle">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="section-info">
+                            <div class="section-title">
+                                <i class="fas fa-project-diagram text-success"></i>
+                                <span>Dự án</span>
+                            </div>
+                            <div class="section-description">Danh sách các dự án đã thực hiện</div>
+                        </div>
+                        <div class="section-controls">
+                                                         <div class="form-check form-switch">
+                                 <input class="form-check-input" type="checkbox" id="projectsActive">
+                                 <label class="form-check-label" for="projectsActive">Hiển thị</label>
+                             </div>
+                            <select class="form-select form-select-sm" id="projectsOrder">
+                                <option value="1">Thứ 1</option>
+                                <option value="2">Thứ 2</option>
+                                                                 <option value="3">Thứ 3</option>
+                                <option value="4">Thứ 4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-item" data-section="contact">
+                        <div class="section-handle">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="section-info">
+                            <div class="section-title">
+                                <i class="fas fa-envelope text-danger"></i>
+                                <span>Liên hệ</span>
+                            </div>
+                            <div class="section-description">Thông tin liên hệ và form gửi tin nhắn</div>
+                        </div>
+                        <div class="section-controls">
+                                                         <div class="form-check form-switch">
+                                 <input class="form-check-input" type="checkbox" id="contactActive">
+                                 <label class="form-check-label" for="contactActive">Hiển thị</label>
+                             </div>
+                            <select class="form-select form-select-sm" id="contactOrder">
+                                <option value="1">Thứ 1</option>
+                                <option value="2">Thứ 2</option>
+                                <option value="3">Thứ 3</option>
+                                                                 <option value="4">Thứ 4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Cài đặt hiển thị</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Hiển thị floating navigation</label>
+                    <div class="form-check form-switch">
+                                                 <input class="form-check-input" type="checkbox" id="floatingNavActive">
+                        <label class="form-check-label" for="floatingNavActive">Bật</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hiển thị back to top button</label>
+                    <div class="form-check form-switch">
+                                                 <input class="form-check-input" type="checkbox" id="backToTopActive">
+                        <label class="form-check-label" for="backToTopActive">Bật</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hiển thị page loader</label>
+                    <div class="form-check form-switch">
+                                                 <input class="form-check-input" type="checkbox" id="pageLoaderActive">
+                        <label class="form-check-label" for="pageLoaderActive">Bật</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Animation khi scroll</label>
+                    <div class="form-check form-switch">
+                                                 <input class="form-check-input" type="checkbox" id="scrollAnimationActive">
+                        <label class="form-check-label" for="scrollAnimationActive">Bật</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary w-100" onclick="saveDisplaySettings()">
+                    <i class="fas fa-save"></i> Lưu cài đặt
+                </button>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">Thông tin</h6>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    <strong>Hero Section:</strong> Luôn hiển thị đầu tiên<br>
+                    <strong>Giới thiệu:</strong> Thông tin cá nhân và kỹ năng<br>
+                    <strong>Kinh nghiệm:</strong> Timeline công việc<br>
+                    <strong>Dự án:</strong> Portfolio các dự án<br>
+                    <strong>Liên hệ:</strong> Thông tin liên hệ
+                </small>
+            </div>
+        </div>
     </div>
 </div>
 
 <style>
-.content-value {
-    position: relative;
+.section-order-container {
+    max-width: 100%;
 }
 
-.content-preview {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.4;
+.section-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.content-full {
-    color: #333;
-    font-size: 14px;
-    line-height: 1.4;
-    word-break: break-word;
+.section-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
 }
 
-.toggle-content {
-    padding: 0;
-    font-size: 12px;
-    color: #007bff;
-    text-decoration: none;
+.section-handle {
+    margin-right: 1rem;
+    color: #6c757d;
+    cursor: move;
 }
 
-.toggle-content:hover {
-    color: #0056b3;
-    text-decoration: underline;
+.section-info {
+    flex: 1;
 }
 
-.table th {
+.section-title {
     font-weight: 600;
-    color: #495057;
-    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.table td {
-    vertical-align: middle;
+.section-description {
+    font-size: 0.875rem;
+    color: #6c757d;
 }
 
-.badge {
-    font-size: 11px;
-    padding: 5px 8px;
+.section-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.btn-group .btn {
-    margin-right: 2px;
+.section-controls .form-check {
+    margin: 0;
 }
 
-.btn-group .btn:last-child {
-    margin-right: 0;
+.section-controls .form-select {
+    width: 100px;
+}
+
+.section-status {
+    margin-left: 1rem;
 }
 </style>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Toggle content preview/full view
-            $('.toggle-content').click(function(e) {
-                e.preventDefault();
-                var targetId = $(this).data('target');
-                var row = $(this).closest('tr');
-                var preview = row.find('.content-preview');
-                var full = row.find('.content-full');
-                var button = $(this);
-                
-                if (preview.is(':visible')) {
-                    preview.hide();
-                    full.show();
-                    button.html('<i class="fas fa-eye-slash"></i> Thu gọn');
-                } else {
-                    full.hide();
-                    preview.show();
-                    button.html('<i class="fas fa-eye"></i> Xem thêm');
+            // Initialize Sortable
+            new Sortable(document.querySelector('.section-order-container'), {
+                handle: '.section-handle',
+                animation: 150,
+                onEnd: function(evt) {
+                    updateSectionOrder();
                 }
             });
-            
-            // Add hover effect for better UX
-            $('.table tbody tr').hover(
-                function() {
-                    $(this).addClass('table-active');
-                },
-                function() {
-                    $(this).removeClass('table-active');
-                }
-            );
+
+            // Load current settings
+            loadDisplaySettings();
         });
+
+        function updateSectionOrder() {
+            const sections = document.querySelectorAll('.section-item');
+            sections.forEach((section, index) => {
+                const orderSelect = section.querySelector('select');
+                if (orderSelect) {
+                    // Chỉ cập nhật nếu section không phải Hero (vì Hero luôn đầu tiên)
+                    if (section.dataset.section !== 'hero') {
+                        orderSelect.value = index;
+                    }
+                }
+            });
+        }
+
+        function loadDisplaySettings() {
+            // Load settings from server via ViewBag
+            const displaySettings = @Html.Raw(Json.Serialize(ViewBag.DisplaySettings ?? new List<object>()));
+            
+            console.log('Display settings from server:', displaySettings);
+            
+            // Start with empty settings object
+            const settings = {};
+
+            // Load server settings first
+            displaySettings.forEach(setting => {
+                const key = setting.Key || setting.key; // Handle both cases
+                const value = setting.Value || setting.value;
+                console.log(`Processing setting: ${key} = ${value}`);
+                
+                if (key.includes('Active')) {
+                    settings[key] = value === 'True';
+                    console.log(`Set ${key} = ${settings[key]}`);
+                } else if (key.includes('Order')) {
+                    settings[key] = parseInt(value) || 1;
+                    console.log(`Set ${key} = ${settings[key]}`);
+                }
+            });
+
+            // Set defaults only for missing settings
+            const defaults = {
+                aboutActive: true,
+                aboutOrder: 1,
+                experienceActive: true,
+                experienceOrder: 2,
+                projectsActive: true,
+                projectsOrder: 3,
+                contactActive: true,
+                contactOrder: 4,
+                floatingNavActive: true,
+                backToTopActive: true,
+                pageLoaderActive: true,
+                scrollAnimationActive: true
+            };
+
+            // Apply defaults only if setting doesn't exist
+            Object.keys(defaults).forEach(key => {
+                if (!settings.hasOwnProperty(key)) {
+                    settings[key] = defaults[key];
+                    console.log(`Using default for ${key} = ${settings[key]}`);
+                }
+            });
+
+            console.log('Final settings:', settings);
+
+            // Apply settings to form
+            Object.keys(settings).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = settings[key];
+                        console.log(`Applied ${key} = ${settings[key]} to checkbox`);
+                    } else {
+                        element.value = settings[key];
+                        console.log(`Applied ${key} = ${settings[key]} to select`);
+                    }
+                } else {
+                    console.log(`Element ${key} not found`);
+                }
+            });
+        }
+
+        function saveDisplaySettings() {
+            const settings = {
+                aboutActive: $('#aboutActive').is(':checked'),
+                aboutOrder: $('#aboutOrder').val(),
+                experienceActive: $('#experienceActive').is(':checked'),
+                experienceOrder: $('#experienceOrder').val(),
+                projectsActive: $('#projectsActive').is(':checked'),
+                projectsOrder: $('#projectsOrder').val(),
+                contactActive: $('#contactActive').is(':checked'),
+                contactOrder: $('#contactOrder').val(),
+                floatingNavActive: $('#floatingNavActive').is(':checked'),
+                backToTopActive: $('#backToTopActive').is(':checked'),
+                pageLoaderActive: $('#pageLoaderActive').is(':checked'),
+                scrollAnimationActive: $('#scrollAnimationActive').is(':checked')
+            };
+
+            // Save to server via AJAX
+            $.ajax({
+                url: '@Url.Action("UpdateDisplaySettings", "Admin")',
+                type: 'POST',
+                data: settings,
+                success: function(response) {
+                    if (response.success) {
+                        alert('Cài đặt đã được lưu thành công!');
+                    } else {
+                        alert('Có lỗi xảy ra: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi lưu cài đặt!');
+                }
+            });
+        }
     </script>
 } 

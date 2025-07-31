@@ -24,15 +24,18 @@
     {
         <div class="project-card">
             <div class="project-image">
-                <img src="@project.ImageUrl" alt="@project.Title" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <img src="@(project.ImageUrl ?? "https://via.placeholder.com/300x200?text=No+Image")" alt="@project.Title" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
             </div>
             <div class="project-content">
                 <h4>@project.Title</h4>
                 <p class="project-description">@project.Description</p>
                 <div class="project-tags">
-                    @foreach (var tag in project.Tags.Split(','))
+                    @if (!string.IsNullOrEmpty(project.Tags))
                     {
-                        <span class="tag">@tag.Trim()</span>
+                        @foreach (var tag in project.Tags.Split(','))
+                        {
+                            <span class="tag">@tag.Trim()</span>
+                        }
                     }
                 </div>
                 <div class="project-meta">
