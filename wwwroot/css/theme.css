@@ -6,6 +6,15 @@
     --secondary-color: #6c757d;
     --background-color: #ffffff;
     --text-color: #333333;
+    
+    /* Button gradient defaults */
+    --primary-button-gradient-start: #007bff;
+    --primary-button-gradient-end: #0056b3;
+    --secondary-button-gradient-start: #6c757d;
+    --secondary-button-gradient-end: #545b62;
+    --outline-button-border-color: #007bff;
+    --outline-button-text-color: #007bff;
+    
     --font-family: 'Inter', sans-serif;
     --font-size: 16px;
     --line-height: 1.6;
@@ -22,7 +31,7 @@
 }
 
 body {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
     font-family: var(--font-family);
     font-size: var(--font-size);
@@ -43,37 +52,46 @@ p, span, div {
 
 /* Buttons */
 .btn-primary {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
+    background: linear-gradient(135deg, var(--primary-button-gradient-start, var(--primary-color)), var(--primary-button-gradient-end, var(--primary-color)) !important;
+    border-color: var(--primary-button-gradient-end, var(--primary-color)) !important;
     color: white !important;
+    transition: all var(--transition-duration) var(--transition-timing);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    opacity: 0.9;
+    background: linear-gradient(135deg, var(--primary-button-gradient-end, var(--primary-color)), var(--primary-button-gradient-start, var(--primary-color)) !important;
+    border-color: var(--primary-button-gradient-start, var(--primary-color)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .btn-secondary {
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
+    background: linear-gradient(135deg, var(--secondary-button-gradient-start, var(--secondary-color)), var(--secondary-button-gradient-end, var(--secondary-color)) !important;
+    border-color: var(--secondary-button-gradient-end, var(--secondary-color)) !important;
     color: white !important;
+    transition: all var(--transition-duration) var(--transition-timing);
 }
 
 .btn-secondary:hover {
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
-    opacity: 0.9;
+    background: linear-gradient(135deg, var(--secondary-button-gradient-end, var(--secondary-color)), var(--secondary-button-gradient-start, var(--secondary-color)) !important;
+    border-color: var(--secondary-button-gradient-start, var(--secondary-color)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .btn-outline-primary {
-    color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
+    color: var(--outline-button-text-color, var(--primary-color)) !important;
+    border-color: var(--outline-button-border-color, var(--primary-color)) !important;
+    background: transparent !important;
+    transition: all var(--transition-duration) var(--transition-timing);
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--primary-color) !important;
+    background: linear-gradient(135deg, var(--primary-button-gradient-start, var(--primary-color)), var(--primary-button-gradient-end, var(--primary-color)) !important;
     color: white !important;
+    border-color: var(--primary-button-gradient-end, var(--primary-color)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 /* Cards and containers */
@@ -83,7 +101,7 @@ p, span, div {
 }
 
 .container, .container-fluid {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
 }
 
 /* Form elements */
@@ -99,7 +117,7 @@ p, span, div {
 
 /* Navigation */
 .navbar {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     box-shadow: var(--box-shadow);
 }
 
@@ -117,11 +135,11 @@ p, span, div {
 
 /* Badges */
 .badge.bg-primary {
-    background-color: var(--primary-color) !important;
+    background: linear-gradient(135deg, var(--primary-button-gradient-start, var(--primary-color)), var(--primary-button-gradient-end, var(--primary-color)) !important;
 }
 
 .badge.bg-secondary {
-    background-color: var(--secondary-color) !important;
+    background: linear-gradient(135deg, var(--secondary-button-gradient-start, var(--secondary-color)), var(--secondary-button-gradient-end, var(--secondary-color)) !important;
 }
 
 /* Links */
@@ -136,42 +154,42 @@ a:hover {
 
 /* Sections */
 section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
 }
 
 /* Hero section */
 .hero-section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 
 /* About section */
 .about-section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 
 /* Experience section */
 .experience-section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 
 /* Projects section */
 .projects-section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 
 /* Contact section */
 .contact-section {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 
 /* Footer */
 footer {
-    background-color: var(--background-color);
+    background: var(--background-gradient, var(--background-color));
     color: var(--text-color);
 }
 

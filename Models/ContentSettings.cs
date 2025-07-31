@@ -41,6 +41,14 @@ namespace MyWebProfile.Models
         public string ButtonOutlineTextColor { get; set; } = "#007bff";
         public string ButtonOutlineHoverTextColor { get; set; } = "#ffffff";
         
+        // Button Gradient Colors
+        public string PrimaryButtonGradientStart { get; set; } = "#007bff";
+        public string PrimaryButtonGradientEnd { get; set; } = "#0056b3";
+        public string SecondaryButtonGradientStart { get; set; } = "#6c757d";
+        public string SecondaryButtonGradientEnd { get; set; } = "#545b62";
+        public string OutlineButtonBorderColor { get; set; } = "#007bff";
+        public string OutlineButtonTextColor { get; set; } = "#007bff";
+        
         // Gradient Background
         public bool UseGradientBackground { get; set; } = false;
         public string GradientType { get; set; } = "linear"; // linear, radial, conic

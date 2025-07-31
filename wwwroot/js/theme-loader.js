@@ -36,6 +36,14 @@ class ThemeLoader {
         root.style.setProperty('--background-color', this.themeSettings.backgroundColor || '#ffffff');
         root.style.setProperty('--text-color', this.themeSettings.textColor || '#333333');
         
+        // Apply button gradient settings
+        root.style.setProperty('--primary-button-gradient-start', this.themeSettings.primaryButtonGradientStart || '#007bff');
+        root.style.setProperty('--primary-button-gradient-end', this.themeSettings.primaryButtonGradientEnd || '#0056b3');
+        root.style.setProperty('--secondary-button-gradient-start', this.themeSettings.secondaryButtonGradientStart || '#6c757d');
+        root.style.setProperty('--secondary-button-gradient-end', this.themeSettings.secondaryButtonGradientEnd || '#545b62');
+        root.style.setProperty('--outline-button-border-color', this.themeSettings.outlineButtonBorderColor || '#007bff');
+        root.style.setProperty('--outline-button-text-color', this.themeSettings.outlineButtonTextColor || '#007bff');
+        
         // Apply typography settings
         root.style.setProperty('--font-family', this.themeSettings.fontFamily || "'Inter', sans-serif");
         root.style.setProperty('--font-size', (this.themeSettings.fontSize || 16) + 'px');
@@ -49,6 +57,13 @@ class ThemeLoader {
         // Apply animation settings
         root.style.setProperty('--transition-duration', this.themeSettings.transitionDuration || '0.3s');
         root.style.setProperty('--transition-timing', this.themeSettings.transitionTimingFunction || 'ease');
+        
+        // Apply gradient if enabled
+        if (this.themeSettings.useGradientBackground) {
+            const gradient = `linear-gradient(${this.themeSettings.gradientDirection}, ${this.themeSettings.gradientStartColor}, ${this.themeSettings.gradientEndColor})`;
+            root.style.setProperty('--background-gradient', gradient);
+            root.style.setProperty('--background-color', 'transparent');
+        }
 
         // Load Google Fonts if needed
         this.loadGoogleFonts(this.themeSettings.fontFamily);

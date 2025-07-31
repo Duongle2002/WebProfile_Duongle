@@ -780,7 +780,23 @@ namespace MyWebProfile.Controllers
         [Authorize]
         public IActionResult ThemeSettings()
         {
-            return View(_context.ThemeSettings.FirstOrDefault() ?? new ThemeSettings());
+            var settings = _context.ThemeSettings.FirstOrDefault() ?? new ThemeSettings();
+            
+            // Đảm bảo các giá trị gradient mặc định được thiết lập
+            if (string.IsNullOrEmpty(settings.PrimaryButtonGradientStart))
+                settings.PrimaryButtonGradientStart = "#007bff";
+            if (string.IsNullOrEmpty(settings.PrimaryButtonGradientEnd))
+                settings.PrimaryButtonGradientEnd = "#0056b3";
+            if (string.IsNullOrEmpty(settings.SecondaryButtonGradientStart))
+                settings.SecondaryButtonGradientStart = "#6c757d";
+            if (string.IsNullOrEmpty(settings.SecondaryButtonGradientEnd))
+                settings.SecondaryButtonGradientEnd = "#545b62";
+            if (string.IsNullOrEmpty(settings.OutlineButtonBorderColor))
+                settings.OutlineButtonBorderColor = "#007bff";
+            if (string.IsNullOrEmpty(settings.OutlineButtonTextColor))
+                settings.OutlineButtonTextColor = "#007bff";
+            
+            return View(settings);
         }
 
         [Authorize]
@@ -792,6 +808,10 @@ namespace MyWebProfile.Controllers
             string? ButtonPrimaryColor, string? ButtonPrimaryHoverColor, string? ButtonPrimaryTextColor,
             string? ButtonSecondaryColor, string? ButtonSecondaryHoverColor, string? ButtonSecondaryTextColor,
             string? ButtonOutlineColor, string? ButtonOutlineHoverColor, string? ButtonOutlineTextColor, string? ButtonOutlineHoverTextColor,
+            // Button Gradient Colors
+            string? PrimaryButtonGradientStart, string? PrimaryButtonGradientEnd,
+            string? SecondaryButtonGradientStart, string? SecondaryButtonGradientEnd,
+            string? OutlineButtonBorderColor, string? OutlineButtonTextColor,
             // Gradient Background
             bool UseGradientBackground, string? GradientType, string? GradientDirection, string? GradientStartColor, 
             string? GradientEndColor, string? GradientMiddleColor, string? GradientPosition,
@@ -831,6 +851,14 @@ namespace MyWebProfile.Controllers
                         ButtonOutlineHoverColor = ButtonOutlineHoverColor ?? "#007bff",
                         ButtonOutlineTextColor = ButtonOutlineTextColor ?? "#007bff",
                         ButtonOutlineHoverTextColor = ButtonOutlineHoverTextColor ?? "#ffffff",
+                        
+                        // Button Gradient Colors
+                        PrimaryButtonGradientStart = PrimaryButtonGradientStart ?? "#007bff",
+                        PrimaryButtonGradientEnd = PrimaryButtonGradientEnd ?? "#0056b3",
+                        SecondaryButtonGradientStart = SecondaryButtonGradientStart ?? "#6c757d",
+                        SecondaryButtonGradientEnd = SecondaryButtonGradientEnd ?? "#545b62",
+                        OutlineButtonBorderColor = OutlineButtonBorderColor ?? "#007bff",
+                        OutlineButtonTextColor = OutlineButtonTextColor ?? "#007bff",
                         
                         // Gradient Background
                         UseGradientBackground = UseGradientBackground,
@@ -896,6 +924,14 @@ namespace MyWebProfile.Controllers
                     existingSettings.ButtonOutlineHoverColor = ButtonOutlineHoverColor ?? existingSettings.ButtonOutlineHoverColor;
                     existingSettings.ButtonOutlineTextColor = ButtonOutlineTextColor ?? existingSettings.ButtonOutlineTextColor;
                     existingSettings.ButtonOutlineHoverTextColor = ButtonOutlineHoverTextColor ?? existingSettings.ButtonOutlineHoverTextColor;
+                    
+                    // Button Gradient Colors
+                    existingSettings.PrimaryButtonGradientStart = PrimaryButtonGradientStart ?? existingSettings.PrimaryButtonGradientStart;
+                    existingSettings.PrimaryButtonGradientEnd = PrimaryButtonGradientEnd ?? existingSettings.PrimaryButtonGradientEnd;
+                    existingSettings.SecondaryButtonGradientStart = SecondaryButtonGradientStart ?? existingSettings.SecondaryButtonGradientStart;
+                    existingSettings.SecondaryButtonGradientEnd = SecondaryButtonGradientEnd ?? existingSettings.SecondaryButtonGradientEnd;
+                    existingSettings.OutlineButtonBorderColor = OutlineButtonBorderColor ?? existingSettings.OutlineButtonBorderColor;
+                    existingSettings.OutlineButtonTextColor = OutlineButtonTextColor ?? existingSettings.OutlineButtonTextColor;
                     
                     // Gradient Background
                     existingSettings.UseGradientBackground = UseGradientBackground;
