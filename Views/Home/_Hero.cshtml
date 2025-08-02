@@ -17,7 +17,7 @@
     var heroContactButton = contentSettings.FirstOrDefault(x => x.Key == "HeroContactButton")?.Value ?? "Liên hệ ngay";
 }
 
-<section class="hero-modern">
+<section id="hero" class="hero-modern">
     <!-- Background with animated gradient -->
     <div class="hero-bg">
         <div class="gradient-overlay"></div>
@@ -31,25 +31,25 @@
     <div class="container">
         <div class="hero-content-modern">
             <!-- Left Column: Text Content -->
-            <div class="hero-text-section">
-                <div class="hero-badge">
+            <div class="hero-text-section" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+                <div class="hero-badge" data-aos="fade-down" data-aos-duration="800" data-aos-delay="300">
                     <i class="fas fa-code"></i>
                     <span>Developer & Designer</span>
                 </div>
                 
-                <h1 class="hero-title-modern">
+                <h1 class="hero-title-modern" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
                     <span class="greeting">Xin chào, tôi là</span>
                     <span class="name">@heroName</span>
                 </h1>
                 
-                <p class="hero-subtitle-modern">@heroTitle</p>
+                <p class="hero-subtitle-modern" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">@heroTitle</p>
                 
-                <p class="hero-location-modern">
+                <p class="hero-location-modern" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
                     <i class="fas fa-map-marker-alt"></i>
                     @heroLocation
                 </p>
                 
-                <div class="hero-stats-modern">
+                <div class="hero-stats-modern" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
                     <div class="stat-item">
                         <div class="stat-number">@heroProjects</div>
                         <div class="stat-label">Dự án hoàn thành</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 
-                <div class="hero-actions">
+                <div class="hero-actions" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
                     @{
                         var displayConfig = ViewBag.DisplayConfig as Dictionary<string, object> ?? new Dictionary<string, object>();
                         var projectsActive = displayConfig.ContainsKey("ProjectsActive") ? (bool)displayConfig["ProjectsActive"] : true;
@@ -270,6 +270,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 2rem;
+    color: #ffffff !important;
 }
 
 .stat-item {
@@ -279,6 +280,7 @@
     border-radius: 15px;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
+    color: #ffffff !important;
 }
 
 .stat-item:hover {
@@ -289,11 +291,16 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .stat-label {
     font-size: 0.9rem;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: #ffffff !important;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .hero-actions {

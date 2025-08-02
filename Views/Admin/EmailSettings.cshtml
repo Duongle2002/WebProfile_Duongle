@@ -1,0 +1,161 @@
+@{
+    ViewData["Title"] = "Email Settings";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-cog me-2"></i>
+                    Email Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="UpdateEmailSettings" method="post" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">SMTP Configuration</h6>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">SMTP Server</label>
+                                <input name="SmtpServer" value="@(ViewBag.EmailSettings?.SmtpServer)" class="form-control" placeholder="smtp.gmail.com">
+                                <small class="form-text text-muted">Common: smtp.gmail.com, smtp.outlook.com</small>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">SMTP Port</label>
+                                <input name="SmtpPort" value="@(ViewBag.EmailSettings?.SmtpPort)" class="form-control" type="number" placeholder="587">
+                                <small class="form-text text-muted">Common: 587 (TLS), 465 (SSL)</small>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input name="EnableSsl" value="true" @(ViewBag.EmailSettings?.EnableSsl == true ? "checked" : "") class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">Enable SSL/TLS</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Email Configuration</h6>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">From Email</label>
+                                <input name="FromEmail" value="@(ViewBag.EmailSettings?.FromEmail)" class="form-control" placeholder="your-email@gmail.com">
+                                <small class="form-text text-muted">Your email address</small>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">From Name</label>
+                                <input name="FromName" value="@(ViewBag.EmailSettings?.FromName)" class="form-control" placeholder="Your Name">
+                                <small class="form-text text-muted">Display name for emails</small>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">To Email</label>
+                                <input name="ToEmail" value="@(ViewBag.EmailSettings?.ToEmail)" class="form-control" placeholder="admin@yourdomain.com">
+                                <small class="form-text text-muted">Where to receive notifications</small>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label class="form-label">Email Password</label>
+                                <input name="EmailPassword" value="@(ViewBag.EmailSettings?.EmailPassword)" class="form-control" type="password" placeholder="App Password">
+                                <small class="form-text text-muted">Use App Password for Gmail/Outlook</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h6 class="mb-3">Notification Settings</h6>
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input name="EnableEmailNotification" value="true" @(ViewBag.EmailSettings?.EnableEmailNotification == true ? "checked" : "") class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">Enable Email Notifications</label>
+                                </div>
+                                <small class="form-text text-muted">Receive email notifications for new contact messages</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>
+                            Save Settings
+                        </button>
+                        <a href="@Url.Action("EmailNotification", "Admin")" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Back to Email Notification
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Setup Instructions -->
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Setup Instructions
+                </h5>
+            </div>
+            <div class="card-body">
+                <h6>Gmail Setup:</h6>
+                <ol class="small">
+                    <li>Enable 2-Factor Authentication</li>
+                    <li>Generate App Password</li>
+                    <li>Use App Password instead of regular password</li>
+                    <li>SMTP Server: smtp.gmail.com</li>
+                    <li>Port: 587</li>
+                    <li>Enable SSL/TLS</li>
+                </ol>
+                
+                <h6 class="mt-3">Outlook Setup:</h6>
+                <ol class="small">
+                    <li>Enable 2-Factor Authentication</li>
+                    <li>Generate App Password</li>
+                    <li>Use App Password</li>
+                    <li>SMTP Server: smtp-mail.outlook.com</li>
+                    <li>Port: 587</li>
+                    <li>Enable SSL/TLS</li>
+                </ol>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-lightbulb me-1"></i>
+                    <strong>Tip:</strong> Always use App Passwords for better security!
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Email -->
+        <div class="admin-card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Test Email
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="small text-muted">Test your email configuration by sending a test email.</p>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="testEmail()">
+                    <i class="fas fa-paper-plane me-1"></i>
+                    Send Test Email
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function testEmail() {
+    if (confirm('Send a test email to verify your configuration?')) {
+        // You can implement test email functionality here
+        alert('Test email functionality can be implemented here.');
+    }
+}
+</script>

@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\default-project.svg"
     },
     {
+      "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\page-loader.js",
+      "PackagePath": "staticwebassets\\js\\page-loader.js"
+    },
+    {
       "Id": "D:\\doan\\Web_profile_ASP.NET_Core MVC\\MyWebProfile\\wwwroot\\js\\script.js",
       "PackagePath": "staticwebassets\\js\\script.js"
     },

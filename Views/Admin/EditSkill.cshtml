@@ -1,6 +1,6 @@
 @model MyWebProfile.Models.Skill
 @{
-    ViewData["Title"] = "Thêm Kỹ năng mới";
+    ViewData["Title"] = "Chỉnh sửa Kỹ năng";
     Layout = "_AdminLayout";
 }
 
@@ -8,9 +8,12 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <h3 class="mb-4">Thêm Kỹ năng mới</h3>
+                <h3 class="mb-4">Chỉnh sửa Kỹ năng</h3>
                 
-                <form asp-action="CreateSkill" method="post">
+                <form asp-action="EditSkill" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -49,10 +52,10 @@
                             <div class="form-group">
                                 <label asp-for="Proficiency" class="form-label">Mức độ thành thạo</label>
                                 <div class="d-flex align-items-center gap-3">
-                                    <input type="range" id="proficiencyRange" class="form-control-range" min="0" max="100" value="50">
-                                    <span id="proficiencyValue" class="fw-bold">50%</span>
+                                    <input type="range" id="proficiencyRange" class="form-control-range" min="0" max="100" value="@Model.Proficiency">
+                                    <span id="proficiencyValue" class="fw-bold">@Model.Proficiency%</span>
                                 </div>
-                                <input type="hidden" asp-for="Proficiency" id="Proficiency" value="50">
+                                <input type="hidden" asp-for="Proficiency" id="Proficiency" value="@Model.Proficiency">
                                 <span asp-validation-for="Proficiency" class="text-danger"></span>
                             </div>
                         </div>
@@ -61,7 +64,7 @@
                             <div class="form-group">
                                 <label asp-for="Icon" class="form-label">Icon</label>
                                 <div class="input-group">
-                                    <input asp-for="Icon" class="form-control" id="iconInput" placeholder="bi-code-slash" value="bi-code-slash">
+                                    <input asp-for="Icon" class="form-control" id="iconInput" placeholder="bi-code-slash" value="@Model.Icon">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#iconModal">
                                         <i class="bi bi-search"></i> Chọn Icon
                                     </button>
@@ -74,7 +77,7 @@
                     
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Lưu kỹ năng
+                            <i class="fas fa-save"></i> Cập nhật kỹ năng
                         </button>
                         <a href="@Url.Action("Skills", "Admin")" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Quay lại
@@ -101,9 +104,9 @@
                         <p id="previewDescription" class="skill-description">Mô tả kỹ năng sẽ hiển thị ở đây</p>
                         <div class="skill-progress">
                             <div class="progress">
-                                <div id="previewProgress" class="progress-bar" style="width: 50%"></div>
+                                <div id="previewProgress" class="progress-bar" style="width: @Model.Proficiency%"></div>
                             </div>
-                            <span id="previewProficiency" class="proficiency-text">50%</span>
+                            <span id="previewProficiency" class="proficiency-text">@Model.Proficiency%</span>
                         </div>
                     </div>
                 </div>

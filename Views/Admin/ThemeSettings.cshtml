@@ -156,6 +156,364 @@
             </div>
         </div>
 
+        <!-- Page Section Colors -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Màu sắc từng phần trang</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Header</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="HeaderBackgroundColor" class="color-picker" value="@(Model.HeaderBackgroundColor ?? "#ffffff")">
+                                <input type="text" class="form-control color-text" value="@(Model.HeaderBackgroundColor ?? "#ffffff")" placeholder="#ffffff">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="HeaderTextColor" class="color-picker" value="@(Model.HeaderTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.HeaderTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Hero Section</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="HeroBackgroundColor" class="color-picker" value="@(Model.HeroBackgroundColor ?? "#f8f9fa")">
+                                <input type="text" class="form-control color-text" value="@(Model.HeroBackgroundColor ?? "#f8f9fa")" placeholder="#f8f9fa">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="HeroTextColor" class="color-picker" value="@(Model.HeroTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.HeroTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="mb-3">About Section</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="AboutBackgroundColor" class="color-picker" value="@(Model.AboutBackgroundColor ?? "#ffffff")">
+                                <input type="text" class="form-control color-text" value="@(Model.AboutBackgroundColor ?? "#ffffff")" placeholder="#ffffff">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="AboutTextColor" class="color-picker" value="@(Model.AboutTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.AboutTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Experience Section</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ExperienceBackgroundColor" class="color-picker" value="@(Model.ExperienceBackgroundColor ?? "#f8f9fa")">
+                                <input type="text" class="form-control color-text" value="@(Model.ExperienceBackgroundColor ?? "#f8f9fa")" placeholder="#f8f9fa">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ExperienceTextColor" class="color-picker" value="@(Model.ExperienceTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.ExperienceTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Projects Section</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ProjectsBackgroundColor" class="color-picker" value="@(Model.ProjectsBackgroundColor ?? "#ffffff")">
+                                <input type="text" class="form-control color-text" value="@(Model.ProjectsBackgroundColor ?? "#ffffff")" placeholder="#ffffff">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ProjectsTextColor" class="color-picker" value="@(Model.ProjectsTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.ProjectsTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Contact Section</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ContactBackgroundColor" class="color-picker" value="@(Model.ContactBackgroundColor ?? "#f8f9fa")">
+                                <input type="text" class="form-control color-text" value="@(Model.ContactBackgroundColor ?? "#f8f9fa")" placeholder="#f8f9fa">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="ContactTextColor" class="color-picker" value="@(Model.ContactTextColor ?? "#333333")">
+                                <input type="text" class="form-control color-text" value="@(Model.ContactTextColor ?? "#333333")" placeholder="#333333">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Footer</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền</label>
+                            <div class="color-input-group">
+                                <input type="color" id="FooterBackgroundColor" class="color-picker" value="@(Model.FooterBackgroundColor ?? "#343a40")">
+                                <input type="text" class="form-control color-text" value="@(Model.FooterBackgroundColor ?? "#343a40")" placeholder="#343a40">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu chữ</label>
+                            <div class="color-input-group">
+                                <input type="color" id="FooterTextColor" class="color-picker" value="@(Model.FooterTextColor ?? "#ffffff")">
+                                <input type="text" class="form-control color-text" value="@(Model.FooterTextColor ?? "#ffffff")" placeholder="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hover Effects -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Hiệu ứng hover</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu hover cho links</label>
+                            <div class="color-input-group">
+                                <input type="color" id="LinkHoverColor" class="color-picker" value="@(Model.LinkHoverColor ?? "#0056b3")">
+                                <input type="text" class="form-control color-text" value="@(Model.LinkHoverColor ?? "#0056b3")" placeholder="#0056b3">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Transform cho buttons (hover)</label>
+                            <select id="ButtonHoverTransform" class="form-control">
+                                <option value="translateY(-2px)">Lift up (-2px)</option>
+                                <option value="translateY(-4px)">Lift up (-4px)</option>
+                                <option value="scale(1.05)">Scale up (1.05)</option>
+                                <option value="scale(1.1)">Scale up (1.1)</option>
+                                <option value="rotate(5deg)">Rotate (5deg)</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Shadow cho buttons (hover)</label>
+                            <select id="ButtonHoverShadow" class="form-control">
+                                <option value="0 4px 8px rgba(0,0,0,0.2)">Medium shadow</option>
+                                <option value="0 6px 12px rgba(0,0,0,0.3)">Strong shadow</option>
+                                <option value="0 2px 4px rgba(0,0,0,0.1)">Light shadow</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Transform cho cards (hover)</label>
+                            <select id="CardHoverTransform" class="form-control">
+                                <option value="translateY(-4px)">Lift up (-4px)</option>
+                                <option value="translateY(-8px)">Lift up (-8px)</option>
+                                <option value="scale(1.02)">Scale up (1.02)</option>
+                                <option value="scale(1.05)">Scale up (1.05)</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Shadow cho cards (hover)</label>
+                            <select id="CardHoverShadow" class="form-control">
+                                <option value="0 8px 16px rgba(0,0,0,0.15)">Medium shadow</option>
+                                <option value="0 12px 24px rgba(0,0,0,0.2)">Strong shadow</option>
+                                <option value="0 4px 8px rgba(0,0,0,0.1)">Light shadow</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Transform cho images (hover)</label>
+                            <select id="ImageHoverTransform" class="form-control">
+                                <option value="scale(1.05)">Scale up (1.05)</option>
+                                <option value="scale(1.1)">Scale up (1.1)</option>
+                                <option value="scale(1.15)">Scale up (1.15)</option>
+                                <option value="rotate(2deg)">Rotate (2deg)</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Shadow cho images (hover)</label>
+                            <select id="ImageHoverShadow" class="form-control">
+                                <option value="0 6px 12px rgba(0,0,0,0.2)">Medium shadow</option>
+                                <option value="0 8px 16px rgba(0,0,0,0.3)">Strong shadow</option>
+                                <option value="0 4px 8px rgba(0,0,0,0.1)">Light shadow</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Loader Settings -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Cài đặt Page Loader</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Bật/tắt Page Loader</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="EnablePageLoader" @(Model.EnablePageLoader ? "checked" : "")>
+                                <label class="form-check-label" for="EnablePageLoader">
+                                    Hiển thị loader khi tải trang
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Loại loader</label>
+                            <select id="LoaderType" class="form-control">
+                                <option value="spinner">Spinner</option>
+                                <option value="dots">Dots</option>
+                                <option value="bars">Bars</option>
+                                <option value="pulse">Pulse</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu loader</label>
+                            <div class="color-input-group">
+                                <input type="color" id="LoaderColor" class="color-picker" value="@(Model.LoaderColor ?? "#007bff")">
+                                <input type="text" class="form-control color-text" value="@(Model.LoaderColor ?? "#007bff")" placeholder="#007bff">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Màu nền loader</label>
+                            <div class="color-input-group">
+                                <input type="color" id="LoaderBackgroundColor" class="color-picker" value="@(Model.LoaderBackgroundColor ?? "#ffffff")">
+                                <input type="text" class="form-control color-text" value="@(Model.LoaderBackgroundColor ?? "#ffffff")" placeholder="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Kích thước loader</label>
+                            <select id="LoaderSize" class="form-control">
+                                <option value="30px">Small (30px)</option>
+                                <option value="40px">Medium (40px)</option>
+                                <option value="50px">Large (50px)</option>
+                                <option value="60px">Extra Large (60px)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Thời gian animation</label>
+                            <select id="LoaderAnimationDuration" class="form-control">
+                                <option value="0.5s">Fast (0.5s)</option>
+                                <option value="1s">Normal (1s)</option>
+                                <option value="1.5s">Slow (1.5s)</option>
+                                <option value="2s">Very Slow (2s)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Thời gian fade out</label>
+                            <select id="LoaderFadeOutDuration" class="form-control">
+                                <option value="0.3s">Fast (0.3s)</option>
+                                <option value="0.5s">Normal (0.5s)</option>
+                                <option value="0.8s">Slow (0.8s)</option>
+                                <option value="1s">Very Slow (1s)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Hiển thị khi</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="LoaderShowOnNavigation" @(Model.LoaderShowOnNavigation ? "checked" : "")>
+                                <label class="form-check-label" for="LoaderShowOnNavigation">
+                                    Chuyển trang
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="LoaderShowOnAjax" @(Model.LoaderShowOnAjax ? "checked" : "")>
+                                <label class="form-check-label" for="LoaderShowOnAjax">
+                                    AJAX requests
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card mt-4">
             <div class="card-header">
                 <h5 class="mb-0">Cài đặt Typography</h5>
@@ -297,60 +655,198 @@
     </div>
     
     <div class="col-lg-4">
-        <div class="card sticky-preview">
-            <div class="card-header">
-                <h5 class="mb-0">Xem trước Real-time</h5>
-            </div>
-            <div class="card-body">
-                <div id="themePreview" class="preview-container">
-                    <div class="preview-header">
-                        <h3>Tiêu đề mẫu</h3>
-                        <p>Đây là đoạn văn bản mẫu để xem trước cách hiển thị với các cài đặt giao diện hiện tại. Bạn có thể thấy font chữ, màu sắc và hiệu ứng được áp dụng ngay lập tức.</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="card sticky-preview">
+                    <div class="card-header">
+                        <h5 class="mb-0">Xem trước Real-time</h5>
                     </div>
-                    
-                    <div class="preview-buttons">
-                        <button class="btn btn-primary">Nút chính</button>
-                        <button class="btn btn-secondary">Nút phụ</button>
-                        <button class="btn btn-outline-primary">Nút outline</button>
-                    </div>
-                    
-                    <div class="preview-card-sample">
-                        <h5>Thẻ mẫu</h5>
-                        <p>Nội dung thẻ mẫu để xem trước giao diện với border radius và shadow.</p>
-                        <div class="preview-badge">
-                            <span class="badge bg-primary">Badge mẫu</span>
-                        </div>
-                    </div>
+                    <div class="card-body">
+                        <div id="themePreview" class="preview-container">
+                            <!-- Color Settings Preview -->
+                            <div class="preview-section">
+                                <h4>Màu sắc cơ bản</h4>
+                                <div class="preview-colors">
+                                    <div class="preview-color-item">
+                                        <span class="preview-color-label">Primary:</span>
+                                        <span class="preview-color-swatch" style="background-color: var(--primary-color, #007bff);"></span>
+                                    </div>
+                                    <div class="preview-color-item">
+                                        <span class="preview-color-label">Secondary:</span>
+                                        <span class="preview-color-swatch" style="background-color: var(--secondary-color, #6c757d);"></span>
+                                    </div>
+                                    <div class="preview-color-item">
+                                        <span class="preview-color-label">Background:</span>
+                                        <span class="preview-color-swatch" style="background-color: var(--background-color, #ffffff);"></span>
+                                    </div>
+                                    <div class="preview-color-item">
+                                        <span class="preview-color-label">Text:</span>
+                                        <span class="preview-color-swatch" style="background-color: var(--text-color, #333333);"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Buttons Preview -->
+                            <div class="preview-section">
+                                <h4>Nút bấm</h4>
+                                <div class="preview-buttons">
+                                    <button class="btn btn-primary">Nút chính</button>
+                                    <button class="btn btn-secondary">Nút phụ</button>
+                                    <button class="btn btn-outline-primary">Nút outline</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Header Section Preview -->
+                            <div class="preview-section preview-header-section">
+                                <h4>Header Section</h4>
+                                <div class="preview-header">
+                                    <h3>Tiêu đề mẫu</h3>
+                                    <p>Đây là đoạn văn bản mẫu để xem trước cách hiển thị với các cài đặt giao diện hiện tại.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Hero Section Preview -->
+                            <div class="preview-section preview-hero-section">
+                                <h4>Hero Section</h4>
+                                <div class="preview-hero">
+                                    <h2>Hero Title</h2>
+                                    <p>Hero content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- About Section Preview -->
+                            <div class="preview-section preview-about-section">
+                                <h4>About Section</h4>
+                                <div class="preview-about">
+                                    <h3>About Title</h3>
+                                    <p>About content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Experience Section Preview -->
+                            <div class="preview-section preview-experience-section">
+                                <h4>Experience Section</h4>
+                                <div class="preview-experience">
+                                    <h3>Experience Title</h3>
+                                    <p>Experience content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Projects Section Preview -->
+                            <div class="preview-section preview-projects-section">
+                                <h4>Projects Section</h4>
+                                <div class="preview-projects">
+                                    <h3>Projects Title</h3>
+                                    <p>Projects content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Section Preview -->
+                            <div class="preview-section preview-contact-section">
+                                <h4>Contact Section</h4>
+                                <div class="preview-contact">
+                                    <h3>Contact Title</h3>
+                                    <p>Contact content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Footer Section Preview -->
+                            <div class="preview-section preview-footer-section">
+                                <h4>Footer Section</h4>
+                                <div class="preview-footer">
+                                    <h5>Footer Title</h5>
+                                    <p>Footer content mẫu để xem trước màu sắc và font chữ.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Hover Effects Preview -->
+                            <div class="preview-section">
+                                <h4>Hiệu ứng hover</h4>
+                                <div class="preview-hover-effects">
+                                    <div class="preview-hover-item">
+                                        <a href="#" class="preview-link">Link với hover</a>
+                                    </div>
+                                    <div class="preview-hover-item">
+                                        <div class="preview-card-hover">
+                                            <h6>Card với hover</h6>
+                                            <p>Di chuột để xem hiệu ứng</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-hover-item">
+                                        <div class="preview-image-hover">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZGRkIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=" alt="Preview Image" class="preview-img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Page Loader Preview -->
+                            <div class="preview-section">
+                                <h4>Page Loader</h4>
+                                <div class="preview-loader">
+                                    <div class="preview-loader-content">
+                                        <div class="loader-spinner" style="width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--loader-color, #007bff); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                                        <p class="mt-2 mb-0">Loader preview</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Typography Preview -->
+                            <div class="preview-section">
+                                <h4>Typography</h4>
+                                <div class="preview-typography">
+                                    <h1>Heading 1</h1>
+                                    <h2>Heading 2</h2>
+                                    <h3>Heading 3</h3>
+                                    <p>Đây là đoạn văn bản mẫu để xem trước font chữ, cỡ chữ và khoảng cách dòng.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Effects Preview -->
+                            <div class="preview-section">
+                                <h4>Hiệu ứng</h4>
+                                <div class="preview-card-sample">
+                                    <h5>Thẻ mẫu</h5>
+                                    <p>Nội dung thẻ mẫu để xem trước giao diện với border radius và shadow.</p>
+                                    <div class="preview-badge">
+                                        <span class="badge bg-primary">Badge mẫu</span>
+                                    </div>
+                                </div>
 
-                    <div class="preview-form-sample">
-                        <h6>Form mẫu</h6>
-                        <div class="mb-3">
-                            <label class="form-label">Input mẫu</label>
-                            <input type="text" class="form-control" placeholder="Nhập text...">
+                                <div class="preview-form-sample">
+                                    <h6>Form mẫu</h6>
+                                    <div class="mb-3">
+                                        <label class="form-label">Input mẫu</label>
+                                        <input type="text" class="form-control" placeholder="Nhập text...">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-header">
-                <h6 class="mb-0">Presets nhanh</h6>
-            </div>
-            <div class="card-body">
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="applyPreset('modern')">
-                        Modern Blue
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-success" onclick="applyPreset('nature')">
-                        Nature Green
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-warning" onclick="applyPreset('warm')">
-                        Warm Orange
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="applyPreset('elegant')">
-                        Elegant Purple
-                    </button>
+            
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Presets nhanh</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="applyPreset('modern')">
+                                Modern Blue
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-success" onclick="applyPreset('nature')">
+                                Nature Green
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="applyPreset('warm')">
+                                Warm Orange
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="applyPreset('elegant')">
+                                Elegant Purple
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -387,11 +883,143 @@
     margin-bottom: 0.5rem;
 }
 
+.preview-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.preview-section h4 {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.preview-section h3,
+.preview-section h2,
+.preview-section h5 {
+    margin-bottom: 0.5rem;
+}
+
+.preview-section p {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+}
+
+.preview-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.preview-color-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.preview-color-label {
+    font-size: 0.8rem;
+    min-width: 80px;
+}
+
+.preview-color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
 .preview-buttons {
     margin: 1rem 0;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+}
+
+.preview-hover-effects {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.preview-hover-item {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.preview-link {
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.preview-link:hover {
+    color: var(--link-hover-color, #0056b3);
+}
+
+.preview-card-hover {
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.preview-card-hover:hover {
+    transform: var(--card-hover-transform, translateY(-4px));
+    box-shadow: var(--card-hover-shadow, 0 8px 16px rgba(0,0,0,0.15));
+}
+
+.preview-image-hover {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.preview-image-hover:hover {
+    transform: var(--image-hover-transform, scale(1.05));
+    box-shadow: var(--image-hover-shadow, 0 6px 12px rgba(0,0,0,0.2));
+}
+
+.preview-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+}
+
+.preview-loader {
+    text-align: center;
+    padding: 1rem;
+}
+
+.preview-loader-content {
+    display: inline-block;
+}
+
+@@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.preview-typography h1,
+.preview-typography h2,
+.preview-typography h3 {
+    margin-bottom: 0.5rem;
+}
+
+.preview-typography h1 {
+    font-size: 1.5rem;
+}
+
+.preview-typography h2 {
+    font-size: 1.25rem;
+}
+
+.preview-typography h3 {
+    font-size: 1.1rem;
 }
 
 .preview-card-sample {
@@ -460,7 +1088,19 @@ document.addEventListener('DOMContentLoaded', function() {
         'SecondaryButtonGradientStart', 'SecondaryButtonGradientEnd',
         'OutlineButtonBorderColor', 'OutlineButtonTextColor',
         'FontFamily', 'FontSize', 'LineHeight', 'LetterSpacing',
-        'BorderRadius', 'BoxShadow', 'TransitionDuration', 'TransitionTimingFunction'
+        'BorderRadius', 'BoxShadow', 'TransitionDuration', 'TransitionTimingFunction',
+        // Page Section Colors
+        'HeaderBackgroundColor', 'HeaderTextColor', 'HeroBackgroundColor', 'HeroTextColor',
+        'AboutBackgroundColor', 'AboutTextColor', 'ExperienceBackgroundColor', 'ExperienceTextColor',
+        'ProjectsBackgroundColor', 'ProjectsTextColor', 'ContactBackgroundColor', 'ContactTextColor',
+        'FooterBackgroundColor', 'FooterTextColor',
+        // Hover Colors
+        'LinkHoverColor', 'ButtonHoverTransform', 'ButtonHoverShadow',
+        'CardHoverTransform', 'CardHoverShadow', 'ImageHoverTransform', 'ImageHoverShadow',
+        // Page Loader Settings
+        'EnablePageLoader', 'LoaderType', 'LoaderColor', 'LoaderBackgroundColor',
+        'LoaderSize', 'LoaderAnimationDuration', 'LoaderFadeOutDuration',
+        'LoaderShowOnNavigation', 'LoaderShowOnAjax'
     ];
 
     controls.forEach(controlId => {
@@ -493,6 +1133,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const outlineBorderColor = document.getElementById('OutlineButtonBorderColor').value;
         const outlineTextColor = document.getElementById('OutlineButtonTextColor').value;
 
+        // Page Section Colors
+        const headerBackgroundColor = document.getElementById('HeaderBackgroundColor').value;
+        const headerTextColor = document.getElementById('HeaderTextColor').value;
+        const heroBackgroundColor = document.getElementById('HeroBackgroundColor').value;
+        const heroTextColor = document.getElementById('HeroTextColor').value;
+        const aboutBackgroundColor = document.getElementById('AboutBackgroundColor').value;
+        const aboutTextColor = document.getElementById('AboutTextColor').value;
+        const experienceBackgroundColor = document.getElementById('ExperienceBackgroundColor').value;
+        const experienceTextColor = document.getElementById('ExperienceTextColor').value;
+        const projectsBackgroundColor = document.getElementById('ProjectsBackgroundColor').value;
+        const projectsTextColor = document.getElementById('ProjectsTextColor').value;
+        const contactBackgroundColor = document.getElementById('ContactBackgroundColor').value;
+        const contactTextColor = document.getElementById('ContactTextColor').value;
+        const footerBackgroundColor = document.getElementById('FooterBackgroundColor').value;
+        const footerTextColor = document.getElementById('FooterTextColor').value;
+
         const preview = document.getElementById('themePreview');
         
         // Apply styles to preview
@@ -505,6 +1161,56 @@ document.addEventListener('DOMContentLoaded', function() {
         preview.style.borderRadius = borderRadius;
         preview.style.boxShadow = boxShadow;
         preview.style.transition = `all ${transitionDuration} ${transitionTiming}`;
+
+        // Update page section previews
+        // Header Section
+        const headerSection = preview.querySelector('.preview-header-section');
+        if (headerSection) {
+            headerSection.style.backgroundColor = headerBackgroundColor;
+            headerSection.style.color = headerTextColor;
+        }
+
+        // Hero Section
+        const heroSection = preview.querySelector('.preview-hero-section');
+        if (heroSection) {
+            heroSection.style.backgroundColor = heroBackgroundColor;
+            heroSection.style.color = heroTextColor;
+        }
+
+        // About Section
+        const aboutSection = preview.querySelector('.preview-about-section');
+        if (aboutSection) {
+            aboutSection.style.backgroundColor = aboutBackgroundColor;
+            aboutSection.style.color = aboutTextColor;
+        }
+
+        // Experience Section
+        const experienceSection = preview.querySelector('.preview-experience-section');
+        if (experienceSection) {
+            experienceSection.style.backgroundColor = experienceBackgroundColor;
+            experienceSection.style.color = experienceTextColor;
+        }
+
+        // Projects Section
+        const projectsSection = preview.querySelector('.preview-projects-section');
+        if (projectsSection) {
+            projectsSection.style.backgroundColor = projectsBackgroundColor;
+            projectsSection.style.color = projectsTextColor;
+        }
+
+        // Contact Section
+        const contactSection = preview.querySelector('.preview-contact-section');
+        if (contactSection) {
+            contactSection.style.backgroundColor = contactBackgroundColor;
+            contactSection.style.color = contactTextColor;
+        }
+
+        // Footer Section
+        const footerSection = preview.querySelector('.preview-footer-section');
+        if (footerSection) {
+            footerSection.style.backgroundColor = footerBackgroundColor;
+            footerSection.style.color = footerTextColor;
+        }
 
         // Update primary buttons with gradient
         const primaryButtons = preview.querySelectorAll('.btn-primary');
@@ -542,6 +1248,63 @@ document.addEventListener('DOMContentLoaded', function() {
             control.style.borderRadius = borderRadius;
             control.style.transition = `all ${transitionDuration} ${transitionTiming}`;
         });
+
+        // Update color swatches in preview
+        const colorSwatches = preview.querySelectorAll('.preview-color-swatch');
+        if (colorSwatches.length >= 4) {
+            colorSwatches[0].style.backgroundColor = primary; // Primary
+            colorSwatches[1].style.backgroundColor = secondary; // Secondary
+            colorSwatches[2].style.backgroundColor = background; // Background
+            colorSwatches[3].style.backgroundColor = text; // Text
+        }
+
+        // Update other preview sections that need text color
+        const previewSections = preview.querySelectorAll('.preview-section');
+        previewSections.forEach(section => {
+            // Only apply text color to sections that don't have specific text colors
+            if (!section.classList.contains('preview-header-section') && 
+                !section.classList.contains('preview-hero-section') && 
+                !section.classList.contains('preview-about-section') && 
+                !section.classList.contains('preview-experience-section') && 
+                !section.classList.contains('preview-projects-section') && 
+                !section.classList.contains('preview-contact-section') && 
+                !section.classList.contains('preview-footer-section')) {
+                section.style.color = text;
+            }
+        });
+
+        // Update hover effects preview
+        const previewLink = preview.querySelector('.preview-link');
+        if (previewLink) {
+            previewLink.style.color = primary;
+        }
+
+        const previewCardHover = preview.querySelector('.preview-card-hover');
+        if (previewCardHover) {
+            previewCardHover.style.transition = `all ${transitionDuration} ${transitionTiming}`;
+        }
+
+        const previewImageHover = preview.querySelector('.preview-image-hover');
+        if (previewImageHover) {
+            previewImageHover.style.transition = `all ${transitionDuration} ${transitionTiming}`;
+        }
+
+        // Update loader preview
+        const loaderSpinner = preview.querySelector('.loader-spinner');
+        if (loaderSpinner) {
+            const loaderColor = document.getElementById('LoaderColor').value;
+            loaderSpinner.style.borderTopColor = loaderColor;
+        }
+
+        // Update typography preview
+        const typographySection = preview.querySelector('.preview-typography');
+        if (typographySection) {
+            typographySection.style.fontFamily = font;
+            typographySection.style.fontSize = size + 'px';
+            typographySection.style.lineHeight = lineHeight;
+            typographySection.style.letterSpacing = letterSpacing;
+            typographySection.style.color = text;
+        }
     }
 
     // Set initial values from Model
@@ -563,6 +1326,42 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('BoxShadow').value = '@Model.BoxShadow';
     document.getElementById('TransitionDuration').value = '@Model.TransitionDuration';
     document.getElementById('TransitionTimingFunction').value = '@Model.TransitionTimingFunction';
+    
+    // Page Section Colors
+    document.getElementById('HeaderBackgroundColor').value = '@(Model.HeaderBackgroundColor ?? "#ffffff")';
+    document.getElementById('HeaderTextColor').value = '@(Model.HeaderTextColor ?? "#333333")';
+    document.getElementById('HeroBackgroundColor').value = '@(Model.HeroBackgroundColor ?? "#f8f9fa")';
+    document.getElementById('HeroTextColor').value = '@(Model.HeroTextColor ?? "#333333")';
+    document.getElementById('AboutBackgroundColor').value = '@(Model.AboutBackgroundColor ?? "#ffffff")';
+    document.getElementById('AboutTextColor').value = '@(Model.AboutTextColor ?? "#333333")';
+    document.getElementById('ExperienceBackgroundColor').value = '@(Model.ExperienceBackgroundColor ?? "#f8f9fa")';
+    document.getElementById('ExperienceTextColor').value = '@(Model.ExperienceTextColor ?? "#333333")';
+    document.getElementById('ProjectsBackgroundColor').value = '@(Model.ProjectsBackgroundColor ?? "#ffffff")';
+    document.getElementById('ProjectsTextColor').value = '@(Model.ProjectsTextColor ?? "#333333")';
+    document.getElementById('ContactBackgroundColor').value = '@(Model.ContactBackgroundColor ?? "#f8f9fa")';
+    document.getElementById('ContactTextColor').value = '@(Model.ContactTextColor ?? "#333333")';
+    document.getElementById('FooterBackgroundColor').value = '@(Model.FooterBackgroundColor ?? "#343a40")';
+    document.getElementById('FooterTextColor').value = '@(Model.FooterTextColor ?? "#ffffff")';
+    
+    // Hover Colors
+    document.getElementById('LinkHoverColor').value = '@(Model.LinkHoverColor ?? "#0056b3")';
+    document.getElementById('ButtonHoverTransform').value = '@(Model.ButtonHoverTransform ?? "translateY(-2px)")';
+    document.getElementById('ButtonHoverShadow').value = '@(Model.ButtonHoverShadow ?? "0 4px 8px rgba(0,0,0,0.2)")';
+    document.getElementById('CardHoverTransform').value = '@(Model.CardHoverTransform ?? "translateY(-4px)")';
+    document.getElementById('CardHoverShadow').value = '@(Model.CardHoverShadow ?? "0 8px 16px rgba(0,0,0,0.15)")';
+    document.getElementById('ImageHoverTransform').value = '@(Model.ImageHoverTransform ?? "scale(1.05)")';
+    document.getElementById('ImageHoverShadow').value = '@(Model.ImageHoverShadow ?? "0 6px 12px rgba(0,0,0,0.2)")';
+    
+    // Page Loader Settings
+    document.getElementById('EnablePageLoader').checked = @(Model.EnablePageLoader ? "true" : "false");
+    document.getElementById('LoaderType').value = '@(Model.LoaderType ?? "spinner")';
+    document.getElementById('LoaderColor').value = '@(Model.LoaderColor ?? "#007bff")';
+    document.getElementById('LoaderBackgroundColor').value = '@(Model.LoaderBackgroundColor ?? "#ffffff")';
+    document.getElementById('LoaderSize').value = '@(Model.LoaderSize ?? "40px")';
+    document.getElementById('LoaderAnimationDuration').value = '@(Model.LoaderAnimationDuration ?? "1s")';
+    document.getElementById('LoaderFadeOutDuration').value = '@(Model.LoaderFadeOutDuration ?? "0.5s")';
+    document.getElementById('LoaderShowOnNavigation').checked = @(Model.LoaderShowOnNavigation ? "true" : "false");
+    document.getElementById('LoaderShowOnAjax').checked = @(Model.LoaderShowOnAjax ? "true" : "false");
     
     // Update color text inputs
     document.querySelectorAll('.color-text').forEach((text, index) => {
@@ -595,7 +1394,40 @@ function saveThemeSettings() {
         BorderRadius: document.getElementById('BorderRadius').value,
         BoxShadow: document.getElementById('BoxShadow').value,
         TransitionDuration: document.getElementById('TransitionDuration').value,
-        TransitionTimingFunction: document.getElementById('TransitionTimingFunction').value
+        TransitionTimingFunction: document.getElementById('TransitionTimingFunction').value,
+        // Page Section Colors
+        HeaderBackgroundColor: document.getElementById('HeaderBackgroundColor').value,
+        HeaderTextColor: document.getElementById('HeaderTextColor').value,
+        HeroBackgroundColor: document.getElementById('HeroBackgroundColor').value,
+        HeroTextColor: document.getElementById('HeroTextColor').value,
+        AboutBackgroundColor: document.getElementById('AboutBackgroundColor').value,
+        AboutTextColor: document.getElementById('AboutTextColor').value,
+        ExperienceBackgroundColor: document.getElementById('ExperienceBackgroundColor').value,
+        ExperienceTextColor: document.getElementById('ExperienceTextColor').value,
+        ProjectsBackgroundColor: document.getElementById('ProjectsBackgroundColor').value,
+        ProjectsTextColor: document.getElementById('ProjectsTextColor').value,
+        ContactBackgroundColor: document.getElementById('ContactBackgroundColor').value,
+        ContactTextColor: document.getElementById('ContactTextColor').value,
+        FooterBackgroundColor: document.getElementById('FooterBackgroundColor').value,
+        FooterTextColor: document.getElementById('FooterTextColor').value,
+        // Hover Colors
+        LinkHoverColor: document.getElementById('LinkHoverColor').value,
+        ButtonHoverTransform: document.getElementById('ButtonHoverTransform').value,
+        ButtonHoverShadow: document.getElementById('ButtonHoverShadow').value,
+        CardHoverTransform: document.getElementById('CardHoverTransform').value,
+        CardHoverShadow: document.getElementById('CardHoverShadow').value,
+        ImageHoverTransform: document.getElementById('ImageHoverTransform').value,
+        ImageHoverShadow: document.getElementById('ImageHoverShadow').value,
+        // Page Loader Settings
+        EnablePageLoader: document.getElementById('EnablePageLoader').checked,
+        LoaderType: document.getElementById('LoaderType').value,
+        LoaderColor: document.getElementById('LoaderColor').value,
+        LoaderBackgroundColor: document.getElementById('LoaderBackgroundColor').value,
+        LoaderSize: document.getElementById('LoaderSize').value,
+        LoaderAnimationDuration: document.getElementById('LoaderAnimationDuration').value,
+        LoaderFadeOutDuration: document.getElementById('LoaderFadeOutDuration').value,
+        LoaderShowOnNavigation: document.getElementById('LoaderShowOnNavigation').checked,
+        LoaderShowOnAjax: document.getElementById('LoaderShowOnAjax').checked
     };
 
     $.ajax({
@@ -635,6 +1467,42 @@ function resetToDefault() {
     document.getElementById('TransitionDuration').value = '0.3s';
     document.getElementById('TransitionTimingFunction').value = 'ease';
     
+    // Page Section Colors
+    document.getElementById('HeaderBackgroundColor').value = '#ffffff';
+    document.getElementById('HeaderTextColor').value = '#333333';
+    document.getElementById('HeroBackgroundColor').value = '#f8f9fa';
+    document.getElementById('HeroTextColor').value = '#333333';
+    document.getElementById('AboutBackgroundColor').value = '#ffffff';
+    document.getElementById('AboutTextColor').value = '#333333';
+    document.getElementById('ExperienceBackgroundColor').value = '#f8f9fa';
+    document.getElementById('ExperienceTextColor').value = '#333333';
+    document.getElementById('ProjectsBackgroundColor').value = '#ffffff';
+    document.getElementById('ProjectsTextColor').value = '#333333';
+    document.getElementById('ContactBackgroundColor').value = '#f8f9fa';
+    document.getElementById('ContactTextColor').value = '#333333';
+    document.getElementById('FooterBackgroundColor').value = '#343a40';
+    document.getElementById('FooterTextColor').value = '#ffffff';
+    
+    // Hover Colors
+    document.getElementById('LinkHoverColor').value = '#0056b3';
+    document.getElementById('ButtonHoverTransform').value = 'translateY(-2px)';
+    document.getElementById('ButtonHoverShadow').value = '0 4px 8px rgba(0,0,0,0.2)';
+    document.getElementById('CardHoverTransform').value = 'translateY(-4px)';
+    document.getElementById('CardHoverShadow').value = '0 8px 16px rgba(0,0,0,0.15)';
+    document.getElementById('ImageHoverTransform').value = 'scale(1.05)';
+    document.getElementById('ImageHoverShadow').value = '0 6px 12px rgba(0,0,0,0.2)';
+    
+    // Page Loader Settings
+    document.getElementById('EnablePageLoader').checked = true;
+    document.getElementById('LoaderType').value = 'spinner';
+    document.getElementById('LoaderColor').value = '#007bff';
+    document.getElementById('LoaderBackgroundColor').value = '#ffffff';
+    document.getElementById('LoaderSize').value = '40px';
+    document.getElementById('LoaderAnimationDuration').value = '1s';
+    document.getElementById('LoaderFadeOutDuration').value = '0.5s';
+    document.getElementById('LoaderShowOnNavigation').checked = true;
+    document.getElementById('LoaderShowOnAjax').checked = true;
+    
     // Update color text inputs
     document.querySelectorAll('.color-text').forEach((text, index) => {
         text.value = document.querySelectorAll('.color-picker')[index].value;
@@ -662,7 +1530,40 @@ function applyPreset(preset) {
             OutlineButtonTextColor: '#3b82f6',
             FontFamily: "'Inter', sans-serif",
             BorderRadius: '12px',
-            BoxShadow: '0 4px 8px rgba(0,0,0,0.15)'
+            BoxShadow: '0 4px 8px rgba(0,0,0,0.15)',
+            // Page Section Colors
+            HeaderBackgroundColor: '#ffffff',
+            HeaderTextColor: '#1e293b',
+            HeroBackgroundColor: '#f1f5f9',
+            HeroTextColor: '#1e293b',
+            AboutBackgroundColor: '#ffffff',
+            AboutTextColor: '#1e293b',
+            ExperienceBackgroundColor: '#f8fafc',
+            ExperienceTextColor: '#1e293b',
+            ProjectsBackgroundColor: '#ffffff',
+            ProjectsTextColor: '#1e293b',
+            ContactBackgroundColor: '#f1f5f9',
+            ContactTextColor: '#1e293b',
+            FooterBackgroundColor: '#1e293b',
+            FooterTextColor: '#ffffff',
+            // Hover Colors
+            LinkHoverColor: '#1d4ed8',
+            ButtonHoverTransform: 'translateY(-2px)',
+            ButtonHoverShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            CardHoverTransform: 'translateY(-4px)',
+            CardHoverShadow: '0 8px 16px rgba(0,0,0,0.15)',
+            ImageHoverTransform: 'scale(1.05)',
+            ImageHoverShadow: '0 6px 12px rgba(0,0,0,0.2)',
+            // Page Loader Settings
+            EnablePageLoader: true,
+            LoaderType: 'spinner',
+            LoaderColor: '#3b82f6',
+            LoaderBackgroundColor: '#ffffff',
+            LoaderSize: '40px',
+            LoaderAnimationDuration: '1s',
+            LoaderFadeOutDuration: '0.5s',
+            LoaderShowOnNavigation: true,
+            LoaderShowOnAjax: true
         },
         nature: {
             PrimaryColor: '#10b981',
@@ -677,7 +1578,40 @@ function applyPreset(preset) {
             OutlineButtonTextColor: '#10b981',
             FontFamily: "'Open Sans', sans-serif",
             BorderRadius: '8px',
-            BoxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            BoxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            // Page Section Colors
+            HeaderBackgroundColor: '#ffffff',
+            HeaderTextColor: '#374151',
+            HeroBackgroundColor: '#ecfdf5',
+            HeroTextColor: '#374151',
+            AboutBackgroundColor: '#ffffff',
+            AboutTextColor: '#374151',
+            ExperienceBackgroundColor: '#f0fdf4',
+            ExperienceTextColor: '#374151',
+            ProjectsBackgroundColor: '#ffffff',
+            ProjectsTextColor: '#374151',
+            ContactBackgroundColor: '#ecfdf5',
+            ContactTextColor: '#374151',
+            FooterBackgroundColor: '#374151',
+            FooterTextColor: '#ffffff',
+            // Hover Colors
+            LinkHoverColor: '#059669',
+            ButtonHoverTransform: 'translateY(-2px)',
+            ButtonHoverShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            CardHoverTransform: 'translateY(-4px)',
+            CardHoverShadow: '0 8px 16px rgba(0,0,0,0.15)',
+            ImageHoverTransform: 'scale(1.05)',
+            ImageHoverShadow: '0 6px 12px rgba(0,0,0,0.2)',
+            // Page Loader Settings
+            EnablePageLoader: true,
+            LoaderType: 'dots',
+            LoaderColor: '#10b981',
+            LoaderBackgroundColor: '#ffffff',
+            LoaderSize: '40px',
+            LoaderAnimationDuration: '1s',
+            LoaderFadeOutDuration: '0.5s',
+            LoaderShowOnNavigation: true,
+            LoaderShowOnAjax: true
         },
         warm: {
             PrimaryColor: '#f59e0b',
@@ -692,7 +1626,40 @@ function applyPreset(preset) {
             OutlineButtonTextColor: '#f59e0b',
             FontFamily: "'Poppins', sans-serif",
             BorderRadius: '16px',
-            BoxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+            BoxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+            // Page Section Colors
+            HeaderBackgroundColor: '#ffffff',
+            HeaderTextColor: '#92400e',
+            HeroBackgroundColor: '#fef3c7',
+            HeroTextColor: '#92400e',
+            AboutBackgroundColor: '#ffffff',
+            AboutTextColor: '#92400e',
+            ExperienceBackgroundColor: '#fefce8',
+            ExperienceTextColor: '#92400e',
+            ProjectsBackgroundColor: '#ffffff',
+            ProjectsTextColor: '#92400e',
+            ContactBackgroundColor: '#fef3c7',
+            ContactTextColor: '#92400e',
+            FooterBackgroundColor: '#92400e',
+            FooterTextColor: '#ffffff',
+            // Hover Colors
+            LinkHoverColor: '#d97706',
+            ButtonHoverTransform: 'scale(1.05)',
+            ButtonHoverShadow: '0 6px 12px rgba(0,0,0,0.3)',
+            CardHoverTransform: 'scale(1.02)',
+            CardHoverShadow: '0 12px 24px rgba(0,0,0,0.2)',
+            ImageHoverTransform: 'scale(1.1)',
+            ImageHoverShadow: '0 8px 16px rgba(0,0,0,0.3)',
+            // Page Loader Settings
+            EnablePageLoader: true,
+            LoaderType: 'pulse',
+            LoaderColor: '#f59e0b',
+            LoaderBackgroundColor: '#ffffff',
+            LoaderSize: '50px',
+            LoaderAnimationDuration: '1.5s',
+            LoaderFadeOutDuration: '0.8s',
+            LoaderShowOnNavigation: true,
+            LoaderShowOnAjax: true
         },
         elegant: {
             PrimaryColor: '#8b5cf6',
@@ -707,7 +1674,40 @@ function applyPreset(preset) {
             OutlineButtonTextColor: '#8b5cf6',
             FontFamily: "'Montserrat', sans-serif",
             BorderRadius: '4px',
-            BoxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            BoxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            // Page Section Colors
+            HeaderBackgroundColor: '#ffffff',
+            HeaderTextColor: '#581c87',
+            HeroBackgroundColor: '#faf5ff',
+            HeroTextColor: '#581c87',
+            AboutBackgroundColor: '#ffffff',
+            AboutTextColor: '#581c87',
+            ExperienceBackgroundColor: '#f3e8ff',
+            ExperienceTextColor: '#581c87',
+            ProjectsBackgroundColor: '#ffffff',
+            ProjectsTextColor: '#581c87',
+            ContactBackgroundColor: '#faf5ff',
+            ContactTextColor: '#581c87',
+            FooterBackgroundColor: '#581c87',
+            FooterTextColor: '#ffffff',
+            // Hover Colors
+            LinkHoverColor: '#7c3aed',
+            ButtonHoverTransform: 'translateY(-2px)',
+            ButtonHoverShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            CardHoverTransform: 'translateY(-4px)',
+            CardHoverShadow: '0 8px 16px rgba(0,0,0,0.15)',
+            ImageHoverTransform: 'scale(1.05)',
+            ImageHoverShadow: '0 6px 12px rgba(0,0,0,0.2)',
+            // Page Loader Settings
+            EnablePageLoader: true,
+            LoaderType: 'bars',
+            LoaderColor: '#8b5cf6',
+            LoaderBackgroundColor: '#ffffff',
+            LoaderSize: '40px',
+            LoaderAnimationDuration: '1s',
+            LoaderFadeOutDuration: '0.5s',
+            LoaderShowOnNavigation: true,
+            LoaderShowOnAjax: true
         }
     };
 
@@ -715,14 +1715,259 @@ function applyPreset(preset) {
     Object.keys(selected).forEach(key => {
         const element = document.getElementById(key);
         if (element) {
-            element.value = selected[key];
-            if (element.type === 'color') {
-                element.nextElementSibling.value = selected[key];
+            if (element.type === 'checkbox') {
+                element.checked = selected[key];
+            } else {
+                element.value = selected[key];
+                if (element.type === 'color') {
+                    element.nextElementSibling.value = selected[key];
+                }
             }
         }
     });
 
     document.getElementById('PrimaryColor').dispatchEvent(new Event('input'));
+}
+
+// Section Theme Settings Functions
+function loadSectionSettings() {
+    const section = document.getElementById('sectionSelector').value;
+    const advancedSettings = document.getElementById('advancedSectionSettings');
+    
+    if (section) {
+        advancedSettings.style.display = 'block';
+        // Load saved settings for this section
+        const savedSettings = localStorage.getItem(`section_${section}_settings`);
+        if (savedSettings) {
+            const settings = JSON.parse(savedSettings);
+            applySectionSettingsToForm(settings);
+        }
+    } else {
+        advancedSettings.style.display = 'none';
+    }
+}
+
+function applySectionSettingsToForm(settings) {
+    Object.keys(settings).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+            if (element.type === 'checkbox') {
+                element.checked = settings[key];
+            } else {
+                element.value = settings[key];
+            }
+        }
+    });
+}
+
+function applySectionTheme() {
+    const section = document.getElementById('sectionSelector').value;
+    if (!section) {
+        alert('Vui lòng chọn một phần!');
+        return;
+    }
+
+    const settings = getSectionSettings();
+    const iframe = document.getElementById('websitePreview');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    
+    if (iframeDoc) {
+        const sectionElement = iframeDoc.querySelector(`.${section}-section`) || 
+                              iframeDoc.querySelector(`#${section}-section`) ||
+                              iframeDoc.querySelector(`.${section}`);
+        
+        if (sectionElement) {
+            applySettingsToElement(sectionElement, settings);
+        }
+    }
+
+    // Save settings
+    localStorage.setItem(`section_${section}_settings`, JSON.stringify(settings));
+    showAlert('success', `Đã áp dụng theme cho ${section} section!`);
+}
+
+function getSectionSettings() {
+    return {
+        // Layout
+        containerWidth: document.getElementById('sectionContainerWidth').value,
+        display: document.getElementById('sectionDisplay').value,
+        paddingTop: document.getElementById('sectionPaddingTop').value,
+        paddingBottom: document.getElementById('sectionPaddingBottom').value,
+        marginTop: document.getElementById('sectionMarginTop').value,
+        marginBottom: document.getElementById('sectionMarginBottom').value,
+        position: document.getElementById('sectionPosition').value,
+        zIndex: document.getElementById('sectionZIndex').value,
+        
+        // Colors
+        backgroundColor: document.getElementById('sectionBackgroundColor').value,
+        backgroundColorSecondary: document.getElementById('sectionBackgroundColorSecondary').value,
+        textColor: document.getElementById('sectionTextColor').value,
+        textColorSecondary: document.getElementById('sectionTextColorSecondary').value,
+        borderColor: document.getElementById('sectionBorderColor').value,
+        highlightColor: document.getElementById('sectionHighlightColor').value,
+        gradient: document.getElementById('sectionGradient').value,
+        gradientDirection: document.getElementById('sectionGradientDirection').value,
+        
+        // Typography
+        fontFamily: document.getElementById('sectionFontFamily').value,
+        fontSize: document.getElementById('sectionFontSize').value,
+        headingFontFamily: document.getElementById('sectionHeadingFontFamily').value,
+        headingFontWeight: document.getElementById('sectionHeadingFontWeight').value,
+        lineHeight: document.getElementById('sectionLineHeight').value,
+        letterSpacing: document.getElementById('sectionLineSpacing').value,
+        textAlign: document.getElementById('sectionTextAlign').value,
+        textTransform: document.getElementById('sectionTextTransform').value,
+        
+        // Effects
+        borderRadius: document.getElementById('sectionBorderRadius').value,
+        borderWidth: document.getElementById('sectionBorderWidth').value,
+        boxShadow: document.getElementById('sectionBoxShadow').value,
+        opacity: document.getElementById('sectionOpacity').value,
+        backdropFilter: document.getElementById('sectionBackdropFilter').value,
+        transformScale: document.getElementById('sectionTransformScale').value,
+        enableHoverEffects: document.getElementById('sectionEnableHoverEffects').checked,
+        enableScrollAnimations: document.getElementById('sectionEnableScrollAnimations').checked,
+        enableParallax: document.getElementById('sectionEnableParallax').checked,
+        enableGlassEffect: document.getElementById('sectionEnableGlassEffect').checked,
+        
+        // Advanced
+        cssVariables: document.getElementById('sectionCSSVariables').value,
+        mediaQuery: document.getElementById('sectionMediaQuery').value,
+        customCSS: document.getElementById('sectionCustomCSS').value,
+        animationDuration: document.getElementById('sectionAnimationDuration').value,
+        animationTiming: document.getElementById('sectionAnimationTiming').value,
+        transitionProperties: Array.from(document.getElementById('sectionTransitionProperties').selectedOptions).map(opt => opt.value),
+        beforeElement: document.getElementById('sectionBeforeElement').checked,
+        afterElement: document.getElementById('sectionAfterElement').checked
+    };
+}
+
+function applySettingsToElement(element, settings) {
+    // Layout
+    if (settings.display !== 'inherit') element.style.display = settings.display;
+    if (settings.position !== 'inherit') element.style.position = settings.position;
+    if (settings.zIndex !== 'inherit') element.style.zIndex = settings.zIndex;
+    
+    // Spacing
+    element.style.paddingTop = settings.paddingTop + 'px';
+    element.style.paddingBottom = settings.paddingBottom + 'px';
+    element.style.marginTop = settings.marginTop + 'px';
+    element.style.marginBottom = settings.marginBottom + 'px';
+    
+    // Colors
+    if (settings.backgroundColor !== '#ffffff') element.style.backgroundColor = settings.backgroundColor;
+    if (settings.textColor !== '#333333') element.style.color = settings.textColor;
+    if (settings.borderColor !== '#dee2e6') element.style.borderColor = settings.borderColor;
+    if (settings.borderWidth !== '1') element.style.borderWidth = settings.borderWidth + 'px';
+    
+    // Typography
+    if (settings.fontFamily !== 'inherit') element.style.fontFamily = settings.fontFamily;
+    if (settings.fontSize !== '16') element.style.fontSize = settings.fontSize + 'px';
+    if (settings.lineHeight !== '1.5') element.style.lineHeight = settings.lineHeight;
+    if (settings.letterSpacing !== '0') element.style.letterSpacing = settings.letterSpacing + 'px';
+    if (settings.textAlign !== 'inherit') element.style.textAlign = settings.textAlign;
+    if (settings.textTransform !== 'none') element.style.textTransform = settings.textTransform;
+    
+    // Effects
+    if (settings.borderRadius !== '8') element.style.borderRadius = settings.borderRadius + 'px';
+    if (settings.boxShadow !== 'none') element.style.boxShadow = settings.boxShadow;
+    if (settings.opacity !== '1') element.style.opacity = settings.opacity;
+    if (settings.backdropFilter !== 'none') element.style.backdropFilter = settings.backdropFilter;
+    if (settings.transformScale !== '1') element.style.transform = `scale(${settings.transformScale})`;
+    
+    // Gradient
+    if (settings.gradient !== 'none') {
+        const gradientColors = [settings.backgroundColor, settings.backgroundColorSecondary];
+        if (settings.gradient === 'linear') {
+            element.style.background = `linear-gradient(${settings.gradientDirection}, ${gradientColors.join(', ')})`;
+        } else if (settings.gradient === 'radial') {
+            element.style.background = `radial-gradient(circle, ${gradientColors.join(', ')})`;
+        }
+    }
+    
+    // Custom CSS
+    if (settings.customCSS) {
+        const style = document.createElement('style');
+        style.textContent = settings.customCSS;
+        document.head.appendChild(style);
+    }
+}
+
+function resetSectionTheme() {
+    const section = document.getElementById('sectionSelector').value;
+    if (!section) {
+        alert('Vui lòng chọn một phần!');
+        return;
+    }
+    
+    const iframe = document.getElementById('websitePreview');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    
+    if (iframeDoc) {
+        const sectionElement = iframeDoc.querySelector(`.${section}-section`) || 
+                              iframeDoc.querySelector(`#${section}-section`) ||
+                              iframeDoc.querySelector(`.${section}`);
+        
+        if (sectionElement) {
+            sectionElement.style.cssText = '';
+        }
+    }
+
+    // Clear saved settings
+    localStorage.removeItem(`section_${section}_settings`);
+    showAlert('info', `Đã khôi phục ${section} section về mặc định!`);
+}
+
+function saveSectionSettings() {
+    const section = document.getElementById('sectionSelector').value;
+    if (!section) {
+        alert('Vui lòng chọn một phần!');
+        return;
+    }
+
+    const settings = getSectionSettings();
+    
+    $.ajax({
+        url: '@Url.Action("SaveSectionSettings", "Admin")',
+        type: 'POST',
+        data: {
+            section: section,
+            settings: JSON.stringify(settings)
+        },
+        success: function(response) {
+            if (response.success) {
+                showAlert('success', 'Cài đặt phần này đã được lưu thành công!');
+            } else {
+                showAlert('error', 'Lỗi: ' + response.message);
+            }
+        },
+        error: function() {
+            showAlert('error', 'Có lỗi xảy ra khi lưu cài đặt!');
+        }
+    });
+}
+
+function exportSectionSettings() {
+    const section = document.getElementById('sectionSelector').value;
+    if (!section) {
+        alert('Vui lòng chọn một phần!');
+        return;
+    }
+
+    const settings = getSectionSettings();
+    const exportData = {
+        section: section,
+        settings: settings,
+        timestamp: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = `section-${section}-settings.json`;
+    link.click();
 }
 
 function applyToPreview() {
@@ -745,7 +1990,40 @@ function applyToPreview() {
         BorderRadius: document.getElementById('BorderRadius').value,
         BoxShadow: document.getElementById('BoxShadow').value,
         TransitionDuration: document.getElementById('TransitionDuration').value,
-        TransitionTimingFunction: document.getElementById('TransitionTimingFunction').value
+        TransitionTimingFunction: document.getElementById('TransitionTimingFunction').value,
+        // Page Section Colors
+        HeaderBackgroundColor: document.getElementById('HeaderBackgroundColor').value,
+        HeaderTextColor: document.getElementById('HeaderTextColor').value,
+        HeroBackgroundColor: document.getElementById('HeroBackgroundColor').value,
+        HeroTextColor: document.getElementById('HeroTextColor').value,
+        AboutBackgroundColor: document.getElementById('AboutBackgroundColor').value,
+        AboutTextColor: document.getElementById('AboutTextColor').value,
+        ExperienceBackgroundColor: document.getElementById('ExperienceBackgroundColor').value,
+        ExperienceTextColor: document.getElementById('ExperienceTextColor').value,
+        ProjectsBackgroundColor: document.getElementById('ProjectsBackgroundColor').value,
+        ProjectsTextColor: document.getElementById('ProjectsTextColor').value,
+        ContactBackgroundColor: document.getElementById('ContactBackgroundColor').value,
+        ContactTextColor: document.getElementById('ContactTextColor').value,
+        FooterBackgroundColor: document.getElementById('FooterBackgroundColor').value,
+        FooterTextColor: document.getElementById('FooterTextColor').value,
+        // Hover Colors
+        LinkHoverColor: document.getElementById('LinkHoverColor').value,
+        ButtonHoverTransform: document.getElementById('ButtonHoverTransform').value,
+        ButtonHoverShadow: document.getElementById('ButtonHoverShadow').value,
+        CardHoverTransform: document.getElementById('CardHoverTransform').value,
+        CardHoverShadow: document.getElementById('CardHoverShadow').value,
+        ImageHoverTransform: document.getElementById('ImageHoverTransform').value,
+        ImageHoverShadow: document.getElementById('ImageHoverShadow').value,
+        // Page Loader Settings
+        EnablePageLoader: document.getElementById('EnablePageLoader').checked,
+        LoaderType: document.getElementById('LoaderType').value,
+        LoaderColor: document.getElementById('LoaderColor').value,
+        LoaderBackgroundColor: document.getElementById('LoaderBackgroundColor').value,
+        LoaderSize: document.getElementById('LoaderSize').value,
+        LoaderAnimationDuration: document.getElementById('LoaderAnimationDuration').value,
+        LoaderFadeOutDuration: document.getElementById('LoaderFadeOutDuration').value,
+        LoaderShowOnNavigation: document.getElementById('LoaderShowOnNavigation').checked,
+        LoaderShowOnAjax: document.getElementById('LoaderShowOnAjax').checked
     };
 
     // Store in localStorage for preview page

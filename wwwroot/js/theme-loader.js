@@ -58,6 +58,38 @@ class ThemeLoader {
         root.style.setProperty('--transition-duration', this.themeSettings.transitionDuration || '0.3s');
         root.style.setProperty('--transition-timing', this.themeSettings.transitionTimingFunction || 'ease');
         
+        // Apply page section colors
+        root.style.setProperty('--header-background-color', this.themeSettings.headerBackgroundColor || '#ffffff');
+        root.style.setProperty('--header-text-color', this.themeSettings.headerTextColor || '#333333');
+        root.style.setProperty('--hero-background-color', this.themeSettings.heroBackgroundColor || '#f8f9fa');
+        root.style.setProperty('--hero-text-color', this.themeSettings.heroTextColor || '#333333');
+        root.style.setProperty('--about-background-color', this.themeSettings.aboutBackgroundColor || '#ffffff');
+        root.style.setProperty('--about-text-color', this.themeSettings.aboutTextColor || '#333333');
+        root.style.setProperty('--experience-background-color', this.themeSettings.experienceBackgroundColor || '#f8f9fa');
+        root.style.setProperty('--experience-text-color', this.themeSettings.experienceTextColor || '#333333');
+        root.style.setProperty('--projects-background-color', this.themeSettings.projectsBackgroundColor || '#ffffff');
+        root.style.setProperty('--projects-text-color', this.themeSettings.projectsTextColor || '#333333');
+        root.style.setProperty('--contact-background-color', this.themeSettings.contactBackgroundColor || '#f8f9fa');
+        root.style.setProperty('--contact-text-color', this.themeSettings.contactTextColor || '#333333');
+        root.style.setProperty('--footer-background-color', this.themeSettings.footerBackgroundColor || '#343a40');
+        root.style.setProperty('--footer-text-color', this.themeSettings.footerTextColor || '#ffffff');
+        
+        // Apply hover effect settings
+        root.style.setProperty('--link-hover-color', this.themeSettings.linkHoverColor || '#0056b3');
+        root.style.setProperty('--button-hover-transform', this.themeSettings.buttonHoverTransform || 'translateY(-2px)');
+        root.style.setProperty('--button-hover-shadow', this.themeSettings.buttonHoverShadow || '0 4px 8px rgba(0,0,0,0.2)');
+        root.style.setProperty('--card-hover-transform', this.themeSettings.cardHoverTransform || 'translateY(-4px)');
+        root.style.setProperty('--card-hover-shadow', this.themeSettings.cardHoverShadow || '0 8px 16px rgba(0,0,0,0.15)');
+        root.style.setProperty('--image-hover-transform', this.themeSettings.imageHoverTransform || 'scale(1.05)');
+        root.style.setProperty('--image-hover-shadow', this.themeSettings.imageHoverShadow || '0 6px 12px rgba(0,0,0,0.2)');
+        
+        // Apply page loader settings
+        root.style.setProperty('--loader-color', this.themeSettings.loaderColor || '#007bff');
+        root.style.setProperty('--loader-background-color', this.themeSettings.loaderBackgroundColor || '#ffffff');
+        root.style.setProperty('--loader-size', this.themeSettings.loaderSize || '40px');
+        root.style.setProperty('--loader-animation-duration', this.themeSettings.loaderAnimationDuration || '1s');
+        root.style.setProperty('--loader-fade-out-duration', this.themeSettings.loaderFadeOutDuration || '0.5s');
+        
         // Apply gradient if enabled
         if (this.themeSettings.useGradientBackground) {
             const gradient = `linear-gradient(${this.themeSettings.gradientDirection}, ${this.themeSettings.gradientStartColor}, ${this.themeSettings.gradientEndColor})`;
@@ -87,6 +119,38 @@ class ThemeLoader {
         root.style.setProperty('--box-shadow', '0 4px 8px rgba(0,0,0,0.15)');
         root.style.setProperty('--transition-duration', '0.3s');
         root.style.setProperty('--transition-timing', 'ease');
+        
+        // Default page section colors
+        root.style.setProperty('--header-background-color', '#ffffff');
+        root.style.setProperty('--header-text-color', '#1e293b');
+        root.style.setProperty('--hero-background-color', '#f1f5f9');
+        root.style.setProperty('--hero-text-color', '#1e293b');
+        root.style.setProperty('--about-background-color', '#ffffff');
+        root.style.setProperty('--about-text-color', '#1e293b');
+        root.style.setProperty('--experience-background-color', '#f8fafc');
+        root.style.setProperty('--experience-text-color', '#1e293b');
+        root.style.setProperty('--projects-background-color', '#ffffff');
+        root.style.setProperty('--projects-text-color', '#1e293b');
+        root.style.setProperty('--contact-background-color', '#f1f5f9');
+        root.style.setProperty('--contact-text-color', '#1e293b');
+        root.style.setProperty('--footer-background-color', '#1e293b');
+        root.style.setProperty('--footer-text-color', '#ffffff');
+        
+        // Default hover effects
+        root.style.setProperty('--link-hover-color', '#1d4ed8');
+        root.style.setProperty('--button-hover-transform', 'translateY(-2px)');
+        root.style.setProperty('--button-hover-shadow', '0 4px 8px rgba(0,0,0,0.2)');
+        root.style.setProperty('--card-hover-transform', 'translateY(-4px)');
+        root.style.setProperty('--card-hover-shadow', '0 8px 16px rgba(0,0,0,0.15)');
+        root.style.setProperty('--image-hover-transform', 'scale(1.05)');
+        root.style.setProperty('--image-hover-shadow', '0 6px 12px rgba(0,0,0,0.2)');
+        
+        // Default page loader settings
+        root.style.setProperty('--loader-color', '#3b82f6');
+        root.style.setProperty('--loader-background-color', '#ffffff');
+        root.style.setProperty('--loader-size', '40px');
+        root.style.setProperty('--loader-animation-duration', '1s');
+        root.style.setProperty('--loader-fade-out-duration', '0.5s');
 
         console.log('Default theme applied');
     }

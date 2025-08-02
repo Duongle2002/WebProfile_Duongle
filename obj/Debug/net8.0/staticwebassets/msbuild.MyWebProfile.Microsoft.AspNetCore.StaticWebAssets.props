@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>d7ht5cq84w</Fingerprint>
-      <Integrity>p479/6F9fb3gEHbnRGzo8h1ykkdX0WGhQ7f8eiEr4oU=</Integrity>
+      <Fingerprint>akqo1j56gm</Fingerprint>
+      <Integrity>hsZhrwuNWmC0xFCOqwN6cKXcWmVNFmJqkxL+mi1T00c=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</OriginalItemSpec>
@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rgcx9y6sn9</Fingerprint>
-      <Integrity>W47cPoCiSPZ3BO5lLV1qCFtK953dgccqVZ5RRLgVL4U=</Integrity>
+      <Fingerprint>eil6n9j9ts</Fingerprint>
+      <Integrity>Zl39o8WkP1JhphHrbTkOg9l5veVDi9uIbnvihO7FRlI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\theme.css'))</OriginalItemSpec>
@@ -72,6 +72,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\default-project.svg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\page-loader.js'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyWebProfile</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyWebProfile</BasePath>
+      <RelativePath>js/page-loader.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>mj6w5rhzk6</Fingerprint>
+      <Integrity>IipV90wMyfIQQkps7CTMTDRY0BvdanFqp7W+cil6Fzo=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\page-loader.js'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\script.js'))">
       <SourceType>Package</SourceType>
       <SourceId>MyWebProfile</SourceId>
@@ -84,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>irhs3ufsta</Fingerprint>
-      <Integrity>7lO2XJEclYRYLRo4svyspnl9zDspyDBgQQhSfYx//+M=</Integrity>
+      <Fingerprint>rf6z3pbjs2</Fingerprint>
+      <Integrity>qZ3noG1YgrLwLqFemOWsvqAp2QCad5A03upp6dyXM1o=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\script.js'))</OriginalItemSpec>
@@ -120,8 +138,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>reszqkqt49</Fingerprint>
-      <Integrity>k4RFnjhWDnUiOcGHcHKKeVF5xABcKFUXMqXDwPf39p8=</Integrity>
+      <Fingerprint>jihwni1h67</Fingerprint>
+      <Integrity>q2+3eKKqqB8i/WLDlBgUnFP/d3ir7/G/WayGJgtBbhE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\theme-loader.js'))</OriginalItemSpec>

@@ -796,6 +796,66 @@ namespace MyWebProfile.Controllers
             if (string.IsNullOrEmpty(settings.OutlineButtonTextColor))
                 settings.OutlineButtonTextColor = "#007bff";
             
+            // Đảm bảo các giá trị page section mặc định được thiết lập
+            if (string.IsNullOrEmpty(settings.HeaderBackgroundColor))
+                settings.HeaderBackgroundColor = "#ffffff";
+            if (string.IsNullOrEmpty(settings.HeaderTextColor))
+                settings.HeaderTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.HeroBackgroundColor))
+                settings.HeroBackgroundColor = "#f8f9fa";
+            if (string.IsNullOrEmpty(settings.HeroTextColor))
+                settings.HeroTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.AboutBackgroundColor))
+                settings.AboutBackgroundColor = "#ffffff";
+            if (string.IsNullOrEmpty(settings.AboutTextColor))
+                settings.AboutTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.ExperienceBackgroundColor))
+                settings.ExperienceBackgroundColor = "#f8f9fa";
+            if (string.IsNullOrEmpty(settings.ExperienceTextColor))
+                settings.ExperienceTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.ProjectsBackgroundColor))
+                settings.ProjectsBackgroundColor = "#ffffff";
+            if (string.IsNullOrEmpty(settings.ProjectsTextColor))
+                settings.ProjectsTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.ContactBackgroundColor))
+                settings.ContactBackgroundColor = "#f8f9fa";
+            if (string.IsNullOrEmpty(settings.ContactTextColor))
+                settings.ContactTextColor = "#333333";
+            if (string.IsNullOrEmpty(settings.FooterBackgroundColor))
+                settings.FooterBackgroundColor = "#343a40";
+            if (string.IsNullOrEmpty(settings.FooterTextColor))
+                settings.FooterTextColor = "#ffffff";
+            
+            // Đảm bảo các giá trị hover mặc định được thiết lập
+            if (string.IsNullOrEmpty(settings.LinkHoverColor))
+                settings.LinkHoverColor = "#0056b3";
+            if (string.IsNullOrEmpty(settings.ButtonHoverTransform))
+                settings.ButtonHoverTransform = "translateY(-2px)";
+            if (string.IsNullOrEmpty(settings.ButtonHoverShadow))
+                settings.ButtonHoverShadow = "0 4px 8px rgba(0,0,0,0.2)";
+            if (string.IsNullOrEmpty(settings.CardHoverTransform))
+                settings.CardHoverTransform = "translateY(-4px)";
+            if (string.IsNullOrEmpty(settings.CardHoverShadow))
+                settings.CardHoverShadow = "0 8px 16px rgba(0,0,0,0.15)";
+            if (string.IsNullOrEmpty(settings.ImageHoverTransform))
+                settings.ImageHoverTransform = "scale(1.05)";
+            if (string.IsNullOrEmpty(settings.ImageHoverShadow))
+                settings.ImageHoverShadow = "0 6px 12px rgba(0,0,0,0.2)";
+            
+            // Đảm bảo các giá trị loader mặc định được thiết lập
+            if (string.IsNullOrEmpty(settings.LoaderType))
+                settings.LoaderType = "spinner";
+            if (string.IsNullOrEmpty(settings.LoaderColor))
+                settings.LoaderColor = "#007bff";
+            if (string.IsNullOrEmpty(settings.LoaderBackgroundColor))
+                settings.LoaderBackgroundColor = "#ffffff";
+            if (string.IsNullOrEmpty(settings.LoaderSize))
+                settings.LoaderSize = "40px";
+            if (string.IsNullOrEmpty(settings.LoaderAnimationDuration))
+                settings.LoaderAnimationDuration = "1s";
+            if (string.IsNullOrEmpty(settings.LoaderFadeOutDuration))
+                settings.LoaderFadeOutDuration = "0.5s";
+            
             return View(settings);
         }
 
@@ -824,6 +884,18 @@ namespace MyWebProfile.Controllers
             string? TransitionDuration, string? TransitionTimingFunction, bool EnableHoverEffects, bool EnableScrollAnimations,
             // Layout
             string? ContainerMaxWidth, string? SectionPadding, string? CardPadding, string? SpacingUnit,
+            // Page Section Colors
+            string? HeaderBackgroundColor, string? HeaderTextColor, string? HeroBackgroundColor, string? HeroTextColor,
+            string? AboutBackgroundColor, string? AboutTextColor, string? ExperienceBackgroundColor, string? ExperienceTextColor,
+            string? ProjectsBackgroundColor, string? ProjectsTextColor, string? ContactBackgroundColor, string? ContactTextColor,
+            string? FooterBackgroundColor, string? FooterTextColor,
+            // Hover Colors
+            string? LinkHoverColor, string? ButtonHoverTransform, string? ButtonHoverShadow,
+            string? CardHoverTransform, string? CardHoverShadow, string? ImageHoverTransform, string? ImageHoverShadow,
+            // Page Loader Settings
+            bool EnablePageLoader, string? LoaderType, string? LoaderColor, string? LoaderBackgroundColor,
+            string? LoaderSize, string? LoaderAnimationDuration, string? LoaderFadeOutDuration,
+            bool LoaderShowOnNavigation, bool LoaderShowOnAjax,
             // Advanced
             string? CustomCSS)
         {
@@ -899,6 +971,42 @@ namespace MyWebProfile.Controllers
                         // Advanced
                         CustomCSS = CustomCSS ?? "",
                         
+                        // Page Section Colors
+                        HeaderBackgroundColor = HeaderBackgroundColor ?? "#ffffff",
+                        HeaderTextColor = HeaderTextColor ?? "#333333",
+                        HeroBackgroundColor = HeroBackgroundColor ?? "#f8f9fa",
+                        HeroTextColor = HeroTextColor ?? "#333333",
+                        AboutBackgroundColor = AboutBackgroundColor ?? "#ffffff",
+                        AboutTextColor = AboutTextColor ?? "#333333",
+                        ExperienceBackgroundColor = ExperienceBackgroundColor ?? "#f8f9fa",
+                        ExperienceTextColor = ExperienceTextColor ?? "#333333",
+                        ProjectsBackgroundColor = ProjectsBackgroundColor ?? "#ffffff",
+                        ProjectsTextColor = ProjectsTextColor ?? "#333333",
+                        ContactBackgroundColor = ContactBackgroundColor ?? "#f8f9fa",
+                        ContactTextColor = ContactTextColor ?? "#333333",
+                        FooterBackgroundColor = FooterBackgroundColor ?? "#343a40",
+                        FooterTextColor = FooterTextColor ?? "#ffffff",
+                        
+                        // Hover Colors
+                        LinkHoverColor = LinkHoverColor ?? "#0056b3",
+                        ButtonHoverTransform = ButtonHoverTransform ?? "translateY(-2px)",
+                        ButtonHoverShadow = ButtonHoverShadow ?? "0 4px 8px rgba(0,0,0,0.2)",
+                        CardHoverTransform = CardHoverTransform ?? "translateY(-4px)",
+                        CardHoverShadow = CardHoverShadow ?? "0 8px 16px rgba(0,0,0,0.15)",
+                        ImageHoverTransform = ImageHoverTransform ?? "scale(1.05)",
+                        ImageHoverShadow = ImageHoverShadow ?? "0 6px 12px rgba(0,0,0,0.2)",
+                        
+                        // Page Loader Settings
+                        EnablePageLoader = EnablePageLoader,
+                        LoaderType = LoaderType ?? "spinner",
+                        LoaderColor = LoaderColor ?? "#007bff",
+                        LoaderBackgroundColor = LoaderBackgroundColor ?? "#ffffff",
+                        LoaderSize = LoaderSize ?? "40px",
+                        LoaderAnimationDuration = LoaderAnimationDuration ?? "1s",
+                        LoaderFadeOutDuration = LoaderFadeOutDuration ?? "0.5s",
+                        LoaderShowOnNavigation = LoaderShowOnNavigation,
+                        LoaderShowOnAjax = LoaderShowOnAjax,
+                        
                         IsActive = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
@@ -971,6 +1079,42 @@ namespace MyWebProfile.Controllers
                     
                     // Advanced
                     existingSettings.CustomCSS = CustomCSS ?? existingSettings.CustomCSS;
+                    
+                    // Page Section Colors
+                    existingSettings.HeaderBackgroundColor = HeaderBackgroundColor ?? existingSettings.HeaderBackgroundColor;
+                    existingSettings.HeaderTextColor = HeaderTextColor ?? existingSettings.HeaderTextColor;
+                    existingSettings.HeroBackgroundColor = HeroBackgroundColor ?? existingSettings.HeroBackgroundColor;
+                    existingSettings.HeroTextColor = HeroTextColor ?? existingSettings.HeroTextColor;
+                    existingSettings.AboutBackgroundColor = AboutBackgroundColor ?? existingSettings.AboutBackgroundColor;
+                    existingSettings.AboutTextColor = AboutTextColor ?? existingSettings.AboutTextColor;
+                    existingSettings.ExperienceBackgroundColor = ExperienceBackgroundColor ?? existingSettings.ExperienceBackgroundColor;
+                    existingSettings.ExperienceTextColor = ExperienceTextColor ?? existingSettings.ExperienceTextColor;
+                    existingSettings.ProjectsBackgroundColor = ProjectsBackgroundColor ?? existingSettings.ProjectsBackgroundColor;
+                    existingSettings.ProjectsTextColor = ProjectsTextColor ?? existingSettings.ProjectsTextColor;
+                    existingSettings.ContactBackgroundColor = ContactBackgroundColor ?? existingSettings.ContactBackgroundColor;
+                    existingSettings.ContactTextColor = ContactTextColor ?? existingSettings.ContactTextColor;
+                    existingSettings.FooterBackgroundColor = FooterBackgroundColor ?? existingSettings.FooterBackgroundColor;
+                    existingSettings.FooterTextColor = FooterTextColor ?? existingSettings.FooterTextColor;
+                    
+                    // Hover Colors
+                    existingSettings.LinkHoverColor = LinkHoverColor ?? existingSettings.LinkHoverColor;
+                    existingSettings.ButtonHoverTransform = ButtonHoverTransform ?? existingSettings.ButtonHoverTransform;
+                    existingSettings.ButtonHoverShadow = ButtonHoverShadow ?? existingSettings.ButtonHoverShadow;
+                    existingSettings.CardHoverTransform = CardHoverTransform ?? existingSettings.CardHoverTransform;
+                    existingSettings.CardHoverShadow = CardHoverShadow ?? existingSettings.CardHoverShadow;
+                    existingSettings.ImageHoverTransform = ImageHoverTransform ?? existingSettings.ImageHoverTransform;
+                    existingSettings.ImageHoverShadow = ImageHoverShadow ?? existingSettings.ImageHoverShadow;
+                    
+                    // Page Loader Settings
+                    existingSettings.EnablePageLoader = EnablePageLoader;
+                    existingSettings.LoaderType = LoaderType ?? existingSettings.LoaderType;
+                    existingSettings.LoaderColor = LoaderColor ?? existingSettings.LoaderColor;
+                    existingSettings.LoaderBackgroundColor = LoaderBackgroundColor ?? existingSettings.LoaderBackgroundColor;
+                    existingSettings.LoaderSize = LoaderSize ?? existingSettings.LoaderSize;
+                    existingSettings.LoaderAnimationDuration = LoaderAnimationDuration ?? existingSettings.LoaderAnimationDuration;
+                    existingSettings.LoaderFadeOutDuration = LoaderFadeOutDuration ?? existingSettings.LoaderFadeOutDuration;
+                    existingSettings.LoaderShowOnNavigation = LoaderShowOnNavigation;
+                    existingSettings.LoaderShowOnAjax = LoaderShowOnAjax;
                     
                     existingSettings.UpdatedAt = DateTime.Now;
                 }
@@ -1711,6 +1855,256 @@ namespace MyWebProfile.Controllers
             {
                 return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
             }
+        }
+        #endregion
+
+        #region Section Settings Management
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> SaveSectionSettings(string section, string settings)
+        {
+            try
+            {
+                // Parse settings JSON
+                var sectionSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(settings);
+                
+                // Save to database or file system
+                // For now, we'll save to a JSON file in wwwroot
+                var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "section-settings.json");
+                var settingsDir = Path.GetDirectoryName(settingsPath);
+                
+                if (!Directory.Exists(settingsDir))
+                {
+                    Directory.CreateDirectory(settingsDir);
+                }
+
+                // Load existing settings
+                Dictionary<string, object> allSettings = new();
+                if (System.IO.File.Exists(settingsPath))
+                {
+                    var existingJson = await System.IO.File.ReadAllTextAsync(settingsPath);
+                    allSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(existingJson) ?? new();
+                }
+
+                // Update section settings
+                allSettings[section] = sectionSettings;
+
+                // Save back to file
+                var jsonString = JsonSerializer.Serialize(allSettings, new JsonSerializerOptions { WriteIndented = true });
+                await System.IO.File.WriteAllTextAsync(settingsPath, jsonString);
+
+                return Json(new { success = true, message = "Section settings saved successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetSectionSettings(string section)
+        {
+            try
+            {
+                var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "section-settings.json");
+                
+                if (!System.IO.File.Exists(settingsPath))
+                {
+                    return Json(new { success = false, message = "No settings found" });
+                }
+
+                var jsonString = await System.IO.File.ReadAllTextAsync(settingsPath);
+                var allSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonString);
+
+                if (allSettings != null && allSettings.ContainsKey(section))
+                {
+                    return Json(new { success = true, settings = allSettings[section] });
+                }
+
+                return Json(new { success = false, message = "Section not found" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        #endregion
+
+        #region Contact Messages Management
+        [Authorize]
+        public async Task<IActionResult> ContactMessages()
+        {
+            var messages = await _context.ContactMessages
+                .Where(m => !m.IsDeleted)
+                .OrderByDescending(m => m.CreatedAt)
+                .ToListAsync();
+            
+            ViewBag.Messages = messages;
+            ViewBag.UnreadCount = messages.Count(m => !m.IsRead);
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ContactMessagesDeleted()
+        {
+            var messages = await _context.ContactMessages
+                .Where(m => m.IsDeleted)
+                .OrderByDescending(m => m.CreatedAt)
+                .ToListAsync();
+            
+            ViewBag.Messages = messages;
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            var message = await _context.ContactMessages.FindAsync(id);
+            if (message != null)
+            {
+                message.IsRead = true;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> MarkAsUnread(int id)
+        {
+            var message = await _context.ContactMessages.FindAsync(id);
+            if (message != null)
+            {
+                message.IsRead = false;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteContactMessage(int id)
+        {
+            var message = await _context.ContactMessages.FindAsync(id);
+            if (message != null)
+            {
+                message.IsDeleted = true;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RestoreContactMessage(int id)
+        {
+            var message = await _context.ContactMessages.FindAsync(id);
+            if (message != null)
+            {
+                message.IsDeleted = false;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteContactMessagePermanently(int id)
+        {
+            var message = await _context.ContactMessages.FindAsync(id);
+            if (message != null)
+            {
+                _context.ContactMessages.Remove(message);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EmailNotification()
+        {
+            // Email Notification data
+            var unreadMessageCount = await _context.ContactMessages.CountAsync(m => !m.IsRead && !m.IsDeleted);
+            var totalMessageCount = await _context.ContactMessages.CountAsync(m => !m.IsDeleted);
+            var emailSettings = await _context.EmailSettings.FirstOrDefaultAsync();
+            var recentMessages = await _context.ContactMessages
+                .Where(m => !m.IsDeleted)
+                .OrderByDescending(m => m.CreatedAt)
+                .Take(5)
+                .ToListAsync();
+            
+            ViewBag.UnreadMessageCount = unreadMessageCount;
+            ViewBag.TotalMessageCount = totalMessageCount;
+            ViewBag.EmailNotificationEnabled = emailSettings?.EnableEmailNotification ?? false;
+            ViewBag.SmtpServer = emailSettings?.SmtpServer;
+            ViewBag.EmailSettings = emailSettings;
+            ViewBag.RecentMessages = recentMessages;
+            
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EmailSettings()
+        {
+            var emailSettings = await _context.EmailSettings.FirstOrDefaultAsync();
+            if (emailSettings == null)
+            {
+                emailSettings = new EmailSettings
+                {
+                    SmtpServer = "smtp.gmail.com",
+                    SmtpPort = 587,
+                    FromEmail = "",
+                    FromName = "",
+                    ToEmail = "",
+                    EmailPassword = "",
+                    EnableSsl = true,
+                    EnableEmailNotification = true
+                };
+                _context.EmailSettings.Add(emailSettings);
+                await _context.SaveChangesAsync();
+            }
+            
+            ViewBag.EmailSettings = emailSettings;
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateEmailSettings(EmailSettings emailSettings)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingSettings = await _context.EmailSettings.FirstOrDefaultAsync();
+                if (existingSettings != null)
+                {
+                    existingSettings.SmtpServer = emailSettings.SmtpServer;
+                    existingSettings.SmtpPort = emailSettings.SmtpPort;
+                    existingSettings.FromEmail = emailSettings.FromEmail;
+                    existingSettings.FromName = emailSettings.FromName;
+                    existingSettings.ToEmail = emailSettings.ToEmail;
+                    existingSettings.EmailPassword = emailSettings.EmailPassword;
+                    existingSettings.EnableSsl = emailSettings.EnableSsl;
+                    existingSettings.EnableEmailNotification = emailSettings.EnableEmailNotification;
+                    existingSettings.UpdatedAt = DateTime.Now;
+                }
+                else
+                {
+                    emailSettings.CreatedAt = DateTime.Now;
+                    emailSettings.UpdatedAt = DateTime.Now;
+                    _context.EmailSettings.Add(emailSettings);
+                }
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Cài đặt email đã được cập nhật thành công!";
+                return RedirectToAction("EmailSettings");
+            }
+            return View("EmailSettings", emailSettings);
         }
         #endregion
         #endregion

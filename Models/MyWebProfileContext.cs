@@ -12,5 +12,7 @@ namespace MyWebProfile.Models
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ThemeSettings> ThemeSettings { get; set; }
         public DbSet<ContentSettings> ContentSettings { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<EmailSettings> EmailSettings { get; set; }
     }
 } 

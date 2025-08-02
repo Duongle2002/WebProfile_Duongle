@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.getElementById(targetId);
             
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                const offsetTop = targetSection.offsetTop - 120; // Account for floating navigation
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function scrollToSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
-        const offsetTop = targetSection.offsetTop - 80;
+        const offsetTop = targetSection.offsetTop - 120;
         window.scrollTo({
             top: offsetTop,
             behavior: 'smooth'

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWebProfile.Models;
 
@@ -11,9 +12,11 @@ using MyWebProfile.Models;
 namespace MyWebProfile.Migrations
 {
     [DbContext(typeof(MyWebProfileContext))]
-    partial class MyWebProfileContextModelSnapshot : ModelSnapshot
+    [Migration("20250802072931_AddContactMessages")]
+    partial class AddContactMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,57 +103,6 @@ namespace MyWebProfile.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContentSettings");
-                });
-
-            modelBuilder.Entity("MyWebProfile.Models.EmailSettings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("EmailPassword")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("EnableEmailNotification")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("EnableSsl")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("FromEmail")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FromName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("SmtpPort")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SmtpServer")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ToEmail")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmailSettings");
                 });
 
             modelBuilder.Entity("MyWebProfile.Models.Experience", b =>

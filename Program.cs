@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebProfile.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MyWebProfile.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Admin/Login";
         options.LogoutPath = "/Admin/Logout";
     });
+
+// Register Email Service
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 

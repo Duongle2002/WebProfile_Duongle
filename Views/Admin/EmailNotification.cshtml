@@ -1,0 +1,350 @@
+@{
+    ViewData["Title"] = "Email Notification";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Email Notification Overview -->
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-envelope me-2"></i>
+                    Email Notification Overview
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="notification-stat-card">
+                            <div class="stat-icon-wrapper bg-primary">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h6 class="stat-title">Tin nhắn mới</h6>
+                                <div class="stat-value">@ViewBag.UnreadMessageCount</div>
+                                <div class="stat-description">tin nhắn chưa đọc</div>
+                                <a href="@Url.Action("ContactMessages", "Admin")" class="btn btn-primary btn-sm mt-2">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Xem tin nhắn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="notification-stat-card">
+                            <div class="stat-icon-wrapper @(ViewBag.EmailNotificationEnabled == true ? "bg-success" : "bg-danger")">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h6 class="stat-title">Thông báo Email</h6>
+                                <div class="stat-value">
+                                    @if (ViewBag.EmailNotificationEnabled == true)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>
+                                            Đã bật
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-times-circle me-1"></i>
+                                            Đã tắt
+                                        </span>
+                                    }
+                                </div>
+                                <div class="stat-description">Trạng thái thông báo</div>
+                                <a href="@Url.Action("EmailSettings", "Admin")" class="btn btn-outline-secondary btn-sm mt-2">
+                                    <i class="fas fa-cog me-1"></i>
+                                    Cấu hình
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="notification-stat-card">
+                            <div class="stat-icon-wrapper @(!string.IsNullOrEmpty(ViewBag.SmtpServer) ? "bg-success" : "bg-warning")">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h6 class="stat-title">SMTP Server</h6>
+                                <div class="stat-value">
+                                    @if (!string.IsNullOrEmpty(ViewBag.SmtpServer))
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>
+                                            Đã cấu hình
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="fas fa-exclamation-triangle me-1"></i>
+                                            Chưa cấu hình
+                                        </span>
+                                    }
+                                </div>
+                                <div class="stat-description">Trạng thái SMTP</div>
+                                <a href="@Url.Action("EmailSettings", "Admin")" class="btn btn-outline-warning btn-sm mt-2">
+                                    <i class="fas fa-server me-1"></i>
+                                    Thiết lập SMTP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Settings Summary -->
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-cog me-2"></i>
+                    Email Settings Summary
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.EmailSettings != null)
+                {
+                    var settings = ViewBag.EmailSettings as EmailSettings;
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="settings-group">
+                                <h6 class="settings-title">SMTP Configuration</h6>
+                                <div class="settings-item">
+                                    <span class="settings-label">Server:</span>
+                                    <span class="settings-value">@settings.SmtpServer</span>
+                                </div>
+                                <div class="settings-item">
+                                    <span class="settings-label">Port:</span>
+                                    <span class="settings-value">@settings.SmtpPort</span>
+                                </div>
+                                <div class="settings-item">
+                                    <span class="settings-label">SSL:</span>
+                                    <span class="settings-value">
+                                        @if (settings.EnableSsl)
+                                        {
+                                            <span class="badge bg-success">Enabled</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Disabled</span>
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="settings-group">
+                                <h6 class="settings-title">Email Configuration</h6>
+                                <div class="settings-item">
+                                    <span class="settings-label">From Email:</span>
+                                    <span class="settings-value">@settings.FromEmail</span>
+                                </div>
+                                <div class="settings-item">
+                                    <span class="settings-label">From Name:</span>
+                                    <span class="settings-value">@settings.FromName</span>
+                                </div>
+                                <div class="settings-item">
+                                    <span class="settings-label">To Email:</span>
+                                    <span class="settings-value">@settings.ToEmail</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="@Url.Action("EmailSettings", "Admin")" class="btn btn-primary">
+                            <i class="fas fa-edit me-1"></i>
+                            Edit Email Settings
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">No Email Settings Found</h5>
+                        <p class="text-muted">Please configure your email settings to enable email notifications.</p>
+                        <a href="@Url.Action("EmailSettings", "Admin")" class="btn btn-primary">
+                            <i class="fas fa-cog me-1"></i>
+                            Configure Email Settings
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- Recent Messages -->
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-inbox me-2"></i>
+                    Recent Messages
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.RecentMessages != null && ((List<ContactMessage>)ViewBag.RecentMessages).Count > 0)
+                {
+                    var messages = (List<ContactMessage>)ViewBag.RecentMessages;
+                    <div class="recent-messages">
+                        @foreach (var message in messages)
+                        {
+                            <div class="message-item @(!message.IsRead ? "unread" : "")">
+                                <div class="message-header">
+                                    <div class="message-sender">@message.Name</div>
+                                    <div class="message-time">@message.CreatedAt.ToString("MM/dd HH:mm")</div>
+                                </div>
+                                <div class="message-subject">@message.Subject</div>
+                                <div class="message-preview">@(message.Message.Length > 50 ? message.Message.Substring(0, 50) + "..." : message.Message)</div>
+                                @if (!message.IsRead)
+                                {
+                                    <span class="badge bg-primary badge-sm">New</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div class="mt-3">
+                        <a href="@Url.Action("ContactMessages", "Admin")" class="btn btn-outline-primary btn-sm w-100">
+                            <i class="fas fa-eye me-1"></i>
+                            View All Messages
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <i class="fas fa-inbox text-muted" style="font-size: 3rem;"></i>
+                        <h6 class="mt-3">No Messages</h6>
+                        <p class="text-muted">No recent messages found.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="admin-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="quick-actions">
+                    <a href="@Url.Action("ContactMessages", "Admin")" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                        <i class="fas fa-envelope me-1"></i>
+                        View Messages
+                    </a>
+                    <a href="@Url.Action("EmailSettings", "Admin")" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                        <i class="fas fa-cog me-1"></i>
+                        Email Settings
+                    </a>
+                    <a href="@Url.Action("ContactMessagesDeleted", "Admin")" class="btn btn-outline-warning btn-sm w-100">
+                        <i class="fas fa-trash me-1"></i>
+                        Deleted Messages
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.settings-group {
+    margin-bottom: 1.5rem;
+}
+
+.settings-title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.settings-label {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.settings-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.recent-messages {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.message-item {
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.message-item:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.message-item.unread {
+    border-left: 4px solid #007bff;
+    background-color: #f8f9ff;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.message-sender {
+    font-weight: 600;
+    color: #333;
+}
+
+.message-time {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.message-subject {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.25rem;
+}
+
+.message-preview {
+    font-size: 0.875rem;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+.badge-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.quick-actions .btn {
+    text-align: left;
+    justify-content: flex-start;
+}
+</style> 

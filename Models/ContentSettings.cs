@@ -92,5 +92,41 @@ namespace MyWebProfile.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
+        
+        // Page Section Colors
+        public string HeaderBackgroundColor { get; set; } = "#ffffff";
+        public string HeaderTextColor { get; set; } = "#333333";
+        public string HeroBackgroundColor { get; set; } = "#f8f9fa";
+        public string HeroTextColor { get; set; } = "#333333";
+        public string AboutBackgroundColor { get; set; } = "#ffffff";
+        public string AboutTextColor { get; set; } = "#333333";
+        public string ExperienceBackgroundColor { get; set; } = "#f8f9fa";
+        public string ExperienceTextColor { get; set; } = "#333333";
+        public string ProjectsBackgroundColor { get; set; } = "#ffffff";
+        public string ProjectsTextColor { get; set; } = "#333333";
+        public string ContactBackgroundColor { get; set; } = "#f8f9fa";
+        public string ContactTextColor { get; set; } = "#333333";
+        public string FooterBackgroundColor { get; set; } = "#343a40";
+        public string FooterTextColor { get; set; } = "#ffffff";
+        
+        // Hover Colors
+        public string LinkHoverColor { get; set; } = "#0056b3";
+        public string ButtonHoverTransform { get; set; } = "translateY(-2px)";
+        public string ButtonHoverShadow { get; set; } = "0 4px 8px rgba(0,0,0,0.2)";
+        public string CardHoverTransform { get; set; } = "translateY(-4px)";
+        public string CardHoverShadow { get; set; } = "0 8px 16px rgba(0,0,0,0.15)";
+        public string ImageHoverTransform { get; set; } = "scale(1.05)";
+        public string ImageHoverShadow { get; set; } = "0 6px 12px rgba(0,0,0,0.2)";
+        
+        // Page Loader Settings
+        public bool EnablePageLoader { get; set; } = true;
+        public string LoaderType { get; set; } = "spinner"; // spinner, dots, bars, pulse
+        public string LoaderColor { get; set; } = "#007bff";
+        public string LoaderBackgroundColor { get; set; } = "#ffffff";
+        public string LoaderSize { get; set; } = "40px";
+        public string LoaderAnimationDuration { get; set; } = "1s";
+        public string LoaderFadeOutDuration { get; set; } = "0.5s";
+        public bool LoaderShowOnNavigation { get; set; } = true;
+        public bool LoaderShowOnAjax { get; set; } = true;
     }
 } 

@@ -238,6 +238,14 @@
             </div>
             
             <div class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "EmailNotification" ? "active" : "")" 
+                   href="@Url.Action("EmailNotification", "Admin")">
+                    <i class="fas fa-envelope"></i>
+                    <span class="sidebar-text">Email Notification</span>
+                </a>
+            </div>
+            
+            <div class="nav-item">
                 <a class="nav-link" href="@Url.Action("Preview", "Admin")" target="_blank">
                     <i class="fas fa-eye"></i>
                     <span class="sidebar-text">Xem trước Website</span>

@@ -20,6 +20,10 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/ContactMessages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29udGFjdE1lc3NhZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/ContentSettings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29udGVudFNldHRpbmdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -56,8 +60,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFByb2plY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditSkill.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFNraWxsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EditUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EmailNotification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1haWxOb3RpZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/EmailSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1haWxTZXR0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/doan/Web_profile_ASP.NET_Core MVC/MyWebProfile/Views/Admin/Experiences.cshtml]

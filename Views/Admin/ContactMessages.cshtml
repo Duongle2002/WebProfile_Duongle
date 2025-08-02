@@ -1,0 +1,227 @@
+@{
+    ViewData["Title"] = "Contact Messages";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="admin-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-inbox me-2"></i>
+                    Contact Messages
+                </h5>
+                <div>
+                    <a href="@Url.Action("ContactMessagesDeleted", "Admin")" class="btn btn-outline-warning btn-sm">
+                        <i class="fas fa-trash me-1"></i>
+                        Deleted Messages
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.Messages != null && ((List<ContactMessage>)ViewBag.Messages).Count > 0)
+                            {
+                                var messages = (List<ContactMessage>)ViewBag.Messages;
+                                @foreach (var message in messages)
+                                {
+                                    <tr class="@(!message.IsRead ? "table-primary" : "")">
+                                        <td>
+                                            <strong>@message.Name</strong>
+                                            @if (!string.IsNullOrEmpty(message.Phone))
+                                            {
+                                                <br><small class="text-muted">@message.Phone</small>
+                                            }
+                                        </td>
+                                        <td>@message.Email</td>
+                                        <td>@message.Subject</td>
+                                        <td>
+                                            @(message.Message.Length > 50 ? message.Message.Substring(0, 50) + "..." : message.Message)
+                                        </td>
+                                        <td>@message.CreatedAt.ToString("MM/dd/yyyy HH:mm")</td>
+                                        <td>
+                                            @if (message.IsRead)
+                                            {
+                                                <span class="badge bg-success">Read</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning">Unread</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                                        onclick="viewMessage(@message.Id, '@message.Name', '@message.Email', '@message.Subject', '@message.Message.Replace("'", "\\'")', '@message.CreatedAt.ToString("MM/dd/yyyy HH:mm")')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                @if (message.IsRead)
+                                                {
+                                                    <button type="button" class="btn btn-sm btn-outline-warning" 
+                                                            onclick="markAsUnread(@message.Id)">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-sm btn-outline-success" 
+                                                            onclick="markAsRead(@message.Id)">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                }
+                                                <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                        onclick="deleteMessage(@message.Id)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div class="empty-state">
+                                            <i class="fas fa-inbox"></i>
+                                            <h5>No Messages</h5>
+                                            <p>No contact messages found.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message Detail Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Message Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Name:</label>
+                            <p id="modalName" class="mb-0"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email:</label>
+                            <p id="modalEmail" class="mb-0"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Date:</label>
+                            <p id="modalDate" class="mb-0"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Subject:</label>
+                            <p id="modalSubject" class="mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Message:</label>
+                    <div id="modalMessage" class="border rounded p-3 bg-light"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewMessage(id, name, email, subject, message, date) {
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalEmail').textContent = email;
+    document.getElementById('modalSubject').textContent = subject;
+    document.getElementById('modalMessage').textContent = message;
+    document.getElementById('modalDate').textContent = date;
+    
+    new bootstrap.Modal(document.getElementById('messageModal')).show();
+}
+
+function markAsRead(id) {
+    if (confirm('Mark this message as read?')) {
+        fetch('/Admin/MarkAsRead', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error marking message as read');
+            }
+        });
+    }
+}
+
+function markAsUnread(id) {
+    if (confirm('Mark this message as unread?')) {
+        fetch('/Admin/MarkAsUnread', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error marking message as unread');
+            }
+        });
+    }
+}
+
+function deleteMessage(id) {
+    if (confirm('Are you sure you want to delete this message?')) {
+        fetch('/Admin/DeleteContactMessage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error deleting message');
+            }
+        });
+    }
+}
+</script>
