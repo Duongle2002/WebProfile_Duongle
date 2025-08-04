@@ -11,12 +11,64 @@
     
     // Lấy thông tin từ ContentSettings
     var aboutName = contentSettings.FirstOrDefault(x => x.Key == "AboutName")?.Value ?? "Lê Hữu Dương";
-    var aboutTitle = contentSettings.FirstOrDefault(x => x.Key == "AboutTitle")?.Value ?? "Full Stack Developer với hơn 5 năm kinh nghiệm";
+    
+    // Tính toán số năm kinh nghiệm động - ưu tiên năm nhỏ nhất từ kinh nghiệm làm việc
+    DateTime startDate;
+    var currentDate = DateTime.Now;
+    
+    // Ưu tiên 1: Lấy năm nhỏ nhất từ kinh nghiệm làm việc trong database
+    if (experiences != null && experiences.Any())
+    {
+        var earliestExperience = experiences.OrderBy(e => e.StartDate).First();
+        startDate = earliestExperience.StartDate;
+    }
+    // Ưu tiên 2: Sử dụng CareerStartDate từ ContentSettings
+    else if (!string.IsNullOrEmpty(contentSettings.FirstOrDefault(x => x.Key == "CareerStartDate")?.Value))
+    {
+        var startDateText = contentSettings.FirstOrDefault(x => x.Key == "CareerStartDate")?.Value;
+        if (DateTime.TryParse(startDateText, out var parsedDate))
+        {
+            startDate = parsedDate;
+        }
+        else
+        {
+            startDate = new DateTime(2019, 1, 1); // Fallback
+        }
+    }
+    // Ưu tiên 3: Sử dụng CareerStartYear từ ContentSettings
+    else
+    {
+        var startYearText = contentSettings.FirstOrDefault(x => x.Key == "CareerStartYear")?.Value ?? "2019";
+        var startYear = int.TryParse(startYearText, out var year) ? year : 2019;
+        startDate = new DateTime(startYear, 1, 1);
+    }
+    
+    var experienceTimeSpan = currentDate - startDate;
+    var experienceYears = experienceTimeSpan.Days / 365.25; // Tính chính xác hơn
+    var experienceText = experienceYears > 0 ? $"{(int)experienceYears}+" : "1+";
+    
+    var aboutTitle = contentSettings.FirstOrDefault(x => x.Key == "AboutTitle")?.Value ?? $"Full Stack Developer với hơn {experienceText} năm kinh nghiệm";
     var aboutDescription = contentSettings.FirstOrDefault(x => x.Key == "AboutDescription")?.Value ?? "Tôi là một developer đam mê với kinh nghiệm trong việc phát triển các ứng dụng web hiện đại. Chuyên môn của tôi bao gồm React, .NET, và các công nghệ frontend/backend tiên tiến.";
-                    // Tính toán động từ database
-                var aboutExperience = experiences.Count > 0 ? experiences.Count.ToString() + "+" : "5+";
-                var aboutProjects = projects.Count.ToString();
-                var aboutClients = contentSettings.FirstOrDefault(x => x.Key == "SatisfiedClients")?.Value ?? "50+";
+    
+    // Tính toán động từ database - ưu tiên năm nhỏ nhất từ kinh nghiệm làm việc
+    var aboutExperience = experienceText; // Sử dụng số năm kinh nghiệm được tính toán
+    
+    // Tính toán số dự án động
+    var baseProjectsText = contentSettings.FirstOrDefault(x => x.Key == "BaseProjects")?.Value ?? "0";
+    var baseProjects = int.TryParse(baseProjectsText, out var baseProjectsValue) ? baseProjectsValue : 0;
+    var totalProjects = baseProjects + projects.Count;
+    var aboutProjects = totalProjects > 0 ? totalProjects.ToString() : projects.Count.ToString();
+    
+    // Tính toán số khách hàng hài lòng động
+    var baseClientsText = contentSettings.FirstOrDefault(x => x.Key == "BaseClients")?.Value ?? "30";
+    var clientsPerYearText = contentSettings.FirstOrDefault(x => x.Key == "ClientsPerYear")?.Value ?? "5";
+    
+    var baseClients = int.TryParse(baseClientsText, out var baseClientsValue) ? baseClientsValue : 30;
+    var clientsPerYear = int.TryParse(clientsPerYearText, out var clientsPerYearValue) ? clientsPerYearValue : 5;
+    
+    var additionalClients = (int)experienceYears * clientsPerYear;
+    var totalClients = baseClients + additionalClients;
+    var aboutClients = $"{totalClients}+";
     
     var contactEmail = contentSettings.FirstOrDefault(x => x.Key == "ContactEmail")?.Value ?? "duongle@email.com";
     var contactPhone = contentSettings.FirstOrDefault(x => x.Key == "ContactPhone")?.Value ?? "+84 123 456 789";
@@ -190,15 +242,18 @@ var contactYoutube = contentSettings.FirstOrDefault(x => x.Key == "ContactYoutub
                                     </div>
                                     <div class="col-md-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
                                         <div class="about-stats">
-                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400">
+                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400" 
+                                                 title="@(experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
                                                 <div class="stat-number">@aboutExperience</div>
                                                 <div class="stat-label">Năm kinh nghiệm</div>
                                             </div>
-                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="500">
+                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="500"
+                                                 title="@(baseProjects > 0 ? $"Cơ bản: {baseProjects} + Database: {projects.Count}" : $"Từ database: {projects.Count}")">
                                                 <div class="stat-number">@aboutProjects</div>
                                                 <div class="stat-label">Dự án hoàn thành</div>
                                             </div>
-                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="600">
+                                            <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="600"
+                                                 title="Cơ bản: @baseClients + (@((int)experienceYears) năm × @clientsPerYear/năm) = @totalClients">
                                                 <div class="stat-number">@aboutClients</div>
                                                 <div class="stat-label">Khách hàng hài lòng</div>
                                             </div>
@@ -529,7 +584,7 @@ var contactYoutube = contentSettings.FirstOrDefault(x => x.Key == "ContactYoutub
                 </div>
                 <div class="col-md-6">
                     <p class="footer-credit">
-                        Được phát triển với <i class="fas fa-heart"></i> và <i class="fas fa-coffee"></i>
+                        Được phát triển với <i class="bi bi-chat-heart"></i> và <i class="bi bi-cup-hot-fill"></i>
                     </p>
                 </div>
             </div>
@@ -2203,6 +2258,22 @@ body {
 .footer-credit i {
     color: #e74c3c;
     margin: 0 0.25rem;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+.footer-credit i.fa-heart {
+    color: #e74c3c;
+    animation: heartbeat 2s infinite;
+}
+
+.footer-credit i.fa-coffee {
+    color: #8b4513;
+}
+
+@@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 /* Responsive Footer */

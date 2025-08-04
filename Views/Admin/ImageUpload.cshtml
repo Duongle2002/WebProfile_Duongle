@@ -1,0 +1,485 @@
+@{
+    ViewData["Title"] = "Quản lý Hình ảnh";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Quản lý Hình ảnh</h2>
+        <p>Tải lên và quản lý hình ảnh cho website</p>
+    </div>
+    <div>
+        <a href="@Url.Action("Preview", "Admin")" class="btn btn-primary" target="_blank">
+            <i class="fas fa-eye"></i> Xem trước Website
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Upload Section -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-upload"></i> Tải lên hình ảnh</h5>
+            </div>
+            <div class="card-body">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="imageFile" class="form-label">Chọn hình ảnh</label>
+                        <input type="file" class="form-control" id="imageFile" name="file" accept="image/*" required>
+                        <small class="text-muted">Hỗ trợ: JPG, PNG, GIF, WEBP (tối đa 5MB)</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="imageCategory" class="form-label">Danh mục</label>
+                        <select class="form-control" id="imageCategory" name="category">
+                            <option value="general">Chung</option>
+                            <option value="projects">Dự án</option>
+                            <option value="hero">Hero Section</option>
+                            <option value="about">About Section</option>
+                            <option value="gallery">Thư viện</option>
+                            <option value="backgrounds">Hình nền</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100" id="uploadBtn">
+                        <i class="fas fa-upload"></i> Tải lên
+                    </button>
+                </form>
+                
+                <!-- Upload Progress -->
+                <div id="uploadProgress" class="mt-3" style="display: none;">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <small class="text-muted">Đang tải lên...</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Upload Info -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-info-circle"></i> Thông tin</h6>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    <strong>Định dạng hỗ trợ:</strong> JPG, PNG, GIF, WEBP<br>
+                    <strong>Kích thước tối đa:</strong> 5MB<br>
+                    <strong>Danh mục:</strong> Tự động tạo thư mục theo danh mục<br>
+                    <strong>URL:</strong> Tự động tạo URL để sử dụng<br>
+                    <strong>Bảo mật:</strong> Tên file được mã hóa để tránh xung đột
+                </small>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Gallery -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-images"></i> Thư viện hình ảnh</h5>
+                <div>
+                    <select class="form-select form-select-sm" id="categoryFilter" style="width: auto;">
+                        <option value="all">Tất cả danh mục</option>
+                        <option value="general">Chung</option>
+                        <option value="projects">Dự án</option>
+                        <option value="hero">Hero Section</option>
+                        <option value="about">About Section</option>
+                        <option value="gallery">Thư viện</option>
+                        <option value="backgrounds">Hình nền</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="imageGallery" class="row">
+                    <!-- Images will be loaded here -->
+                </div>
+                
+                <div id="loadingImages" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Đang tải...</span>
+                    </div>
+                    <p class="mt-2">Đang tải hình ảnh...</p>
+                </div>
+                
+                <div id="noImages" class="text-center py-4" style="display: none;">
+                    <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Chưa có hình ảnh nào được tải lên</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image Preview Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xem trước hình ảnh</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Preview" class="img-fluid">
+                <div class="mt-3">
+                    <small class="text-muted" id="modalImageInfo"></small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="copyUrlBtn">
+                    <i class="fas fa-copy"></i> Copy URL
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.image-card {
+    position: relative;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.image-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.image-card:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.image-actions .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.image-info {
+    padding: 0.5rem;
+    background: rgba(255,255,255,0.9);
+}
+
+.image-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.image-meta {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.category-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+}
+
+.drag-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.2s ease;
+}
+
+.drag-area.dragover {
+    border-color: #007bff;
+    background-color: rgba(0,123,255,0.1);
+}
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            let currentImages = [];
+            let selectedImageUrl = '';
+            
+            // Load images on page load
+            loadImages();
+            
+            // Upload form submission
+            $('#uploadForm').submit(function(e) {
+                e.preventDefault();
+                uploadImage();
+            });
+            
+            // Category filter
+            $('#categoryFilter').change(function() {
+                loadImages($(this).val());
+            });
+            
+            // Drag and drop functionality
+            const dragArea = $('<div class="drag-area">').html(`
+                <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                <p class="mb-0">Kéo thả hình ảnh vào đây hoặc click để chọn</p>
+            `);
+            
+            $('#imageFile').parent().append(dragArea);
+            
+            dragArea.on('click', function() {
+                $('#imageFile').click();
+            });
+            
+            dragArea.on('dragover', function(e) {
+                e.preventDefault();
+                $(this).addClass('dragover');
+            });
+            
+            dragArea.on('dragleave', function(e) {
+                e.preventDefault();
+                $(this).removeClass('dragover');
+            });
+            
+            dragArea.on('drop', function(e) {
+                e.preventDefault();
+                $(this).removeClass('dragover');
+                
+                const files = e.originalEvent.dataTransfer.files;
+                if (files.length > 0) {
+                    $('#imageFile')[0].files = files;
+                    uploadImage();
+                }
+            });
+            
+            function uploadImage() {
+                const fileInput = $('#imageFile')[0];
+                const category = $('#imageCategory').val();
+                
+                if (!fileInput.files[0]) {
+                    alert('Vui lòng chọn file để tải lên!');
+                    return;
+                }
+                
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                formData.append('category', category);
+                
+                // Show progress
+                $('#uploadProgress').show();
+                $('#uploadBtn').prop('disabled', true);
+                
+                $.ajax({
+                    url: '@Url.Action("UploadImage", "Admin")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    xhr: function() {
+                        const xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener('progress', function(e) {
+                            if (e.lengthComputable) {
+                                const percentComplete = (e.loaded / e.total) * 100;
+                                $('.progress-bar').css('width', percentComplete + '%');
+                            }
+                        });
+                        return xhr;
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Tải lên thành công!');
+                            $('#uploadForm')[0].reset();
+                            loadImages();
+                        } else {
+                            alert('Lỗi: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi tải lên!');
+                    },
+                    complete: function() {
+                        $('#uploadProgress').hide();
+                        $('#uploadBtn').prop('disabled', false);
+                        $('.progress-bar').css('width', '0%');
+                    }
+                });
+            }
+            
+            function loadImages(category = 'all') {
+                $('#loadingImages').show();
+                $('#imageGallery').empty();
+                $('#noImages').hide();
+                
+                $.ajax({
+                    url: '@Url.Action("GetUploadedImages", "Admin")',
+                    type: 'GET',
+                    data: { category: category },
+                    success: function(response) {
+                        if (response.success) {
+                            currentImages = response.images;
+                            displayImages(currentImages);
+                        } else {
+                            alert('Lỗi: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi tải hình ảnh!');
+                    },
+                    complete: function() {
+                        $('#loadingImages').hide();
+                    }
+                });
+            }
+            
+            function displayImages(images) {
+                const gallery = $('#imageGallery');
+                gallery.empty();
+                
+                if (images.length === 0) {
+                    $('#noImages').show();
+                    return;
+                }
+                
+                images.forEach(function(image) {
+                    const imageCard = $(`
+                        <div class="col-md-4 col-lg-3">
+                            <div class="image-card">
+                                <img src="${image.url}" alt="${image.name}" loading="lazy">
+                                <div class="category-badge">${image.category}</div>
+                                <div class="image-overlay">
+                                    <div class="image-actions">
+                                        <button class="btn btn-sm btn-light view-image" data-url="${image.url}" data-name="${image.name}" data-size="${image.size}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-light copy-url" data-url="${image.url}">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger delete-image" data-name="${image.name}" data-category="${image.category}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="image-info">
+                                    <div class="image-name">${image.name}</div>
+                                    <div class="image-meta">
+                                        ${formatFileSize(image.size)} • ${formatDate(image.uploadDate)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    
+                    gallery.append(imageCard);
+                });
+                
+                // Bind events
+                $('.view-image').click(function() {
+                    const url = $(this).data('url');
+                    const name = $(this).data('name');
+                    const size = $(this).data('size');
+                    
+                    $('#modalImage').attr('src', url);
+                    $('#modalImageInfo').text(`${name} (${formatFileSize(size)})`);
+                    selectedImageUrl = url;
+                    $('#imageModal').modal('show');
+                });
+                
+                $('.copy-url').click(function() {
+                    const url = $(this).data('url');
+                    copyToClipboard(url);
+                });
+                
+                $('.delete-image').click(function() {
+                    const name = $(this).data('name');
+                    const category = $(this).data('category');
+                    
+                    if (confirm('Bạn có chắc muốn xóa hình ảnh này?')) {
+                        deleteImage(name, category);
+                    }
+                });
+            }
+            
+            function deleteImage(fileName, category) {
+                $.ajax({
+                    url: '@Url.Action("DeleteImage", "Admin")',
+                    type: 'POST',
+                    data: { fileName: fileName, category: category },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Xóa hình ảnh thành công!');
+                            loadImages($('#categoryFilter').val());
+                        } else {
+                            alert('Lỗi: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi xóa hình ảnh!');
+                    }
+                });
+            }
+            
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('Đã copy URL vào clipboard!');
+                }).catch(function() {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('Đã copy URL vào clipboard!');
+                });
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('vi-VN');
+            }
+            
+            // Copy URL button in modal
+            $('#copyUrlBtn').click(function() {
+                copyToClipboard(selectedImageUrl);
+            });
+        });
+    </script>
+} 

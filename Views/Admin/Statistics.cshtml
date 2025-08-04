@@ -76,9 +76,15 @@
             <div class="card-body">
                 <form id="statisticsForm">
                     <div class="mb-3">
-                        <label class="form-label">Số khách hàng hài lòng</label>
-                        <input type="text" class="form-control" id="satisfiedClients" value="@ViewBag.SatisfiedClients" placeholder="50+">
-                        <small class="text-muted">Hiển thị trong cả Hero section và About section</small>
+                        <label class="form-label">Số khách hàng cơ bản</label>
+                        <input type="text" class="form-control" id="baseClients" value="@ViewBag.BaseClients" placeholder="30">
+                        <small class="text-muted">Số khách hàng cơ bản (mặc định: 30)</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Số khách hàng tăng mỗi năm</label>
+                        <input type="text" class="form-control" id="clientsPerYear" value="@ViewBag.ClientsPerYear" placeholder="5">
+                        <small class="text-muted">Số khách hàng tăng mỗi năm (mặc định: 5)</small>
                     </div>
 
                     <button type="button" class="btn btn-primary" onclick="saveStatistics()">
@@ -98,7 +104,7 @@
                     <strong>Thống kê tùy chỉnh:</strong> Có thể chỉnh sửa thủ công<br>
                     <strong>Hero Section:</strong> Hiển thị số dự án, kinh nghiệm, khách hàng<br>
                     <strong>About Section:</strong> Hiển thị thống kê chi tiết<br>
-                    <strong>Khách hàng hài lòng:</strong> Dùng chung cho cả 2 section
+                    <strong>Khách hàng hài lòng:</strong> Tính theo công thức: Cơ bản + (Năm kinh nghiệm × Tăng/năm)
                 </small>
             </div>
         </div>
@@ -138,13 +144,15 @@
 @section Scripts {
     <script>
         function saveStatistics() {
-            const satisfiedClients = $('#satisfiedClients').val();
+            const baseClients = $('#baseClients').val();
+            const clientsPerYear = $('#clientsPerYear').val();
 
             $.ajax({
                 url: '@Url.Action("UpdateStatistics", "Admin")',
                 type: 'POST',
                 data: {
-                    satisfiedClients: satisfiedClients
+                    baseClients: baseClients,
+                    clientsPerYear: clientsPerYear
                 },
                 success: function(response) {
                     if (response.success) {

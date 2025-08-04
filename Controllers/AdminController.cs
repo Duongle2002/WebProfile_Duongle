@@ -1807,45 +1807,70 @@ namespace MyWebProfile.Controllers
             var experiencesCount = await _context.Experiences.Where(e => e.IsActive && !e.IsDeleted).CountAsync();
             var skillsCount = await _context.Skills.Where(s => s.IsActive && !s.IsDeleted).CountAsync();
             
-            // Lấy settings từ ContentSettings - chỉ một trường khách hàng
+            // Lấy settings từ ContentSettings cho tính toán khách hàng
             var contentSettings = await _context.ContentSettings.Where(c => !c.IsDeleted).ToListAsync();
-            var satisfiedClients = contentSettings.FirstOrDefault(x => x.Key == "SatisfiedClients")?.Value ?? "50+";
+            var baseClients = contentSettings.FirstOrDefault(x => x.Key == "BaseClients")?.Value ?? "30";
+            var clientsPerYear = contentSettings.FirstOrDefault(x => x.Key == "ClientsPerYear")?.Value ?? "5";
             
             ViewBag.ProjectsCount = projectsCount;
             ViewBag.ExperiencesCount = experiencesCount;
             ViewBag.SkillsCount = skillsCount;
-            ViewBag.SatisfiedClients = satisfiedClients;
+            ViewBag.BaseClients = baseClients;
+            ViewBag.ClientsPerYear = clientsPerYear;
             
             return View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> UpdateStatistics(string satisfiedClients)
+        public async Task<IActionResult> UpdateStatistics(string baseClients, string clientsPerYear)
         {
             try
             {
-                // Cập nhật SatisfiedClients
-                var satisfiedClientsSetting = await _context.ContentSettings
-                    .FirstOrDefaultAsync(c => c.Key == "SatisfiedClients" && !c.IsDeleted);
+                // Cập nhật BaseClients
+                var baseClientsSetting = await _context.ContentSettings
+                    .FirstOrDefaultAsync(c => c.Key == "BaseClients" && !c.IsDeleted);
                 
-                if (satisfiedClientsSetting != null)
+                if (baseClientsSetting != null)
                 {
-                    satisfiedClientsSetting.Value = satisfiedClients;
-                    satisfiedClientsSetting.UpdatedAt = DateTime.Now;
+                    baseClientsSetting.Value = baseClients;
+                    baseClientsSetting.UpdatedAt = DateTime.Now;
                 }
                 else
                 {
-                    var newSatisfiedClients = new ContentSettings
+                    var newBaseClients = new ContentSettings
                     {
-                        Key = "SatisfiedClients",
-                        Value = satisfiedClients,
-                        Category = "Statistics",
-                        Description = "Số khách hàng hài lòng (dùng chung cho Hero và About section)",
+                        Key = "BaseClients",
+                        Value = baseClients,
+                        Category = "About",
+                        Description = "Số khách hàng cơ bản (mặc định: 30)",
                         IsDeleted = false,
                         UpdatedAt = DateTime.Now
                     };
-                    _context.ContentSettings.Add(newSatisfiedClients);
+                    _context.ContentSettings.Add(newBaseClients);
+                }
+
+                // Cập nhật ClientsPerYear
+                var clientsPerYearSetting = await _context.ContentSettings
+                    .FirstOrDefaultAsync(c => c.Key == "ClientsPerYear" && !c.IsDeleted);
+                
+                if (clientsPerYearSetting != null)
+                {
+                    clientsPerYearSetting.Value = clientsPerYear;
+                    clientsPerYearSetting.UpdatedAt = DateTime.Now;
+                }
+                else
+                {
+                    var newClientsPerYear = new ContentSettings
+                    {
+                        Key = "ClientsPerYear",
+                        Value = clientsPerYear,
+                        Category = "About",
+                        Description = "Số khách hàng tăng mỗi năm (mặc định: 5)",
+                        IsDeleted = false,
+                        UpdatedAt = DateTime.Now
+                    };
+                    _context.ContentSettings.Add(newClientsPerYear);
                 }
 
                 await _context.SaveChangesAsync();
@@ -2105,6 +2130,147 @@ namespace MyWebProfile.Controllers
                 return RedirectToAction("EmailSettings");
             }
             return View("EmailSettings", emailSettings);
+        }
+        #endregion
+
+        #region Image Upload Management
+        [Authorize]
+        public IActionResult ImageUpload()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UploadImage(IFormFile file, string category = "General")
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return Json(new { success = false, message = "Vui lòng chọn file để tải lên!" });
+                }
+
+                // Kiểm tra định dạng file
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+                var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    return Json(new { success = false, message = "Chỉ chấp nhận file hình ảnh: JPG, PNG, GIF, WEBP!" });
+                }
+
+                // Kiểm tra kích thước file (tối đa 5MB)
+                if (file.Length > 5 * 1024 * 1024)
+                {
+                    return Json(new { success = false, message = "File quá lớn! Tối đa 5MB." });
+                }
+
+                // Tạo tên file unique
+                var fileName = $"{Guid.NewGuid()}{fileExtension}";
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", category.ToLower());
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                var filePath = Path.Combine(uploadPath, fileName);
+                
+                // Lưu file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Trả về URL của file
+                var fileUrl = $"/uploads/{category.ToLower()}/{fileName}";
+                
+                return Json(new { 
+                    success = true, 
+                    message = "Tải lên thành công!", 
+                    url = fileUrl,
+                    fileName = fileName,
+                    originalName = file.FileName,
+                    size = file.Length,
+                    category = category
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetUploadedImages(string category = "all")
+        {
+            try
+            {
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                var images = new List<object>();
+
+                if (Directory.Exists(uploadsPath))
+                {
+                    var directories = category == "all" 
+                        ? Directory.GetDirectories(uploadsPath) 
+                        : new[] { Path.Combine(uploadsPath, category.ToLower()) };
+
+                    foreach (var dir in directories)
+                    {
+                        if (Directory.Exists(dir))
+                        {
+                            var categoryName = Path.GetFileName(dir);
+                            var files = Directory.GetFiles(dir, "*.*")
+                                .Where(f => new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" }
+                                .Contains(Path.GetExtension(f).ToLowerInvariant()))
+                                .Select(f => new
+                                {
+                                    name = Path.GetFileName(f),
+                                    url = $"/uploads/{categoryName}/{Path.GetFileName(f)}",
+                                    size = new FileInfo(f).Length,
+                                    category = categoryName,
+                                    uploadDate = File.GetCreationTime(f)
+                                })
+                                .OrderByDescending(f => f.uploadDate);
+
+                            images.AddRange(files);
+                        }
+                    }
+                }
+
+                return Json(new { success = true, images = images });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult DeleteImage(string fileName, string category)
+        {
+            try
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", category.ToLower(), fileName);
+                
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                    return Json(new { success = true, message = "Xóa hình ảnh thành công!" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Không tìm thấy file!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
         }
         #endregion
         #endregion

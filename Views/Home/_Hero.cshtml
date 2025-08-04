@@ -8,10 +8,54 @@
     var heroTitle = contentSettings.FirstOrDefault(x => x.Key == "HeroTitle")?.Value ?? "Full Stack Developer & UI/UX Designer";
     var heroImage = contentSettings.FirstOrDefault(x => x.Key == "HeroImage")?.Value ?? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200";
     
-    // Tính toán động từ database
+    // Tính toán động từ database - đồng bộ với phần About
     var heroProjects = projects.Count.ToString();
-    var heroExperience = experiences.Count > 0 ? experiences.Count.ToString() + "+" : "5+";
-    var heroClients = contentSettings.FirstOrDefault(x => x.Key == "SatisfiedClients")?.Value ?? "50+";
+    
+    // Tính số năm kinh nghiệm - ưu tiên năm nhỏ nhất từ kinh nghiệm làm việc
+    DateTime startDate;
+    var currentDate = DateTime.Now;
+    
+    // Ưu tiên 1: Lấy năm nhỏ nhất từ kinh nghiệm làm việc trong database
+    if (experiences != null && experiences.Any())
+    {
+        var earliestExperience = experiences.OrderBy(e => e.StartDate).First();
+        startDate = earliestExperience.StartDate;
+    }
+    // Ưu tiên 2: Sử dụng CareerStartDate từ ContentSettings
+    else if (!string.IsNullOrEmpty(contentSettings.FirstOrDefault(x => x.Key == "CareerStartDate")?.Value))
+    {
+        var startDateText = contentSettings.FirstOrDefault(x => x.Key == "CareerStartDate")?.Value;
+        if (DateTime.TryParse(startDateText, out var parsedDate))
+        {
+            startDate = parsedDate;
+        }
+        else
+        {
+            startDate = new DateTime(2019, 1, 1); // Fallback
+        }
+    }
+    // Ưu tiên 3: Sử dụng CareerStartYear từ ContentSettings
+    else
+    {
+        var startYearText = contentSettings.FirstOrDefault(x => x.Key == "CareerStartYear")?.Value ?? "2019";
+        var startYear = int.TryParse(startYearText, out var year) ? year : 2019;
+        startDate = new DateTime(startYear, 1, 1);
+    }
+    
+    var experienceTimeSpan = currentDate - startDate;
+    var experienceYears = experienceTimeSpan.Days / 365.25;
+    var heroExperience = experienceYears > 0 ? $"{(int)experienceYears}+" : "1+";
+    
+    // Tính số khách hàng giống như phần About
+    var baseClientsText = contentSettings.FirstOrDefault(x => x.Key == "BaseClients")?.Value ?? "30";
+    var clientsPerYearText = contentSettings.FirstOrDefault(x => x.Key == "ClientsPerYear")?.Value ?? "5";
+    
+    var baseClients = int.TryParse(baseClientsText, out var baseClientsValue) ? baseClientsValue : 30;
+    var clientsPerYear = int.TryParse(clientsPerYearText, out var clientsPerYearValue) ? clientsPerYearValue : 5;
+    
+    var additionalClients = (int)experienceYears * clientsPerYear;
+    var totalClients = baseClients + additionalClients;
+    var heroClients = $"{totalClients}+";
     
     var heroPortfolioButton = contentSettings.FirstOrDefault(x => x.Key == "HeroPortfolioButton")?.Value ?? "Xem Portfolio";
     var heroContactButton = contentSettings.FirstOrDefault(x => x.Key == "HeroContactButton")?.Value ?? "Liên hệ ngay";
@@ -50,15 +94,15 @@
                 </p>
                 
                 <div class="hero-stats-modern" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
-                    <div class="stat-item">
+                    <div class="stat-item" title="Từ database: @projects.Count dự án">
                         <div class="stat-number">@heroProjects</div>
                         <div class="stat-label">Dự án hoàn thành</div>
                     </div>
-                    <div class="stat-item">
+                                         <div class="stat-item" title="@(experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
                         <div class="stat-number">@heroExperience</div>
                         <div class="stat-label">Năm kinh nghiệm</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item" title="Cơ bản: @baseClients + (@((int)experienceYears) năm × @clientsPerYear/năm) = @totalClients">
                         <div class="stat-number">@heroClients</div>
                         <div class="stat-label">Khách hàng hài lòng</div>
                     </div>
@@ -273,7 +317,7 @@
     color: #ffffff !important;
 }
 
-.stat-item {
+.hero-stats-modern .stat-item {
     text-align: center;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.1);
@@ -283,11 +327,11 @@
     color: #ffffff !important;
 }
 
-.stat-item:hover {
+.hero-stats-modern .stat-item:hover {
     transform: translateY(-5px);
 }
 
-.stat-number {
+.hero-stats-modern .stat-number {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -295,7 +339,7 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.stat-label {
+.hero-stats-modern .stat-label {
     font-size: 0.9rem;
     opacity: 0.9;
     color: #ffffff !important;

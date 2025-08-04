@@ -185,12 +185,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update proficiency value display
     proficiencyRange.addEventListener('input', function() {
-        document.getElementById('proficiencyValue').textContent = this.value + '%';
-        document.getElementById('Proficiency').value = this.value;
+        const value = this.value;
+        document.getElementById('proficiencyValue').textContent = value + '%';
+        document.getElementById('Proficiency').value = value;
+        console.log('Proficiency updated to:', value); // Debug log
     });
 
     // Initial preview
     updatePreview();
+    
+    // Ensure proficiency is set before form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const proficiencyValue = document.getElementById('proficiencyRange').value;
+        document.getElementById('Proficiency').value = proficiencyValue;
+        console.log('Form submitting with proficiency:', proficiencyValue); // Debug log
+        
+        // Validate proficiency value
+        if (!proficiencyValue || proficiencyValue < 0 || proficiencyValue > 100) {
+            e.preventDefault();
+            alert('Mức độ thành thạo phải từ 0 đến 100!');
+            return false;
+        }
+    });
     
     // Icon selection functionality
     const iconSearch = document.getElementById('iconSearch');

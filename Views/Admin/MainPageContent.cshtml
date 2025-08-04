@@ -7,38 +7,44 @@
     // Danh sách key mặc định cho từng nhóm
     var defaultKeys = new List<(string Key, string Category, string Description)>
     {
-        // About/Giới thiệu
-        ("AboutName", "About", "Tên hiển thị trong About section"),
-        ("AboutTitle", "About", "Tiêu đề About section"),
-        ("AboutDescription", "About", "Mô tả chi tiết trong About section"),
-        // Kinh nghiệm
-        ("ExperienceTitle", "Experience", "Tiêu đề phần Kinh nghiệm"),
-        ("ExperienceDescription", "Experience", "Mô tả phần Kinh nghiệm"),
-        // Dự án
-        ("ProjectTitle", "Project", "Tiêu đề phần Dự án"),
-        ("ProjectDescription", "Project", "Mô tả phần Dự án"),
-        // Liên hệ
-        ("ContactEmail", "Contact", "Email liên hệ"),
-        ("ContactPhone", "Contact", "Số điện thoại liên hệ"),
-        ("ContactAddress", "Contact", "Địa chỉ liên hệ"),
-        ("ContactGithub", "Contact", "Link GitHub"),
-        ("ContactLinkedin", "Contact", "Link LinkedIn"),
-        ("ContactTwitter", "Contact", "Link Twitter"),
-        ("ContactFacebook", "Contact", "Link Facebook"),
-        ("ContactInstagram", "Contact", "Link Instagram"),
-        ("ContactYoutube", "Contact", "Link YouTube"),
-        // Hero
-        ("HeroName", "Hero", "Tên hiển thị trong Hero section"),
-        ("HeroTitle", "Hero", "Chức danh/công việc trong Hero section"),
-        ("HeroLocation", "Hero", "Địa điểm làm việc trong Hero section"),
-        ("HeroImage", "Hero", "URL ảnh đại diện trong Hero section"),
-        ("HeroPortfolioButton", "Hero", "Text nút Portfolio trong Hero section"),
-        ("HeroContactButton", "Hero", "Text nút Liên hệ trong Hero section"),
-        // Navigation
-        ("NavigationLogo", "Navigation", "Logo trong navigation"),
-        // Footer
-        ("FooterCopyright", "Footer", "Text copyright trong footer"),
-        ("FooterDescription", "Footer", "Mô tả trong footer")
+                 // About/Giới thiệu
+         ("AboutName", "About", "Tên của bạn hiển thị trong phần Giới thiệu"),
+         ("AboutTitle", "About", "Tiêu đề chức danh (ví dụ: Full Stack Developer)"),
+         ("AboutDescription", "About", "Mô tả chi tiết về bản thân (hỗ trợ HTML: <strong>, <em>, <br>)"),
+         ("CareerStartYear", "About", "Năm bắt đầu sự nghiệp (dự phòng nếu không có kinh nghiệm làm việc)"),
+         ("CareerStartDate", "About", "Ngày bắt đầu sự nghiệp (định dạng: 2019-01-01 - dự phòng nếu không có kinh nghiệm làm việc)"),
+         ("BaseClients", "About", "Số khách hàng cơ bản (mặc định: 30)"),
+         ("ClientsPerYear", "About", "Số khách hàng tăng mỗi năm (mặc định: 5)"),
+         ("BaseProjects", "About", "Số dự án cơ bản (mặc định: 0, sẽ cộng với dự án từ database)"),
+         ("ShowCalculationInfo", "About", "Hiển thị tooltip công thức tính (True/False)"),
+         // Kinh nghiệm
+         ("ExperienceTitle", "Experience", "Tiêu đề phần Kinh nghiệm làm việc"),
+         ("ExperienceDescription", "Experience", "Mô tả phần Kinh nghiệm"),
+         // Dự án
+         ("ProjectTitle", "Project", "Tiêu đề phần Dự án đã thực hiện"),
+         ("ProjectDescription", "Project", "Mô tả phần Dự án"),
+         // Liên hệ
+         ("ContactEmail", "Contact", "Email liên hệ (hiển thị trong phần Contact)"),
+         ("ContactPhone", "Contact", "Số điện thoại liên hệ"),
+         ("ContactAddress", "Contact", "Địa chỉ làm việc"),
+         ("ContactGithub", "Contact", "Link GitHub cá nhân"),
+         ("ContactLinkedin", "Contact", "Link LinkedIn cá nhân"),
+         ("ContactTwitter", "Contact", "Link Twitter cá nhân"),
+         ("ContactFacebook", "Contact", "Link Facebook cá nhân"),
+         ("ContactInstagram", "Contact", "Link Instagram cá nhân"),
+         ("ContactYoutube", "Contact", "Link YouTube cá nhân"),
+         // Hero
+         ("HeroName", "Hero", "Tên hiển thị ở đầu trang (Hero section)"),
+         ("HeroTitle", "Hero", "Chức danh/công việc chính"),
+         ("HeroLocation", "Hero", "Địa điểm làm việc (ví dụ: Hà Nội, Việt Nam)"),
+         ("HeroImage", "Hero", "URL ảnh đại diện (hiển thị ở Hero section)"),
+         ("HeroPortfolioButton", "Hero", "Text nút Portfolio (mặc định: Xem Portfolio)"),
+         ("HeroContactButton", "Hero", "Text nút Liên hệ (mặc định: Liên hệ)"),
+         // Navigation
+         ("NavigationLogo", "Navigation", "Logo hiển thị trong menu navigation"),
+         // Footer
+         ("FooterCopyright", "Footer", "Text copyright ở cuối trang"),
+         ("FooterDescription", "Footer", "Mô tả ngắn ở footer")
     };
 
     // Kết hợp key mặc định và key trong database (Model)
@@ -67,17 +73,28 @@
     }
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2>Quản lý nội dung trang chính</h2>
-        <p>Chỉnh sửa nội dung tĩnh hiển thị trên trang chính</p>
-    </div>
-    <div>
-        <a href="@Url.Action("PreviewMainPage", "Admin")" class="btn btn-primary" target="_blank">
-            <i class="fas fa-eye"></i> Xem trước trang chính
-        </a>
-    </div>
-</div>
+ <div class="d-flex justify-content-between align-items-center mb-4">
+     <div>
+         <h2>Quản lý nội dung trang chính</h2>
+         <p>Chỉnh sửa nội dung tĩnh hiển thị trên trang chính</p>
+     </div>
+     <div>
+         <a href="@Url.Action("PreviewMainPage", "Admin")" class="btn btn-primary" target="_blank">
+             <i class="fas fa-eye"></i> Xem trước trang chính
+         </a>
+     </div>
+ </div>
+ 
+ <!-- Hướng dẫn sử dụng -->
+ <div class="alert alert-info mb-4">
+     <h6><i class="fas fa-info-circle"></i> Hướng dẫn sử dụng:</h6>
+     <ul class="mb-0">
+         <li><strong>Key:</strong> Tên định danh của nội dung (không thay đổi)</li>
+         <li><strong>Mô tả:</strong> Giải thích nội dung này hiển thị ở đâu và làm gì</li>
+         <li><strong>Giá trị hiện tại:</strong> Nội dung đang hiển thị trên trang chính</li>
+         <li><strong>Thao tác:</strong> Click vào nút <i class="fas fa-edit"></i> hoặc click vào bất kỳ ô nào để chỉnh sửa</li>
+     </ul>
+ </div>
 
 <div class="row">
     <div class="col-md-8">
@@ -124,36 +141,44 @@
 
                 <div class="table-responsive">
                     <table class="table table-hover" id="contentTable">
-                        <thead>
-                            <tr>
-                                <th>Key</th>
-                                <th>Ý nghĩa</th>
-                                <th>Giá trị</th>
-                                <th>Danh mục</th>
-                                <th>Cập nhật</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
+                                                 <thead>
+                             <tr>
+                                 <th>Key</th>
+                                 <th>Mô tả</th>
+                                 <th>Giá trị hiện tại</th>
+                                 <th>Danh mục</th>
+                                 <th>Cập nhật</th>
+                                 <th>Thao tác</th>
+                             </tr>
+                         </thead>
                         <tbody>
                             @foreach (var item in allKeys)
                             {
                                 <tr data-key="@item.Key" data-category="@item.Category" data-value="@item.Value">
                                     <td><strong>@item.Key</strong></td>
                                     <td><small class="text-muted">@item.Description</small></td>
-                                    <td>
-                                        <div class="content-value">
-                                            @if (!string.IsNullOrEmpty(item.Value) && item.Value.Length > 50)
-                                            {
-                                                <div class="content-preview">@item.Value.Substring(0, 50)<text>...</text></div>
-                                                <div class="content-full" style="display: none;">@item.Value</div>
-                                                <button type="button" class="btn btn-sm btn-link toggle-content" data-target="@item.Key"><i class="fas fa-eye"></i> Xem thêm</button>
-                                            }
-                                            else
-                                            {
-                                                <div class="content-full">@item.Value</div>
-                                            }
-                                        </div>
-                                    </td>
+                                                                         <td>
+                                         <div class="content-value">
+                                             @if (!string.IsNullOrEmpty(item.Value) && item.Value.Length > 50)
+                                             {
+                                                 <div class="content-preview">@item.Value.Substring(0, 50)<text>...</text></div>
+                                                 <div class="content-full" style="display: none;">@item.Value</div>
+                                                 <button type="button" class="btn btn-sm btn-link toggle-content" data-target="@item.Key"><i class="fas fa-eye"></i> Xem thêm</button>
+                                                 @if (item.Key == "AboutDescription")
+                                                 {
+                                                     <button type="button" class="btn btn-sm btn-link preview-html" data-content="@item.Value"><i class="fas fa-eye"></i> Xem HTML</button>
+                                                 }
+                                             }
+                                             else
+                                             {
+                                                 <div class="content-full">@item.Value</div>
+                                                 @if (item.Key == "AboutDescription")
+                                                 {
+                                                     <button type="button" class="btn btn-sm btn-link preview-html" data-content="@item.Value"><i class="fas fa-eye"></i> Xem HTML</button>
+                                                 }
+                                             }
+                                         </div>
+                                     </td>
                                     <td>
                                         <span class="badge bg-secondary">@item.Category</span>
                                     </td>
@@ -199,10 +224,14 @@
                         <div class="form-text">Ví dụ: HeroName, AboutTitle, ContactEmail</div>
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="contentValue" class="form-label">Giá trị</label>
-                        <textarea class="form-control" id="contentValue" name="value" rows="3" required></textarea>
-                    </div>
+                                         <div class="mb-3">
+                         <label for="contentValue" class="form-label">Giá trị</label>
+                         <textarea class="form-control" id="contentValue" name="value" rows="3" required></textarea>
+                         <div id="htmlPreview" class="mt-2" style="display: none;">
+                             <small class="text-muted">Preview:</small>
+                             <div class="border p-2 bg-light rounded" id="previewContent"></div>
+                         </div>
+                     </div>
                     
                     <div class="mb-3">
                         <label for="contentCategory" class="form-label">Danh mục</label>
@@ -223,18 +252,25 @@
             </div>
         </div>
         
-        <div class="card mt-3">
-            <div class="card-header">
-                <h6 class="mb-0">Lưu ý</h6>
-            </div>
-            <div class="card-body">
-                <small class="text-muted">
-                    <strong>Nội dung động:</strong> Thống kê dự án, kinh nghiệm được tính tự động từ database<br>
-                    <strong>Nội dung tĩnh:</strong> Tên, mô tả, thông tin liên hệ có thể chỉnh sửa ở đây<br>
-                    <strong>Thứ tự hiển thị:</strong> Quản lý trong "Quản lý thứ tự hiển thị"
-                </small>
-            </div>
-        </div>
+                 <div class="card mt-3">
+             <div class="card-header">
+                 <h6 class="mb-0">Lưu ý quan trọng</h6>
+             </div>
+             <div class="card-body">
+                 <small class="text-muted">
+                     <strong>📊 Nội dung động:</strong> Thống kê dự án, kinh nghiệm được tính tự động từ database<br>
+                     <strong>📝 Nội dung tĩnh:</strong> Tên, mô tả, thông tin liên hệ có thể chỉnh sửa ở đây<br>
+                     <strong>🔧 Thứ tự hiển thị:</strong> Quản lý trong "Quản lý thứ tự hiển thị"<br>
+                     <strong>💻 HTML Support:</strong> AboutDescription hỗ trợ HTML (ví dụ: &lt;strong&gt;, &lt;em&gt;, &lt;br&gt;)<br>
+                     <strong>👁️ Preview:</strong> Click "Xem trước trang chính" để xem thay đổi<br>
+                     <strong>📅 Cách tính số năm kinh nghiệm:</strong><br>
+                     &nbsp;&nbsp;• Ưu tiên 1: Năm nhỏ nhất từ kinh nghiệm làm việc trong database<br>
+                     &nbsp;&nbsp;• Ưu tiên 2: CareerStartDate (định dạng: 2019-01-01)<br>
+                     &nbsp;&nbsp;• Ưu tiên 3: CareerStartYear (chỉ năm: 2019)<br>
+                     &nbsp;&nbsp;• Công thức: (Ngày hiện tại - Ngày bắt đầu) ÷ 365.25
+                 </small>
+             </div>
+         </div>
     </div>
 </div>
 
@@ -411,8 +447,27 @@
                 applyFilters();
             };
             
-            // Initial filter
-            applyFilters();
-        });
-    </script>
+                         // Initial filter
+             applyFilters();
+             
+             // HTML Preview functionality
+             $('.preview-html').click(function() {
+                 var content = $(this).data('content');
+                 $('#previewContent').html(content);
+                 $('#htmlPreview').show();
+             });
+             
+             // Auto preview for AboutDescription
+             $('#contentValue').on('input', function() {
+                 var key = $('#contentKey').val();
+                 if (key === 'AboutDescription') {
+                     var content = $(this).val();
+                     $('#previewContent').html(content);
+                     $('#htmlPreview').show();
+                 } else {
+                     $('#htmlPreview').hide();
+                 }
+             });
+         });
+     </script>
 } 

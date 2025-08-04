@@ -213,13 +213,21 @@
                         <span class="sidebar-text">Quản lý thứ tự hiển thị</span>
                     </a>
                 </div>
-                <div class="nav-item">
-                    <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Statistics" ? "active" : "")" 
-                       href="@Url.Action("Statistics", "Admin")">
-                        <i class="fas fa-chart-bar"></i>
-                        <span class="sidebar-text">Quản lý Thống kê</span>
-                    </a>
-                </div>
+                            <div class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Statistics" ? "active" : "")" 
+                   href="@Url.Action("Statistics", "Admin")">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="sidebar-text">Quản lý Thống kê</span>
+                </a>
+            </div>
+            
+            <div class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "ImageUpload" ? "active" : "")" 
+                   href="@Url.Action("ImageUpload", "Admin")">
+                    <i class="fas fa-images"></i>
+                    <span class="sidebar-text">Quản lý Hình ảnh</span>
+                </a>
+            </div>
             
             <div class="nav-item">
                 <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "MainPageContent" ? "active" : "")" 
