@@ -1893,12 +1893,17 @@ namespace MyWebProfile.Controllers
                 // Parse settings JSON
                 var sectionSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(settings);
                 
+                if (sectionSettings == null)
+                {
+                    return Json(new { success = false, message = "Invalid settings format" });
+                }
+                
                 // Save to database or file system
                 // For now, we'll save to a JSON file in wwwroot
                 var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "section-settings.json");
                 var settingsDir = Path.GetDirectoryName(settingsPath);
                 
-                if (!Directory.Exists(settingsDir))
+                if (!string.IsNullOrEmpty(settingsDir) && !Directory.Exists(settingsDir))
                 {
                     Directory.CreateDirectory(settingsDir);
                 }
@@ -1908,7 +1913,11 @@ namespace MyWebProfile.Controllers
                 if (System.IO.File.Exists(settingsPath))
                 {
                     var existingJson = await System.IO.File.ReadAllTextAsync(settingsPath);
-                    allSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(existingJson) ?? new();
+                    var deserializedSettings = JsonSerializer.Deserialize<Dictionary<string, object>>(existingJson);
+                    if (deserializedSettings != null)
+                    {
+                        allSettings = deserializedSettings;
+                    }
                 }
 
                 // Update section settings
@@ -2232,7 +2241,7 @@ namespace MyWebProfile.Controllers
                                     url = $"/uploads/{categoryName}/{Path.GetFileName(f)}",
                                     size = new FileInfo(f).Length,
                                     category = categoryName,
-                                    uploadDate = File.GetCreationTime(f)
+                                    uploadDate = System.IO.File.GetCreationTime(f)
                                 })
                                 .OrderByDescending(f => f.uploadDate);
 

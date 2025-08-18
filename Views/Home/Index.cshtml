@@ -243,7 +243,7 @@ var contactYoutube = contentSettings.FirstOrDefault(x => x.Key == "ContactYoutub
                                     <div class="col-md-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
                                         <div class="about-stats">
                                             <div class="stat-card" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400" 
-                                                 title="@(experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
+                                                 title="@(experiences != null && experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
                                                 <div class="stat-number">@aboutExperience</div>
                                                 <div class="stat-label">Năm kinh nghiệm</div>
                                             </div>
@@ -273,9 +273,11 @@ var contactYoutube = contentSettings.FirstOrDefault(x => x.Key == "ContactYoutub
                                 <p class="section-subtitle">Hành trình phát triển sự nghiệp của tôi</p>
                             </div>
                             <div class="experience-timeline">
-                                @foreach (var experience in experiences)
+                                @if (experiences != null)
                                 {
-                                    <div class="timeline-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="@(200 + (experiences.IndexOf(experience) * 100))">
+                                    @foreach (var experience in experiences)
+                                    {
+                                        <div class="timeline-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="@(200 + (experiences.IndexOf(experience) * 100))">
                                         <div class="timeline-dot"></div>
                                         <div class="timeline-content">
                                             <h3>@experience.Title</h3>
@@ -283,6 +285,7 @@ var contactYoutube = contentSettings.FirstOrDefault(x => x.Key == "ContactYoutub
                                             <p>@experience.Description</p>
                                         </div>
                                     </div>
+                                    }
                                 }
                             </div>
                         </div>

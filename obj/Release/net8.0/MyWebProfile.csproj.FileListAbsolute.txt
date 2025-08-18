@@ -1,0 +1,9 @@
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.csproj.AssemblyReference.cache
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.GeneratedMSBuildEditorConfig.editorconfig
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.AssemblyInfoInputs.cache
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.AssemblyInfo.cs
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.csproj.CoreCompileInputs.cache
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.MvcApplicationPartsAssemblyInfo.cache
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.RazorAssemblyInfo.cache
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.RazorAssemblyInfo.cs
+D:\doan\Web_profile_ASP.NET_Core MVC\MyWebProfile\obj\Release\net8.0\MyWebProfile.sourcelink.json

@@ -98,7 +98,7 @@
                         <div class="stat-number">@heroProjects</div>
                         <div class="stat-label">Dự án hoàn thành</div>
                     </div>
-                                         <div class="stat-item" title="@(experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
+                                         <div class="stat-item" title="@(experiences != null && experiences.Any() ? $"Từ kinh nghiệm làm việc: {startDate.ToString("yyyy")}" : $"Từ cấu hình: {startDate.ToString("yyyy")}") đến hiện tại">
                         <div class="stat-number">@heroExperience</div>
                         <div class="stat-label">Năm kinh nghiệm</div>
                     </div>

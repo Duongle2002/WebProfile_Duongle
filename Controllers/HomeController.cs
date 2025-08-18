@@ -195,7 +195,7 @@ namespace MyWebProfile.Controllers
 
                 return Json(new { success = true, message = "Tin nhắn đã được gửi thành công! Chúng tôi sẽ liên hệ lại sớm nhất." });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new { success = false, message = "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau." });
             }
